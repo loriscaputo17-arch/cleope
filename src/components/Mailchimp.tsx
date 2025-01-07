@@ -1,7 +1,7 @@
 "use client";
 
 import { mailchimp } from '@/app/resources'
-import { Button, Flex, Heading, Input, Text, Background, Arrow } from '@/once-ui/components';
+import { Button, Flex, Heading, Input, Text, SmartImage, Background, Arrow } from '@/once-ui/components';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -100,6 +100,14 @@ export const Mailchimp = (
                                                         <Arrow trigger="#about"/>
                                                 </Flex>
                                             </Button>
+
+                                            <img width={'100%'}
+                                                                    alt={'Volt Calendar'}
+                                                                    src={'/images/jancalendar.jpeg'}
+                                                                    style={{
+                                                                        border: '1px solid var(--neutral-alpha-weak)',
+                                                                        marginTop: '3rem'
+                                                                    }}/>
         </Flex>
     )
 }

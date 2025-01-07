@@ -247,9 +247,9 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                             ))}
                                         </Flex>
                                         {experience.images.length > 0 && (
-                                            <Flex
-                                                fillWidth paddingTop="m"
-                                                wrap>
+                                            <div style={{marginTop: '1rem'
+                                            }}
+                                                >
                                                 {experience.images.map((image, index) => (
                                                     <Flex
                                                         key={index}
@@ -257,7 +257,7 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                                         borderStyle="solid-1"
                                                         radius="m"
                                                         style={{marginBottom: '2rem'}}
-                                                        minWidth={image.width} height={image.height}>
+                                                        minWidth={image.width} height={20}>
                                                         <SmartImage
                                                             enlarge
                                                             radius="m"
@@ -266,7 +266,7 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                                             src={image.src}/>
                                                     </Flex>
                                                 ))}
-                                            </Flex>
+                                            </div>
                                         )}
                                     </Flex>
                                 ))}
@@ -302,9 +302,9 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                             {institution.description}
                                         </Text>
                                         {institution.image.length > 0 && (
-                                        <Flex
-                                            fillWidth paddingTop="m"
-                                            wrap>
+                                        <div style={{marginTop: '1rem'
+                                        }}
+                                            >
                                             {institution.image.map((image, index) => (
                                                 <Flex
                                                     key={index}
@@ -312,7 +312,7 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                                     borderStyle="solid-1"
                                                     radius="m"
                                                     style={{marginBottom: '2rem'}}
-                                                    minWidth={image.width} height={image.height}>
+                                                    minWidth={image.width} height={20}>
                                                     <SmartImage
                                                         enlarge
                                                         radius="m"
@@ -321,7 +321,7 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                                         src={image.src}/>
                                                 </Flex>
                                             ))}
-                                        </Flex>
+                                        </div>
                                     )}
                                     </Flex>
 
@@ -357,16 +357,16 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                             {skill.description}
                                         </Text>
                                         {skill.images && skill.images.length > 0 && (
-                                            <Flex
-                                                fillWidth paddingTop="m" gap="12"
-                                                wrap>
+                                            <div style={{marginTop: '1rem'
+                                            }}
+                                                >
                                                 {skill.images.map((image, index) => (
                                                     <Flex
                                                         key={index}
                                                         border="neutral-medium"
                                                         borderStyle="solid-1"
                                                         radius="m"
-                                                        minWidth={image.width} height={image.height}>
+                                                        minWidth={image.width} height={20}>
                                                         <SmartImage
                                                             enlarge
                                                             radius="m"
@@ -375,7 +375,7 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                                             src={image.src}/>
                                                     </Flex>
                                                 ))}
-                                            </Flex>
+                                            </div>
                                         )}
                                     </Flex>
                                 ))}

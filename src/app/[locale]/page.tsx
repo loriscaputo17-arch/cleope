@@ -99,8 +99,10 @@ export default function Home(
 								{home.subline}
 							</Text>
 						</RevealFx>
-						<RevealFx translateY="12" delay={0.4}>
-							<Flex fillWidth>
+
+						<div style={{display: 'flex', alignItems: 'center'}}>
+						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
+							<Flex style={{width: 'fit-content'}}>
 								<Button
 									id="about"
 									data-border="rounded"
@@ -116,6 +118,24 @@ export default function Home(
 								</Button>
 							</Flex>
 						</RevealFx>
+						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
+							<Flex style={{width: 'fit-content', marginLeft: '1rem'}}>
+								<Button
+									id="volt"
+									data-border="rounded"
+									href={`/${locale}/volt`}
+									size="m">
+									<Flex
+										gap="8"
+										alignItems="center">
+											VOLT Milan Access 16 Jan 2025
+											<Arrow trigger="#volt"/>
+									</Flex>
+								</Button>
+							</Flex>
+						</RevealFx>
+						</div>
+						
 					</Flex>
 				
 			</Flex>

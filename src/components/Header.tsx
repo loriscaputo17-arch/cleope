@@ -164,20 +164,7 @@ export const Header = () => {
                                 ))}
                             </Flex>
                         }
-                        <Flex
-                            gap="16">
-                            {social.map((item) => (
-                                item.link && (
-                                    <IconButton
-                                        key={item.name}
-                                        href={item.link}
-                                        icon={item.icon}
-                                        tooltip={item.name}
-                                        size="s"
-                                        variant="ghost"/>
-                                )
-                            ))}
-                        </Flex>
+                        
                     </Flex>
                 </Flex>
             </Flex>

@@ -82,14 +82,14 @@ const about = {
                     {
                         src: '/images/projects/project-01/cover-01.jpg',
                         alt: 'Fashion Show',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                     {
                         src: '/images/gallery/img-01.jpg',
                         alt: 'Shooting',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                 ]
             },
@@ -105,14 +105,14 @@ const about = {
                     {
                         src: '/images/projects/project-01/img-07.jpg',
                         alt: 'Fashion Show',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                     {
                         src: '/images/projects/project-01/img-08.jpg',
                         alt: 'Shooting',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                 ]
             },
@@ -129,8 +129,8 @@ const about = {
                     {
                         src: '/images/projects/project-01/img-05.jpg',
                         alt: 'Fashion Show',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                 ]
             },
@@ -141,8 +141,8 @@ const about = {
                     {
                         src: '/images/gallery/img-02.jpg',
                         alt: 'Fashion Show',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                 ]
             }
@@ -160,8 +160,8 @@ const about = {
                     {
                         src: '/images/projects/project-01/img-04.jpg',
                         alt: 'Project image',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                 ]
             },
@@ -173,8 +173,8 @@ const about = {
                     {
                         src: '/images/projects/project-01/image-02.jpg',
                         alt: 'Project image',
-                        width: 40,
-                        height: 20
+                        width: 16,
+                        height: 9
                     },
                 ]
             }

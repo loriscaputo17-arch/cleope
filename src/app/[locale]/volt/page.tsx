@@ -174,13 +174,14 @@ export default function About(){
         <div>
             <div className="text-white min-h-screen items-center justify-center px-4" style={{ zIndex: 2 }}>
             {/* Logo */}
-            <header style={{marginBottom: '4rem', marginTop: '10rem'}}>
-              <div className="flex items-center justify-center" style={{width: '100%', alignItems: 'center'}}>
+            <header style={{marginBottom: '3rem', marginTop: '3rem'}}>
+              <div className="flex items-center justify-center" style={{width: 'fit-content', alignItems: 'center',marginLeft: 'auto',marginRight: 'auto'}}>
               <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={'90px'} height={'90px'} style={{margin: 'auto'}} />
               <p style={{fontWeight: '200', marginRight: '1rem'}}>X</p>
               <img src="https://static1.squarespace.com/static/ta/58909d6e1e5b6ccc19c26826/166/assets/volt-bianco.svg" alt="Logo" className="h-24 w-auto" width={'115px'} height={'115px'} style={{margin: 'auto'}} />
               </div>
             </header>
+
 
             {alertPopup && (
               <div style={{marginBottom: '2rem'}}>
@@ -188,16 +189,21 @@ export default function About(){
               </div>
             )}
 
-            {/* Buttons */}
             <main className="w-full max-w-sm">
               <Button
                                 value="Subscribe"
                                 onClick={() => setActivePopup("volt")}
                                 size="m"
                                 style={{width:'fit-content', margin:'auto'}}>
-                                VOLT Access 16 Jan 2025
-                            </Button>
+											VOLT Milan Access 16 Jan 2025
+                      </Button>
             </main>
+            <div className={styles.imageContainer}>
+              
+              <img alt={'Volt Cover'} src={'/images/pawsacover.jpeg'} className={styles.voltCover}
+                  style={{border: '1px solid var(--neutral-alpha-weak)',marginTop: '3rem', marginBottom: '3rem'}}/>
+              
+              </div>
 
             {/* Popup */}
             {activePopup && (

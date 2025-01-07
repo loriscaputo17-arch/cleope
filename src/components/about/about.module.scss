@@ -12,7 +12,21 @@
     top: var(--static-space-64);
 }
 
+.voltCover{
+    width: 40%;
+}
+
+.imageContainer{
+    display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
 @media (--s) {
+
+    .voltCover{
+        width: 100%;
+    }
     .avatar {
 
         top: auto;
