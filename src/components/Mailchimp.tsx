@@ -74,7 +74,7 @@ export const Mailchimp = (
             <Heading style={{position: 'relative'}}
                 marginBottom="s"
                 variant="display-strong-xs">
-                Request to join the CLEOPE List at VOLT
+                Request to join the CLEOPE List at VOLT Milano
             </Heading>
             <Text
                 style={{
