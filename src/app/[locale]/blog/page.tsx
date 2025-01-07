@@ -76,7 +76,7 @@ export default function Blog(
             <Heading
                 marginBottom="l"
                 variant="display-strong-s">
-                {blog.title}
+                Cleope Events are HOT
             </Heading>
 			<Flex
 				fillWidth flex={1} direction="column">
