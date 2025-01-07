@@ -176,7 +176,7 @@ export default function About(){
             {/* Logo */}
             <header style={{marginBottom: '4rem', marginTop: '10rem'}}>
               <div className="flex items-center justify-center" style={{width: '100%', alignItems: 'center'}}>
-              <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={'115px'} height={'115px'} style={{margin: 'auto'}} />
+              <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={'90px'} height={'90px'} style={{margin: 'auto'}} />
               <p style={{fontWeight: '200', marginRight: '1rem'}}>X</p>
               <img src="https://static1.squarespace.com/static/ta/58909d6e1e5b6ccc19c26826/166/assets/volt-bianco.svg" alt="Logo" className="h-24 w-auto" width={'115px'} height={'115px'} style={{margin: 'auto'}} />
               </div>
