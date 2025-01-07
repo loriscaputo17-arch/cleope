@@ -139,7 +139,7 @@ const about = {
                 description: <>For the runway show, we collaborate with brands looking to organize a catwalk on our event stage. They can choose to work with our models (minimum of 6 models required) or bring their own, focusing the showcase entirely on their clothing and designs. Brands must coordinate with our team if they wish to request external models. To participate in the runway show, the exhibition, or both, we offer tailored packages that include a variety of services we provide. Contact us at cleope.events@gmail.com to learn more and reserve your spot for the next event.</>,
                 image: [
                     {
-                        src: '/images/projects/project-01/cover-03.jpg',
+                        src: '/images/gallery/img-02.jpg',
                         alt: 'Fashion Show',
                         width: 40,
                         height: 20
