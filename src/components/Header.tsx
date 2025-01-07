@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 
-import { Flex, ToggleButton } from "@/once-ui/components"
+import { Flex, ToggleButton, IconButton } from "@/once-ui/components"
 import styles from '@/components/Header.module.scss'
 
 import { routes, display } from '@/app/resources'
@@ -68,7 +68,7 @@ export const Header = () => {
     }
 
     const t = useTranslations();
-    const { person, home, about, blog, work, gallery } = renderContent(t);
+    const { person, home, about, blog, work, gallery, social } = renderContent(t);
 
     return (
         <>
@@ -87,11 +87,8 @@ export const Header = () => {
                     paddingLeft="12" fillWidth
                     alignItems="center"
                     textVariant="body-default-s">
-                    { display.location && (
-                        <Flex hide="s">
-                            {person.location}
-                        </Flex>
-                    )}
+                                  <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={'25px'} height={'25px'} />
+
                 </Flex>
                 <Flex fillWidth justifyContent="center">
                     <Flex
@@ -114,15 +111,15 @@ export const Header = () => {
                                     prefixIcon="person"
                                     href={`/${params?.locale}/about`}
                                     selected={pathname === "/about"}>
-                                    <Flex paddingX="2" hide="s">{about.label}</Flex>
+                                    <Flex paddingX="2" hide="s">Cleope</Flex>
                                 </ToggleButton>
                             )}
-                            { routes['/work'] && (
+                            { routes['/volt'] && (
                                 <ToggleButton
                                     prefixIcon="grid"
-                                    href={`/${params?.locale}/work`}
-                                    selected={pathname.startsWith('/work')}>
-                                    <Flex paddingX="2" hide="s">{work.label}</Flex>
+                                    href={`/${params?.locale}/volt`}
+                                    selected={pathname.startsWith('/volt')}>
+                                    <Flex paddingX="2" hide="s">Volt</Flex>
                                 </ToggleButton>
                             )}
                             { routes['/blog'] && (
@@ -130,7 +127,7 @@ export const Header = () => {
                                     prefixIcon="book"
                                     href={`/${params?.locale}/blog`}
                                     selected={pathname.startsWith('/blog')}>
-                                    <Flex paddingX="2" hide="s">{blog.label}</Flex>
+                                    <Flex paddingX="2" hide="s">Events</Flex>
                                 </ToggleButton>
                             )}
                             { routes['/gallery'] && (
@@ -167,10 +164,19 @@ export const Header = () => {
                                 ))}
                             </Flex>
                         }
-                        <Flex hide="s">
-                            { display.time && (
-                                <TimeDisplay timeZone={person.location}/>
-                            )}
+                        <Flex
+                            gap="16">
+                            {social.map((item) => (
+                                item.link && (
+                                    <IconButton
+                                        key={item.name}
+                                        href={item.link}
+                                        icon={item.icon}
+                                        tooltip={item.name}
+                                        size="s"
+                                        variant="ghost"/>
+                                )
+                            ))}
                         </Flex>
                     </Flex>
                 </Flex>

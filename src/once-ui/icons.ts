@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons';
+import { FaInstagram, FaTiktok } from 'react-icons/fa';
 
 import {
 	HiChevronUp,
@@ -63,5 +64,7 @@ export const iconLibrary: Record<string, IconType> = {
 	github: FaGithub,
 	linkedin: FaLinkedin,
 	x: FaXTwitter,
-	clipboard: HiClipboard
+	clipboard: HiClipboard,
+	instagram: FaInstagram,
+	tiktok: FaTiktok
 };

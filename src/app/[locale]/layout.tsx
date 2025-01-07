@@ -28,10 +28,10 @@ export async function generateMetadata(
 		title: home.title,
 		description: home.description,
 		openGraph: {
-			title: `${person.firstName}'s Portfolio`,
-			description: 'Portfolio website showcasing my work.',
+			title: `CLEOPE`,
+			description: 'CLEOPE - Fashion Party | Night Party. Life is too short to be mass approved.',
 			url: baseURL,
-			siteName: `${person.firstName}'s Portfolio`,
+			siteName: `Cleope`,
 			locale: 'en_US',
 			type: 'website',
 		},

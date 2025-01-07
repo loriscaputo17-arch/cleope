@@ -1,7 +1,7 @@
 "use client";
 
 import { mailchimp } from '@/app/resources'
-import { Button, Flex, Heading, Input, Text, Background } from '@/once-ui/components';
+import { Button, Flex, Heading, Input, Text, Background, Arrow } from '@/once-ui/components';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -74,7 +74,7 @@ export const Mailchimp = (
             <Heading style={{position: 'relative'}}
                 marginBottom="s"
                 variant="display-strong-xs">
-                {newsletter.title}
+                Request to join the CLEOPE List at VOLT
             </Heading>
             <Text
                 style={{
@@ -84,61 +84,22 @@ export const Mailchimp = (
                 wrap="balance"
                 marginBottom="l"
                 onBackground="neutral-medium">
-                {newsletter.description}
+                Request to join our list for the VOLT event, held every Thursday.
             </Text>
-            <form
-                style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}
-                action={mailchimp.action}
-                method="post"
-                id="mc-embedded-subscribe-form"
-                name="mc-embedded-subscribe-form">
-                <Flex id="mc_embed_signup_scroll"
-                    fillWidth maxWidth={24} gap="8">
-                    <Input
-                        formNoValidate
-                        labelAsPlaceholder
-                        id="mce-EMAIL"
-                        name="EMAIL"
-                        type="email"
-                        label="Email"
-                        required
-                        onChange={(e) => {
-                            if (error) {
-                                handleChange(e);
-                            } else {
-                                debouncedHandleChange(e);
-                            }
-                        }}
-                        onBlur={handleBlur}
-                        error={error}/>
-                    <div style={{display: 'none'}}>
-                        <input type="checkbox" readOnly name="group[3492][1]" id="mce-group[3492]-3492-0" value="" checked/>
-                    </div>
-                    <div id="mce-responses" className="clearfalse">
-                        <div className="response" id="mce-error-response" style={{display: 'none'}}></div>
-                        <div className="response" id="mce-success-response" style={{display: 'none'}}></div>
-                    </div>
-                    <div aria-hidden="true" style={{position: 'absolute', left: '-5000px'}}>
-                        <input type="text" readOnly name="b_c1a5a210340eb6c7bff33b2ba_0462d244aa" tabIndex={-1} value=""/>
-                    </div>
-                    <div className="clear">
-                        <Flex
-                            height="48" alignItems="center">
-                            <Button
-                                id="mc-embedded-subscribe"
-                                value="Subscribe"
-                                size="m"
-                                fillWidth>
-                                {t("newsletter.button")}
-                            </Button>
-                        </Flex>
-                    </div>
-                </Flex>
-            </form>
+
+            <Button
+                                                id="about"
+                                                data-border="rounded"
+                                                href={`/volt`}
+                                                variant="tertiary"
+                                                size="m">
+                                                <Flex
+                                                    gap="8"
+                                                    alignItems="center">
+                                                        VOLT access
+                                                        <Arrow trigger="#about"/>
+                                                </Flex>
+                                            </Button>
         </Flex>
     )
 }

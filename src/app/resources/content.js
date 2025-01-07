@@ -22,39 +22,34 @@ const social = [
     // Links are automatically displayed.
     // Import new icons in /once-ui/icons.ts
     {
-        name: 'GitHub',
-        icon: 'github',
-        link: 'https://github.com/once-ui-system/nextjs-starter',
+        name: 'TikTok',
+        icon: 'tiktok',
+        link: 'https://www.tiktok.com/@cleopeofficial?lang=en',
     },
     {
-        name: 'LinkedIn',
-        icon: 'linkedin',
-        link: 'https://www.linkedin.com/company/once-ui/',
-    },
-    {
-        name: 'X',
-        icon: 'x',
-        link: '',
+        name: 'Instagram',
+        icon: 'instagram',
+        link: 'https://www.instagram.com/cleopeofficial/',
     },
     {
         name: 'Email',
         icon: 'email',
-        link: 'mailto:example@gmail.com',
+        link: 'mailto:cleope.events@gmail.com',
     },
 ]
 
 const home = {
     label: 'Home',
-    title: `${person.name}'s Portfolio`,
-    description: `Portfolio website showcasing my work as a ${person.role}`,
-    headline: <>Design engineer and builder</>,
-    subline: <>I'm Selene, a design engineer at <InlineCode>FLY</InlineCode>, where I craft intuitive<br/> user experiences. After hours, I build my own projects.</>
+    title: `CLEOPE`,
+    description: `CLEOPE - Fashion Party`,
+    headline: <>Next Date?</>,
+    subline: <>CLEOPE - Fashion Party | Night Party. Life is too short to be mass approved.</>
 }
 
 const about = {
-    label: 'About',
-    title: 'About me',
-    description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+    label: 'Cleope',
+    title: 'Cleope',
+    description: `What's Cleope?`,
     tableOfContent: {
         display: true,
         subItems: false
@@ -64,93 +59,122 @@ const about = {
     },
     calendar: {
         display: true,
-        link: 'https://cal.com'
+        link: 'https://cal.com/cleope-events'
     },
     intro: {
         display: true,
-        title: 'Introduction',
+        title: 'What\'s Cleope?',
         description: <>Selene is a Jakarta-based design engineer with a passion for transforming complex challenges into simple, elegant design solutions. Her work spans digital interfaces, interactive experiences, and the convergence of design and technology.</>
     },
     work: {
         display: true, // set to false to hide this section
-        title: 'Work Experience',
+        title: 'Fashion Party',
         experiences: [
             {
-                company: 'FLY',
+                company: 'Brand Exhibition + Runway Show',
                 timeframe: '2022 - Present',
-                role: 'Senior Design Engineer',
+                role: 'Aperitif Time',
                 achievements: [
-                    <>Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user engagement and 30% faster load times.</>,
-                    <>Spearheaded the integration of AI tools into design workflows, enabling designers to iterate 50% faster.</>
+                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set.</>,
+                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set. The focus is on the runway show in collaboration with models and brands, as well as the brand exhibitions during the evening, where they also have the opportunity to sell their products.  </>
                 ],
                 images: [ // optional: leave the array empty if you don't want to display images
                     {
                         src: '/images/projects/project-01/cover-01.jpg',
-                        alt: 'Once UI Project',
-                        width: 16,
-                        height: 9
-                    }
+                        alt: 'Fashion Show',
+                        width: 40,
+                        height: 20
+                    },
+                    {
+                        src: '/images/projects/project-01/cover-04.jpg',
+                        alt: 'Shooting',
+                        width: 40,
+                        height: 20
+                    },
                 ]
             },
             {
-                company: 'Creativ3',
-                timeframe: '2018 - 2022',
-                role: 'Lead Designer',
+                company: 'Night Party',
+                timeframe: '2022 - Present',
+                role: 'Night Time',
                 achievements: [
-                    <>Developed a design system that unified the brand across multiple platforms, improving design consistency by 40%.</>,
-                    <>Led a cross-functional team to launch a new product line, contributing to a 15% increase in overall company revenue.</>
+                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set.</>,
+                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set. The focus is on the runway show in collaboration with models and brands, as well as the brand exhibitions during the evening, where they also have the opportunity to sell their products.  </>
                 ],
-                images: [ ]
-            }
+                images: [ // optional: leave the array empty if you don't want to display images
+                    {
+                        src: '/images/projects/project-01/img-07.jpg',
+                        alt: 'Fashion Show',
+                        width: 40,
+                        height: 20
+                    },
+                    {
+                        src: '/images/projects/project-01/img-08.jpg',
+                        alt: 'Shooting',
+                        width: 40,
+                        height: 20
+                    },
+                ]
+            },
         ]
     },
     studies: {
         display: true, // set to false to hide this section
-        title: 'Studies',
+        title: 'Brand Collaboration',
         institutions: [
             {
-                name: 'University of Jakarta',
-                description: <>Studied software engineering.</>,
+                name: 'Brand Exhibition',
+                description: <>We collaborate with brands to provide unique, tailored exhibition spaces with the opportunity to sell products on-site. We offer clothing racks, tables, and customizable areas to suit your needs, while hangers are the responsibility of the brand. Our services include photography, videography, and partnerships with models to enhance every brand's presence. Additionally, we ensure visibility and promotion through dedicated post-event content shared across our social media channels. Contact us at cleope.events@gmail.com to reserve your spot for the next event.</>,
+                image: [
+                    {
+                        src: '/images/projects/project-01/img-05.jpg',
+                        alt: 'Fashion Show',
+                        width: 40,
+                        height: 20
+                    },
+                ]
             },
             {
-                name: 'Build the Future',
-                description: <>Studied online marketing and personal branding.</>,
+                name: 'Runway Show',
+                description: <>For the runway show, we collaborate with brands looking to organize a catwalk on our event stage. They can choose to work with our models (minimum of 6 models required) or bring their own, focusing the showcase entirely on their clothing and designs. Brands must coordinate with our team if they wish to request external models. To participate in the runway show, the exhibition, or both, we offer tailored packages that include a variety of services we provide. Contact us at cleope.events@gmail.com to learn more and reserve your spot for the next event.</>,
+                image: [
+                    {
+                        src: '/images/projects/project-01/cover-03.jpg',
+                        alt: 'Fashion Show',
+                        width: 40,
+                        height: 20
+                    },
+                ]
             }
         ]
     },
     technical: {
         display: true, // set to false to hide this section
-        title: 'Technical skills',
+        title: 'Values',
         skills: [
             {
-                title: 'Figma',
-                description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
+                title: 'Exclusivity',
+                description: <>Our events are exclusive, designed for a select audience in extraordinary locations. Attendance is limited to those who meet our criteria, with online guest lists that open for each event, ensuring a unique and curated experience. Every date brings together a mix of remarkable guests, creating an unparalleled atmosphere. </>,
                 // optional: leave the array empty if you don't want to display images
                 images: [
                     {
-                        src: '/images/projects/project-01/cover-02.jpg',
+                        src: '/images/projects/project-01/img-04.jpg',
                         alt: 'Project image',
-                        width: 16,
-                        height: 9
-                    },
-                    {
-                        src: '/images/projects/project-01/cover-03.jpg',
-                        alt: 'Project image',
-                        width: 16,
-                        height: 9
+                        width: 40,
+                        height: 20
                     },
                 ]
             },
             {
-                title: 'Next.js',
-                description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
+                title: 'Unique',
+                description: <>What makes our events truly unique is our collaboration with standout brands that excel in their field. These brands bring a distinct flair and innovation, making every event not just a gathering but a celebration of creativity, style, and individuality.</>,
                 // optional: leave the array empty if you don't want to display images
                 images: [
                     {
-                        src: '/images/projects/project-01/cover-04.jpg',
+                        src: '/images/projects/project-01/image-02.jpg',
                         alt: 'Project image',
-                        width: 16,
-                        height: 9
+                        width: 40,
+                        height: 20
                     },
                 ]
             }
@@ -167,17 +191,17 @@ const blog = {
 }
 
 const work = {
-    label: 'Work',
-    title: 'My projects',
-    description: `Design and dev projects by ${person.name}`
+    label: 'Events',
+    title: 'Cleope Events',
+    description: `Cleope Events`
     // Create new project pages by adding a new .mdx file to app/blog/posts
     // All projects will be listed on the /home and /work routes
 }
 
 const gallery = {
     label: 'Gallery',
-    title: 'My photo gallery',
-    description: `A photo collection by ${person.name}`,
+    title: 'Cleope Gallery',
+    description: `Cleope Photos`,
     // Images from https://pexels.com
     images: [
         { 

@@ -8,6 +8,7 @@ import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
+import '../global.css';
 
 export async function generateMetadata(
 	{params: {locale}}: { params: { locale: string }}
@@ -109,13 +110,7 @@ export default function Home(
 									<Flex
 										gap="8"
 										alignItems="center">
-										{about.avatar.display && (
-											<Avatar
-												style={{marginLeft: '-0.75rem', marginRight: '0.25rem'}}
-												src={person.avatar}
-												size="m"/>
-											)}
-											{t("about.title")}
+											What's Cleope?
 											<Arrow trigger="#about"/>
 									</Flex>
 								</Button>
@@ -136,7 +131,7 @@ export default function Home(
 							as="h2"
 							variant="display-strong-xs"
 							wrap="balance">
-							Latest from the blog
+							Last Events
 						</Heading>
 					</Flex>
 					<Flex

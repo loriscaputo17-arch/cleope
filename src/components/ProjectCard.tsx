@@ -109,7 +109,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             as="h2"
                             wrap="balance"
                             variant="heading-strong-xl">
-                            {title}
+                            Fashion Event Curators
                         </Heading>
                     </Flex>
                 )}
@@ -128,17 +128,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                                 wrap="balance"
                                 variant="body-default-s"
                                 onBackground="neutral-weak">
-                                {description}
+                                CLEOPE is an innovative fashion party that combines music, entertainment and fashion in exclusive locations.
                             </Text>
                         )}
                         {content?.trim() && (
                             <SmartLink
                                 suffixIcon="chevronRight"
                                 style={{margin: '0', width: 'fit-content'}}
-                                href={href}>
+                                href={'/about'}>
                                     <Text
                                         variant="body-default-s">
-                                       {t("projectCard.label")}
+                                       Learn more about CLEOPE
                                     </Text>
                             </SmartLink>
                         )}

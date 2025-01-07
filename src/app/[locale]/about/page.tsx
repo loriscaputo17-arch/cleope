@@ -46,22 +46,22 @@ export default function About(
     const {person, about, social } = renderContent(t);
     const structure = [
         { 
-            title: about.intro.title,
+            title: "What's Cleope?",
             display: about.intro.display,
             items: []
         },
         { 
-            title: about.work.title,
+            title: "Fashion Party",
             display: about.work.display,
             items: about.work.experiences.map(experience => experience.company)
         },
         { 
-            title: about.studies.title,
+            title: "Brand Collaboration",
             display: about.studies.display,
             items: about.studies.institutions.map(institution => institution.name)
         },
         { 
-            title: about.technical.title,
+            title: "Values",
             display: about.technical.display,
             items: about.technical.skills.map(skill => skill.title)
         },
@@ -111,30 +111,17 @@ export default function About(
                         className={styles.avatar}
                         minWidth="160" paddingX="l" paddingBottom="xl" gap="m"
                         flex={3} direction="column" alignItems="center">
-                        <Avatar
-                            src={person.avatar}
-                            size="xl"/>
+                        
+
+                        <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={'120px'} height={'120px'} />
                         <Flex
                             gap="8"
                             alignItems="center">
                             <Icon
                                 onBackground="accent-weak"
                                 name="globe"/>
-                            {person.location}
+                            Cleope Official
                         </Flex>
-                        { person.languages.length > 0 && (
-                            <Flex
-                                wrap
-                                gap="8">
-                                {person.languages.map((language, index) => (
-                                    <Tag
-                                        key={index}
-                                        size="l">
-                                        {language}
-                                    </Tag>
-                                ))}
-                            </Flex>
-                        )}
                     </Flex>
                 )}
                 <Flex
@@ -175,13 +162,14 @@ export default function About(
                         <Heading
                             className={styles.textAlign}
                             variant="display-strong-xl">
-                            {person.name}
+                            What's Cleope?
                         </Heading>
                         <Text
                             className={styles.textAlign}
                             variant="display-default-xs"
-                            onBackground="neutral-weak">
-                            {person.role}
+                            onBackground="neutral-weak"
+                            style={{fontSize: '14px', lineHeight: '20px', marginTop: '1rem' }}>
+                            CLEOPE è un fashion party innovativo che combina musica, intrattenimento e moda in location esclusive. 
                         </Text>
                         {social.length > 0 && (
                             <Flex
@@ -207,18 +195,19 @@ export default function About(
                             direction="column"
                             textVariant="body-default-l"
                             fillWidth gap="m" marginBottom="xl">
-                            {about.intro.description}
-                        </Flex>
+Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio champagne, esposizioni di brand e sfilate direttamente sulla pista.
+
+</Flex>
                     )}
 
                     { about.work.display && (
                         <>
                             <Heading
                                 as="h2"
-                                id={about.work.title}
+                                id={'Fashion party'}
                                 variant="display-strong-s"
                                 marginBottom="m">
-                                {about.work.title}
+                                Fashion Party
                             </Heading>
                             <Flex
                                 direction="column"
@@ -237,11 +226,6 @@ export default function About(
                                                 id={experience.company}
                                                 variant="heading-strong-l">
                                                 {experience.company}
-                                            </Text>
-                                            <Text
-                                                variant="heading-default-xs"
-                                                onBackground="neutral-weak">
-                                                {experience.timeframe}
                                             </Text>
                                         </Flex>
                                         <Text
@@ -264,7 +248,7 @@ export default function About(
                                         </Flex>
                                         {experience.images.length > 0 && (
                                             <Flex
-                                                fillWidth paddingTop="m" paddingLeft="40"
+                                                fillWidth paddingTop="m"
                                                 wrap>
                                                 {experience.images.map((image, index) => (
                                                     <Flex
@@ -272,6 +256,7 @@ export default function About(
                                                         border="neutral-medium"
                                                         borderStyle="solid-1"
                                                         radius="m"
+                                                        style={{marginBottom: '2rem'}}
                                                         minWidth={image.width} height={image.height}>
                                                         <SmartImage
                                                             enlarge
@@ -293,10 +278,10 @@ export default function About(
                         <>
                             <Heading
                                 as="h2"
-                                id={about.studies.title}
+                                id={'Brand collaboration'}
                                 variant="display-strong-s"
                                 marginBottom="m">
-                                {about.studies.title}
+                                Brand Collaboration
                             </Heading>
                             <Flex
                                 direction="column"
@@ -316,7 +301,31 @@ export default function About(
                                             onBackground="neutral-weak">
                                             {institution.description}
                                         </Text>
+                                        {institution.image.length > 0 && (
+                                        <Flex
+                                            fillWidth paddingTop="m"
+                                            wrap>
+                                            {institution.image.map((image, index) => (
+                                                <Flex
+                                                    key={index}
+                                                    border="neutral-medium"
+                                                    borderStyle="solid-1"
+                                                    radius="m"
+                                                    style={{marginBottom: '2rem'}}
+                                                    minWidth={image.width} height={image.height}>
+                                                    <SmartImage
+                                                        enlarge
+                                                        radius="m"
+                                                        sizes={image.width.toString()}
+                                                        alt={image.alt}
+                                                        src={image.src}/>
+                                                </Flex>
+                                            ))}
+                                        </Flex>
+                                    )}
                                     </Flex>
+
+                                    
                                 ))}
                             </Flex>
                         </>
@@ -326,9 +335,9 @@ export default function About(
                         <>
                             <Heading
                                 as="h2"
-                                id={about.technical.title}
+                                id={'Values'}
                                 variant="display-strong-s" marginBottom="40">
-                                {about.technical.title}
+                                Values
                             </Heading>
                             <Flex
                                 direction="column"
