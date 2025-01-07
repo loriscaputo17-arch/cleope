@@ -86,7 +86,7 @@ const about = {
                         height: 20
                     },
                     {
-                        src: '/images/projects/project-01/cover-04.jpg',
+                        src: '/images/gallery/img-01.jpg',
                         alt: 'Shooting',
                         width: 40,
                         height: 20
