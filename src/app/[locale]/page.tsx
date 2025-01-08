@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Heading, Flex, Text, Button,  Avatar, RevealFx, Arrow } from '@/once-ui/components';
+import { Heading, Flex,Icon, IconButton, Text, Button,  Avatar, RevealFx, Arrow } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
 
 import { baseURL, routes, renderContent } from '@/app/resources'; 
@@ -8,7 +8,7 @@ import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
-import '../global.css';
+import styles from '@/components/about/about.module.scss'
 
 export async function generateMetadata(
 	{params: {locale}}: { params: { locale: string }}
@@ -90,17 +90,33 @@ export default function Home(
 								{home.headline}
 							</Heading>
 						</RevealFx>
-						<RevealFx
+						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
+							<Flex style={{width: 'fit-content', marginBottom: '1rem'}}>
+								<Button
+									id="volt"
+									data-border="rounded"
+									href={`/${locale}/volt`}
+									size="m">
+									<Flex
+										gap="8"
+										alignItems="center">
+											VOLT Milan Access 16 Jan 2025
+											<Arrow trigger="#volt"/>
+									</Flex>
+								</Button>
+							</Flex>
+						</RevealFx>
+						<RevealFx style={{ marginTop:'2rem'}}
 							translateY="8" delay={0.2} fillWidth justifyContent="flex-start" paddingBottom="m">
 							<Text
 								wrap="balance"
 								onBackground="neutral-weak"
-								variant="heading-default-xl">
+								variant="heading-default-xl"
+								>
 								{home.subline}
 							</Text>
 						</RevealFx>
 
-						<div style={{display: 'flex', alignItems: 'center'}}>
 						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
 							<Flex style={{width: 'fit-content'}}>
 								<Button
@@ -118,23 +134,6 @@ export default function Home(
 								</Button>
 							</Flex>
 						</RevealFx>
-						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
-							<Flex style={{width: 'fit-content', marginLeft: '1rem'}}>
-								<Button
-									id="volt"
-									data-border="rounded"
-									href={`/${locale}/volt`}
-									size="m">
-									<Flex
-										gap="8"
-										alignItems="center">
-											VOLT Milan Access 16 Jan 2025
-											<Arrow trigger="#volt"/>
-									</Flex>
-								</Button>
-							</Flex>
-						</RevealFx>
-						</div>
 						
 					</Flex>
 				
@@ -142,6 +141,49 @@ export default function Home(
 			<RevealFx translateY="16" delay={0.6}>
 				<Projects range={[1,1]} locale={locale}/>
 			</RevealFx>
+			<Flex
+					gap="24"
+					mobileDirection="column"
+					style={{width:'90%'}}
+					>
+					<div>
+					<Heading
+							as="h2"
+							variant="display-strong-xs"
+							wrap="balance">
+							Hai un brand di moda?
+						</Heading>
+						<div style={{marginTop: '1rem', marginBottom: '1rem'}}>
+							Collabora con noi. Allestiamo spazi espositivi personalizzati, sfilate e incrementiamo le vostre vendite. 
+							Garantiamo visibilità online attraverso contenuti dedicati post-evento, aumentando la riconoscibilità del marchio.
+						</div>
+						<Flex
+                                className={styles.blockAlign}
+                                style={{
+                                    backdropFilter: 'blur(var(--static-space-1))',
+                                    border: '1px solid var(--brand-alpha-medium)',
+                                    width: 'fit-content'
+                                }}
+                                alpha="brand-weak" radius="full"
+                                fillWidth padding="4" gap="8" marginBottom="m"
+                                alignItems="center">
+                                <Flex paddingLeft="12">
+                                    <Icon
+                                        name="calendar"
+                                        onBackground="brand-weak"/>
+                                </Flex>
+                                <Flex
+                                    paddingX="8">
+                                    Schedule a call
+                                </Flex>
+                                <IconButton
+                                    href={'https://cal.com/cleope-events'}
+                                    data-border="rounded"
+                                    variant="tertiary"
+                                    icon="chevronRight"/>
+                            </Flex>
+					</div>
+				</Flex>
 			{routes['/blog'] && (
 				<Flex
 					fillWidth gap="24"
@@ -156,11 +198,10 @@ export default function Home(
 					</Flex>
 					<Flex
 						flex={3} paddingX="20">
-						<Posts range={[1,2]} columns="2" locale={locale}/>
+						<Posts range={[1,4]} columns="2" locale={locale}/>
 					</Flex>
 				</Flex>
 			)}
-			<Projects range={[2]} locale={locale}/>
 			{ newsletter.display &&
 				<Mailchimp newsletter={newsletter} />
 			}

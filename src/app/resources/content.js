@@ -71,12 +71,12 @@ const about = {
         title: 'Fashion Party',
         experiences: [
             {
-                company: 'Brand Exhibition + Runway Show',
+                company: 'Brand Exhibition & Runway Show',
                 timeframe: '2022 - Present',
                 role: 'Aperitif Time',
                 achievements: [
-                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set.</>,
-                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set. The focus is on the runway show in collaboration with models and brands, as well as the brand exhibitions during the evening, where they also have the opportunity to sell their products.  </>
+                    <>Una serata con aperitivo e DJ set, arricchita da un’esposizione di brand di moda in aree dedicate, cocktail bar, sfilata con modelli e brand partner, e un DJ set finale per continuare la festa.</>,
+                    <>Lo stile é protagonista. Il focus è sulla sfilata in collaborazione con modelli e brand, oltre alle esposizioni dei brand durante la serata, con la possibilità di vendere i loro prodotti. </>
                 ],
                 images: [ // optional: leave the array empty if you don't want to display images
                     {
@@ -98,8 +98,8 @@ const about = {
                 timeframe: '2022 - Present',
                 role: 'Night Time',
                 achievements: [
-                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set.</>,
-                    <>An aperitif evening with a DJ set, featuring a fashion brand exhibition in dedicated display areas, a cocktail bar, a runway show with models and collaborating brands, followed by an extended DJ set. The focus is on the runway show in collaboration with models and brands, as well as the brand exhibitions during the evening, where they also have the opportunity to sell their products.  </>
+                    <>Il Night Party è un evento esclusivo dedicato alla musica e all’atmosfera, con una selezione musicale curata grazie alla collaborazione con DJ e format unici per ogni serata.</>,
+                    <>Il focus della serata è sugli shooting fotografici realizzati in collaborazione con modelli, brand e ospiti presenti al party, per creare un’esperienza coinvolgente che unisce stile, intrattenimento e momenti indimenticabili.</>
                 ],
                 images: [ // optional: leave the array empty if you don't want to display images
                     {
@@ -124,19 +124,14 @@ const about = {
         institutions: [
             {
                 name: 'Brand Exhibition',
-                description: <>We collaborate with brands to provide unique, tailored exhibition spaces with the opportunity to sell products on-site. We offer clothing racks, tables, and customizable areas to suit your needs, while hangers are the responsibility of the brand. Our services include photography, videography, and partnerships with models to enhance every brand's presence. Additionally, we ensure visibility and promotion through dedicated post-event content shared across our social media channels. Contact us at cleope.events@gmail.com to reserve your spot for the next event.</>,
+                description: <>Allestiamo spazi espositivi personalizzati e valorizzare i brand e incrementare le vendite e networking. Garantiamo visibilità online con contenuti dedicati post-evento offrendo servizi fotografici e multimediali, aumentando la riconoscibilità del marchio. Contattaci su cleope.events@gmail.com per partecipare al prossimo evento.</>,
                 image: [
-                    {
-                        src: '/images/projects/project-01/img-05.jpg',
-                        alt: 'Fashion Show',
-                        width: 16,
-                        height: 9
-                    },
+                    
                 ]
             },
             {
                 name: 'Runway Show',
-                description: <>For the runway show, we collaborate with brands looking to organize a catwalk on our event stage. They can choose to work with our models (minimum of 6 models required) or bring their own, focusing the showcase entirely on their clothing and designs. Brands must coordinate with our team if they wish to request external models. To participate in the runway show, the exhibition, or both, we offer tailored packages that include a variety of services we provide. Contact us at cleope.events@gmail.com to learn more and reserve your spot for the next event.</>,
+                description: <>Per la sfilata, collaboriamo con i brand per organizzare una passerella sulla nostra pista, accompagnata da un DJ set e supportata da servizi fotografici e video professionali. I brand possono scegliere di lavorare con le nostre modelle o con le proprie. Sono disponibili pacchetti personalizzati per partecipare. Contattaci a cleope.events@gmail.com per riservare il tuo spazio al prossimo evento.</>,
                 image: [
                     {
                         src: '/images/gallery/img-02.jpg',
@@ -150,28 +145,15 @@ const about = {
     },
     technical: {
         display: true, // set to false to hide this section
-        title: 'Values',
+        title: 'Exclusivity',
         skills: [
             {
-                title: 'Exclusivity',
-                description: <>Our events are exclusive, designed for a select audience in extraordinary locations. Attendance is limited to those who meet our criteria, with online guest lists that open for each event, ensuring a unique and curated experience. Every date brings together a mix of remarkable guests, creating an unparalleled atmosphere. </>,
+                title: '',
+                description: <>I nostri eventi sono esclusivi, pensati per un pubblico selezionato in location straordinarie. La partecipazione è riservata a chi soddisfa i nostri criteri, con liste ospiti online che si aprono per ogni evento, garantendo un’esperienza unica e curata. Ogni data riunisce un mix di ospiti eccezionali, creando un’atmosfera senza paragoni.</>,
                 // optional: leave the array empty if you don't want to display images
                 images: [
                     {
                         src: '/images/projects/project-01/img-04.jpg',
-                        alt: 'Project image',
-                        width: 16,
-                        height: 9
-                    },
-                ]
-            },
-            {
-                title: 'Unique',
-                description: <>What makes our events truly unique is our collaboration with standout brands that excel in their field. These brands bring a distinct flair and innovation, making every event not just a gathering but a celebration of creativity, style, and individuality.</>,
-                // optional: leave the array empty if you don't want to display images
-                images: [
-                    {
-                        src: '/images/projects/project-01/image-02.jpg',
                         alt: 'Project image',
                         width: 16,
                         height: 9

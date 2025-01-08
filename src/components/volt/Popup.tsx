@@ -73,10 +73,19 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
                                 size="m"                       
                                 data-border="rounded"
 									              variant="tertiary"         
-                                style={{marginRight: 'auto'}}
+                                
                                 >
                                 Close
                             </Button>
+
+                          <a href="mailto:cleope.events@gmail.com" style={{marginRight: 'auto'}}>
+                            <Button
+                                value="Close"
+                                size="m"       
+                                >
+                                Volt Tables 
+                            </Button>
+                          </a>
                 </div>
             
           </div>

@@ -195,9 +195,8 @@ export default function About(
                             direction="column"
                             textVariant="body-default-l"
                             fillWidth gap="m" marginBottom="xl">
-Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio champagne, esposizioni di brand e sfilate direttamente sulla pista.
-
-</Flex>
+                            Il fashion party unisce DJ set, cocktail bar, esposizioni di brand e sfilate direttamente in pista.
+                        </Flex>
                     )}
 
                     { about.work.display && (
@@ -337,7 +336,7 @@ Il fashion party combina DJ set, cocktail bar, tavoli esclusivi con servizio cha
                                 as="h2"
                                 id={'Values'}
                                 variant="display-strong-s" marginBottom="40">
-                                Values
+                                Exclusivity
                             </Heading>
                             <Flex
                                 direction="column"

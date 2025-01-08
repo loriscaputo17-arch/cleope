@@ -190,6 +190,7 @@ export default function About(){
             )}
 
             <main className="w-full max-w-sm">
+
               <Button
                                 value="Subscribe"
                                 onClick={() => setActivePopup("volt")}
@@ -197,6 +198,7 @@ export default function About(){
                                 style={{width:'fit-content', margin:'auto'}}>
 											VOLT Milan Access 16 Jan 2025
                       </Button>
+
             </main>
             <div className={styles.imageContainer}>
               
@@ -204,6 +206,34 @@ export default function About(){
                   style={{border: '1px solid var(--neutral-alpha-weak)',marginTop: '3rem', marginBottom: '3rem'}}/>
               
               </div>
+
+
+              <Flex
+                                className={styles.blockAlign}
+                                style={{
+                                    backdropFilter: 'blur(var(--static-space-1))',
+                                    border: '1px solid var(--brand-alpha-medium)',
+                                    width: 'fit-content',
+                                    margin:'auto'
+                                }}
+                                alpha="brand-weak" radius="full"
+                                fillWidth padding="4" gap="8" marginBottom="m"
+                                alignItems="center">
+                                <Flex paddingLeft="12">
+                                    <Icon
+                                        name="calendar"
+                                        onBackground="brand-weak"/>
+                                </Flex>
+                                <Flex
+                                    paddingX="8">
+                                    Brand Collaboration at VOLT
+                                </Flex>
+                                <IconButton
+                                    href={'https://cal.com/cleope-events'}
+                                    data-border="rounded"
+                                    variant="tertiary"
+                                    icon="chevronRight"/>
+                            </Flex>
 
             {/* Popup */}
             {activePopup && (

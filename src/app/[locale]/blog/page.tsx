@@ -1,9 +1,10 @@
-import { Flex, Heading } from '@/once-ui/components';
+import { Flex, Heading, Icon, IconButton,Button } from '@/once-ui/components';
 import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { baseURL, renderContent } from '@/app/resources'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
+import styles from '@/components/about/about.module.scss'
 
 export async function generateMetadata(
 	{params: {locale}}: { params: { locale: string }}
@@ -78,6 +79,38 @@ export default function Blog(
                 variant="display-strong-s">
                 Cleope Events are HOT
             </Heading>
+			<Button
+                                value="Subscribe"
+								href={`/${locale}/volt`}
+                                size="m"
+                                style={{width:'fit-content', marginBottom: '1rem'}}>
+											VOLT Milan Access 16 Jan 2025
+                      </Button>
+			<Flex
+                                className={styles.blockAlign}
+                                style={{
+                                    backdropFilter: 'blur(var(--static-space-1))',
+                                    border: '1px solid var(--brand-alpha-medium)',
+                                    width: 'fit-content'
+                                }}
+                                alpha="brand-weak" radius="full"
+                                fillWidth padding="4" gap="8" marginBottom="m"
+                                alignItems="center">
+                                <Flex paddingLeft="12">
+                                    <Icon
+                                        name="calendar"
+                                        onBackground="brand-weak"/>
+                                </Flex>
+                                <Flex
+                                    paddingX="8">
+                                    Brand Collaboration at VOLT
+                                </Flex>
+                                <IconButton
+                                    href={'https://cal.com/cleope-events'}
+                                    data-border="rounded"
+                                    variant="tertiary"
+                                    icon="chevronRight"/>
+                            </Flex>
 			<Flex
 				fillWidth flex={1} direction="column">
 				<Posts range={[1,3]} locale={locale} thumbnail/>

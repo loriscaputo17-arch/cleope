@@ -1,7 +1,5 @@
 module.exports = {
     plugins: [
-      // Aggiungi il plugin Tailwind CSS
-      'tailwindcss',
       
       [
         '@csstools/postcss-global-data',
