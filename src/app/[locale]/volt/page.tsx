@@ -226,7 +226,7 @@ export default function About(){
                                 </Flex>
                                 <Flex
                                     paddingX="8">
-                                    Brand Collaboration at VOLT
+                                    Collaborazione Brand al VOLT
                                 </Flex>
                                 <IconButton
                                     href={'https://cal.com/cleope-events'}

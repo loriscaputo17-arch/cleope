@@ -71,7 +71,7 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
                                 size="m"
                                 style={{marginLeft: 'auto'}}
                                 >
-                                Request List
+                                Richiedi Lista
                               </Button>
 
                             <Button
@@ -83,7 +83,7 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
 									              variant="tertiary"         
                                 
                                 >
-                                Close
+                                Chiudi
                             </Button>
                 </div>
             
