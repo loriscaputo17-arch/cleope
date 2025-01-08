@@ -87,7 +87,6 @@ export default function Blog(
 											VOLT Milan Access 16 Jan 2025
                       </Button>
 			<Flex
-                                className={styles.blockAlign}
                                 style={{
                                     backdropFilter: 'blur(var(--static-space-1))',
                                     border: '1px solid var(--brand-alpha-medium)',

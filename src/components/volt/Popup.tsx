@@ -20,7 +20,6 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
           </div>
         </header>
          <div style={{
-          display: 'grid',
           gridTemplateColumns: 'repeat(1, 1fr)', // grid-cols-1
           gap: '1rem'
         }}>
@@ -56,6 +55,14 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
                         onChange={(e) => setUserInstagram(e.target.value)}
                         />
 
+                      <div style={{display: 'flex'}}>
+                        <a href="mailto:cleope.events@gmail.com" style={{
+                          marginLeft: 'auto',
+                          marginRight: 'auto',
+                          marginTop: '2rem',
+                        }}>CLicca qui per prenotare un tavolo al Volt</a>
+                      </div>
+
 
                       <div style={{display: 'flex', gap: '2rem', marginTop: '2rem'}}>
                               <Button
@@ -70,22 +77,14 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
                             <Button
                                 value="Close"
                                 onClick={onClose}
-                                size="m"                       
+                                size="m"          
+                                style={{marginRight: 'auto'}}             
                                 data-border="rounded"
 									              variant="tertiary"         
                                 
                                 >
                                 Close
                             </Button>
-
-                          <a href="mailto:cleope.events@gmail.com" style={{marginRight: 'auto'}}>
-                            <Button
-                                value="Close"
-                                size="m"       
-                                >
-                                Volt Tables 
-                            </Button>
-                          </a>
                 </div>
             
           </div>
