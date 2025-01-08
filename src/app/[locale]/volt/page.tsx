@@ -8,12 +8,14 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from "react";
 import Popup from "@/components/volt/Popup";
+import PopupInfoTables from "@/components/voltInfo/Popup";
 import { collection, addDoc, doc, getDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
 export default function About(){
   const [activePopup, setActivePopup] = useState<string | null>(null);
+  const [activePopup2, setActivePopup2] = useState<string | null>(null);
   const [alertPopup, setAlertPopup] = useState<string | null>(null);
   const router = useRouter();
 
@@ -199,6 +201,22 @@ export default function About(){
 											VOLT Milan Access 16 Jan 2025
                       </Button>
 
+                      <Button
+                                value="Subscribe"
+                                onClick={() => setActivePopup2("volt")}
+                                size="m"
+                                style={{width:'fit-content', margin:'auto', marginTop: '1rem', marginBottom: '1rem'}}>
+											VOLT Milan Access 23 Jan 2025
+                      </Button>
+
+                      <Button
+                                value="Subscribe"
+                                onClick={() => setActivePopup2("volt2")}
+                                size="m"
+                                style={{width:'fit-content', margin:'auto'}}>
+											VOLT Milan Access 30 Jan 2025
+                      </Button>
+
             </main>
             <div className={styles.imageContainer}>
               
@@ -237,12 +255,21 @@ export default function About(){
 
             {/* Popup */}
             {activePopup && (
-              <Popup
+              <PopupInfoTables
                 type={activePopup}
                 onClose={() => setActivePopup(null)}
                 onSaveCode={handleSaveCode}
                 onSwitchPopUp={() => setActivePopup("request")}
               />
+            )}
+
+            {activePopup2 && (
+              <Popup
+              type={activePopup2}
+              onClose={() => setActivePopup2(null)}
+              onSaveCode={handleSaveCode}
+              onSwitchPopUp={() => setActivePopup("request")}
+            />
             )}
 
           </div>
