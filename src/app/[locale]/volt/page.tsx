@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { useState, useEffect } from "react";
 import Popup from "@/components/volt/Popup";
 import PopupInfoTables from "@/components/voltInfo/Popup";
+import Popup2 from "@/components/volt2/Popup";
 import { collection, addDoc, doc, getDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
@@ -16,6 +17,7 @@ import { useRouter } from "next/navigation";
 export default function About(){
   const [activePopup, setActivePopup] = useState<string | null>(null);
   const [activePopup2, setActivePopup2] = useState<string | null>(null);
+  const [activePopup3, setActivePopup3] = useState<string | null>(null);
   const [alertPopup, setAlertPopup] = useState<string | null>(null);
   const router = useRouter();
 
@@ -162,9 +164,273 @@ export default function About(){
                 event: "16 Gen 2025",
               });
             
-              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 16 Gennaio 2025.`);
+              alert(`Grazie!`);
               setActivePopup(null); 
-              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 16 Gennaio 2025.")
+              setAlertPopup("Grazie!")
+            }
+        } catch (error) {
+          console.error("Errore:", error);
+          alert("Error during the operation.");
+        }
+      };
+
+      const handleSaveCode2 = async (email:any, instagram:any, type:any) => {
+        try {
+          if (type === "session") {
+    
+            const userCodeQuery = query(
+              collection(db, "users"),
+              where("userCode", "==", email)
+            );
+            const userCodeSnapshot = await getDocs(userCodeQuery);
+    
+            if (!userCodeSnapshot.empty) {
+              let user=userCodeSnapshot.docs[0].data()
+              //alert("Login eseguito con successo!");
+              setActivePopup(null);
+              router.push(`/home?userCode=${user.userCode}`);
+            } else {
+              alert("Code not found.");
+            }
+          } else if (type === "request") {
+            const emailQuery = query(
+              collection(db, "users"),
+              where("email", "==", email)
+            );
+            const emailSnapshot = await getDocs(emailQuery);
+          
+            const instagramQuery = query(
+              collection(db, "users"),
+              where("instagram", "==", instagram)
+            );
+            const instagramSnapshot = await getDocs(instagramQuery);
+          
+            if (!emailSnapshot.empty || !instagramSnapshot.empty) {
+              let existingUser;
+              
+              // Recupera i dati dell'utente che corrispondono
+              if (!emailSnapshot.empty) {
+                existingUser = emailSnapshot.docs[0].data();
+              } else if (!instagramSnapshot.empty) {
+                existingUser = instagramSnapshot.docs[0].data();
+              }
+          
+              const existingCode = existingUser.userCode; // Recupera il codice esistente
+          
+              // Invia email con il codice già presente
+              sendEmail({
+                to: existingUser.email,
+                subject: "Benvenuto in CLEOPE: Il tuo codice di accesso esclusivo",
+                text: `Ecco il tuo codice: ${existingCode}`,
+                html: `<h1>Benvenuto in CLEOPE!</h1>
+                  <p><strong>Il tuo codice è:</strong> <span style="font-size: 24px; color: #0049ff;">${existingCode}</span></p>
+                  <p>Clicca sul link qui sotto per utilizzare il tuo codice e accedere ai nostri eventi sulla piattaforma:</p>
+                  <a href="https://cleope-sigma.vercel.app/?code=${existingCode}" style="color: #007bff;">https://cleope-sigma.vercel.app/?code=${existingCode}</a>
+                  <p>Grazie per esserti unito a CLEOPE!</p>
+                  <p><em>Team CLEOPE</em></p>
+                  <a href="https://www.instagram.com/cleopeofficial/" style="color: #007bff;">
+              Seguici su Instagram
+            </a>
+            <a href="https://www.tiktok.com/@cleopeofficial?_t=ZN-8ry8NBWWrKA&_r=1" style="color: #007bff;">
+              Seguici su TikTok
+            </a>
+                  `,
+              });
+          
+              alert("This email or Instagram is already in use! We have resent the code to your email.");
+              return;
+            }
+          
+            // Genera un nuovo codice se email e Instagram non sono già presenti
+            const uniqueCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+            await addDoc(collection(db, "users"), {
+              ...instagram,
+              email,
+              userCode: uniqueCode,
+              createdAt: serverTimestamp(),
+            });
+          
+            // Invia l'email con il nuovo codice
+            sendEmail({
+              to: email,
+              subject: "Benvenuto in CLEOPE: Il tuo codice di accesso esclusivo",
+              text: `Ecco il tuo codice: ${uniqueCode}`,
+              html: `<h1>Benvenuto in CLEOPE!</h1>
+                <p><strong>Il tuo codice è:</strong> <span style="font-size: 24px; color: #0049ff;">${uniqueCode}</span></p>
+                <p>Clicca sul link qui sotto per utilizzare il tuo codice e accedere ai nostri eventi sulla piattaforma:</p>
+                <a href="https://cleope-sigma.vercel.app/?code=${uniqueCode}" style="color: #007bff;">https://cleope-sigma.vercel.app/?code=${uniqueCode}</a>
+                <p>Grazie per esserti unito a CLEOPE!</p>
+                <p><em>Team CLEOPE</em></p>
+                <a href="https://www.instagram.com/cleopeofficial/" style="color: #007bff;">
+              Seguici su Instagram
+            </a>
+            <a href="https://www.tiktok.com/@cleopeofficial?_t=ZN-8ry8NBWWrKA&_r=1" style="color: #007bff;">
+              Seguici su TikTok
+            </a>
+            `,
+            });
+          
+            alert(`Your code is ${uniqueCode}. We just sent you an email.`);
+            setActivePopup(null);
+          } else {
+              // Caso per "lists"
+            
+              const listQuery = query(
+                collection(db, "VOLTaccessList"),
+                where("email", "==", email),
+                where("event", "==", "23 Gen 2025"),
+                where("type", "==", type)
+              );
+              const listSnapshot = await getDocs(listQuery);
+            
+              if (!listSnapshot.empty) {
+                alert(`Utente giá presente.`);
+                return;
+              }
+            
+              await addDoc(collection(db, "VOLTaccessList"), {
+                email: email,
+                instagram: instagram,
+                type: type,
+                datetime: serverTimestamp(),
+                event: "23 Gen 2025",
+              });
+            
+              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 23 Gennaio 2025.`);
+              setActivePopup(null); 
+              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 23 Gennaio 2025.")
+            }
+        } catch (error) {
+          console.error("Errore:", error);
+          alert("Error during the operation.");
+        }
+      };
+
+      const handleSaveCode3 = async (email:any, instagram:any, type:any) => {
+        try {
+          if (type === "session") {
+    
+            const userCodeQuery = query(
+              collection(db, "users"),
+              where("userCode", "==", email)
+            );
+            const userCodeSnapshot = await getDocs(userCodeQuery);
+    
+            if (!userCodeSnapshot.empty) {
+              let user=userCodeSnapshot.docs[0].data()
+              //alert("Login eseguito con successo!");
+              setActivePopup(null);
+              router.push(`/home?userCode=${user.userCode}`);
+            } else {
+              alert("Code not found.");
+            }
+          } else if (type === "request") {
+            const emailQuery = query(
+              collection(db, "users"),
+              where("email", "==", email)
+            );
+            const emailSnapshot = await getDocs(emailQuery);
+          
+            const instagramQuery = query(
+              collection(db, "users"),
+              where("instagram", "==", instagram)
+            );
+            const instagramSnapshot = await getDocs(instagramQuery);
+          
+            if (!emailSnapshot.empty || !instagramSnapshot.empty) {
+              let existingUser;
+              
+              // Recupera i dati dell'utente che corrispondono
+              if (!emailSnapshot.empty) {
+                existingUser = emailSnapshot.docs[0].data();
+              } else if (!instagramSnapshot.empty) {
+                existingUser = instagramSnapshot.docs[0].data();
+              }
+          
+              const existingCode = existingUser.userCode; // Recupera il codice esistente
+          
+              // Invia email con il codice già presente
+              sendEmail({
+                to: existingUser.email,
+                subject: "Benvenuto in CLEOPE: Il tuo codice di accesso esclusivo",
+                text: `Ecco il tuo codice: ${existingCode}`,
+                html: `<h1>Benvenuto in CLEOPE!</h1>
+                  <p><strong>Il tuo codice è:</strong> <span style="font-size: 24px; color: #0049ff;">${existingCode}</span></p>
+                  <p>Clicca sul link qui sotto per utilizzare il tuo codice e accedere ai nostri eventi sulla piattaforma:</p>
+                  <a href="https://cleope-sigma.vercel.app/?code=${existingCode}" style="color: #007bff;">https://cleope-sigma.vercel.app/?code=${existingCode}</a>
+                  <p>Grazie per esserti unito a CLEOPE!</p>
+                  <p><em>Team CLEOPE</em></p>
+                  <a href="https://www.instagram.com/cleopeofficial/" style="color: #007bff;">
+              Seguici su Instagram
+            </a>
+            <a href="https://www.tiktok.com/@cleopeofficial?_t=ZN-8ry8NBWWrKA&_r=1" style="color: #007bff;">
+              Seguici su TikTok
+            </a>
+                  `,
+              });
+          
+              alert("This email or Instagram is already in use! We have resent the code to your email.");
+              return;
+            }
+          
+            // Genera un nuovo codice se email e Instagram non sono già presenti
+            const uniqueCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+            await addDoc(collection(db, "users"), {
+              ...instagram,
+              email,
+              userCode: uniqueCode,
+              createdAt: serverTimestamp(),
+            });
+          
+            // Invia l'email con il nuovo codice
+            sendEmail({
+              to: email,
+              subject: "Benvenuto in CLEOPE: Il tuo codice di accesso esclusivo",
+              text: `Ecco il tuo codice: ${uniqueCode}`,
+              html: `<h1>Benvenuto in CLEOPE!</h1>
+                <p><strong>Il tuo codice è:</strong> <span style="font-size: 24px; color: #0049ff;">${uniqueCode}</span></p>
+                <p>Clicca sul link qui sotto per utilizzare il tuo codice e accedere ai nostri eventi sulla piattaforma:</p>
+                <a href="https://cleope-sigma.vercel.app/?code=${uniqueCode}" style="color: #007bff;">https://cleope-sigma.vercel.app/?code=${uniqueCode}</a>
+                <p>Grazie per esserti unito a CLEOPE!</p>
+                <p><em>Team CLEOPE</em></p>
+                <a href="https://www.instagram.com/cleopeofficial/" style="color: #007bff;">
+              Seguici su Instagram
+            </a>
+            <a href="https://www.tiktok.com/@cleopeofficial?_t=ZN-8ry8NBWWrKA&_r=1" style="color: #007bff;">
+              Seguici su TikTok
+            </a>
+            `,
+            });
+          
+            alert(`Your code is ${uniqueCode}. We just sent you an email.`);
+            setActivePopup(null);
+          } else {
+              // Caso per "lists"
+            
+              const listQuery = query(
+                collection(db, "VOLTaccessList"),
+                where("email", "==", email),
+                where("event", "==", "30 Gen 2025"),
+                where("type", "==", type)
+              );
+              const listSnapshot = await getDocs(listQuery);
+            
+              if (!listSnapshot.empty) {
+                alert(`Utente giá presente.`);
+                return;
+              }
+            
+              await addDoc(collection(db, "VOLTaccessList"), {
+                email: email,
+                instagram: instagram,
+                type: type,
+                datetime: serverTimestamp(),
+                event: "30 Gen 2025",
+              });
+            
+              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 30 Gennaio 2025.`);
+              setActivePopup(null); 
+              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 30 Gennaio 2025.")
             }
         } catch (error) {
           console.error("Errore:", error);
@@ -187,7 +453,7 @@ export default function About(){
 
             {alertPopup && (
               <div style={{marginBottom: '2rem'}}>
-                <p>Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 16 Gennaio 2025.</p>
+                <p style={{textAlign: 'center'}}>Grazie!</p>
               </div>
             )}
 
@@ -211,7 +477,7 @@ export default function About(){
 
                       <Button
                                 value="Subscribe"
-                                onClick={() => setActivePopup2("volt2")}
+                                onClick={() => setActivePopup3("volt")}
                                 size="m"
                                 style={{width:'fit-content', margin:'auto'}}>
 											VOLT Milan Access 30 Jan 2025
@@ -267,7 +533,16 @@ export default function About(){
               <Popup
               type={activePopup2}
               onClose={() => setActivePopup2(null)}
-              onSaveCode={handleSaveCode}
+              onSaveCode={handleSaveCode2}
+              onSwitchPopUp={() => setActivePopup("request")}
+            />
+            )}
+
+            {activePopup3 && (
+              <Popup2
+              type={activePopup3}
+              onClose={() => setActivePopup3(null)}
+              onSaveCode={handleSaveCode3}
               onSwitchPopUp={() => setActivePopup("request")}
             />
             )}
