@@ -150,7 +150,7 @@ export default function About(
                                 </Flex>
                                 <Flex
                                     paddingX="8">
-                                    Schedule a call
+                                    Fissa una call
                                 </Flex>
                                 <IconButton
                                     href={about.calendar.link}
@@ -162,7 +162,7 @@ export default function About(
                         <Heading
                             className={styles.textAlign}
                             variant="display-strong-xl">
-                            What's Cleope?
+                            Cos'é Cleope?
                         </Heading>
                         <Text
                             className={styles.textAlign}

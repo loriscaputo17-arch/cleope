@@ -128,7 +128,7 @@ export default function Home(
 									<Flex
 										gap="8"
 										alignItems="center">
-											What's Cleope?
+											Cos'é Cleope?
 											<Arrow trigger="#about"/>
 									</Flex>
 								</Button>
@@ -174,7 +174,7 @@ export default function Home(
                                 </Flex>
                                 <Flex
                                     paddingX="8">
-                                    Schedule a call
+                                    Fissa una call
                                 </Flex>
                                 <IconButton
                                     href={'https://cal.com/cleope-events'}
@@ -193,7 +193,7 @@ export default function Home(
 							as="h2"
 							variant="display-strong-xs"
 							wrap="balance">
-							Last Events
+							Ultimi Eventi
 						</Heading>
 					</Flex>
 					<Flex

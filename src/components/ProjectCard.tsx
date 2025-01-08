@@ -128,7 +128,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                                 wrap="balance"
                                 variant="body-default-s"
                                 onBackground="neutral-weak">
-                                CLEOPE is an innovative fashion party that combines music, entertainment and fashion in exclusive locations.
+                                CLEOPE è un evento innovativo che unisce moda, musica ed intrattenimento in location esclusive.
                             </Text>
                         )}
                         {content?.trim() && (
@@ -138,7 +138,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                                 href={'/about'}>
                                     <Text
                                         variant="body-default-s">
-                                       Learn more about CLEOPE
+                                       Scopri di piu su CLEOPE
                                     </Text>
                             </SmartLink>
                         )}
