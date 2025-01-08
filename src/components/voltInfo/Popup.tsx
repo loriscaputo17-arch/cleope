@@ -26,7 +26,7 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
           {/* Lista */}
           <div className="p-4 rounded-lg">
             <h3 className="text-lg font-semibold mb-2">Info & Tavoli</h3>
-            <h3 className="font-semibold mb-2" style={{fontSize: '14px', marginTop: '1rem'}}>Liste chiuse.</h3>
+            <h3 className="font-semibold mb-2" style={{fontSize: '18px', marginTop: '1rem'}}>Liste chiuse.</h3>
 
             <div className="mb-2">
               <p style={{marginTop: '1rem', marginBottom: '1rem', fontSize: '14px'}}>
