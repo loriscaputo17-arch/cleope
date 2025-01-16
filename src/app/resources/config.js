@@ -16,6 +16,7 @@ const routes = {
     '/blog':    true,
     '/gallery': true,
     '/volt': true,
+    '/dashboard': true,
 }
 
 // Enable password protection on selected routes
