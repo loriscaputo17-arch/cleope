@@ -486,11 +486,9 @@ export default function About(){
             </main>
             <div className={styles.imageContainer}>
               
-              <img alt={'Volt Cover'} src={'/images/pawsacover.jpeg'} className={styles.voltCover}
+              <img alt={'Volt Cover'} src={'/images/venuevolt.jpeg'} className={styles.voltCover}
                   style={{border: '1px solid var(--neutral-alpha-weak)',marginTop: '3rem', marginBottom: '3rem'}}/>
-              
               </div>
-
 
               <Flex
                                 className={styles.blockAlign}
