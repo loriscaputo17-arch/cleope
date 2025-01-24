@@ -486,7 +486,7 @@ export default function About(){
             </main>
             <div className={styles.imageContainer}>
               
-              <img alt={'Volt Cover'} src={'/images/venuevolt.jpeg'} className={styles.voltCover}
+              <img alt={'Volt Cover'} src={'/images/volt_30_01_2025.jpg'} className={styles.voltCover}
                   style={{border: '1px solid var(--neutral-alpha-weak)',marginTop: '3rem', marginBottom: '3rem'}}/>
               </div>
 
