@@ -25,10 +25,10 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
         }}>
           {/* Lista */}
           <div className="p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-2">VOLT List</h3>
+            <h3 className="text-lg font-semibold mb-2">VOLT - Lista CLEOPE</h3>
             <div className="mb-2">
               <p style={{marginTop: '1rem', marginBottom: '1rem', fontSize: '14px'}}>
-              Inserisci la tua email e il tuo Instagram per richiedere di entrare nella lista CLEOPE per l'evento del 23 gennaio 2025. 
+              Inserisci la tua email e il tuo Instagram per richiedere di entrare nella lista CLEOPE per l'evento del 20 Febbraio 2025. 
               Questo non garantisce l'accesso all'evento, ma è necessario per partecipare al processo di preselezione all'ingresso.</p>
             </div>
 
@@ -60,7 +60,7 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
                           marginLeft: 'auto',
                           marginRight: 'auto',
                           marginTop: '2rem',
-                        }}>CLicca qui per prenotare un tavolo al Volt</a>
+                        }}>Scrivici per prenotare un tavolo al Volt</a>
                       </div>
 
 

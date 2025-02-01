@@ -146,7 +146,7 @@ export default function About(){
               const listQuery = query(
                 collection(db, "VOLTaccessList"),
                 where("email", "==", email),
-                where("event", "==", "16 Gen 2025"),
+                where("event", "==", "13 Feb 2025"),
                 where("type", "==", type)
               );
               const listSnapshot = await getDocs(listQuery);
@@ -161,12 +161,13 @@ export default function About(){
                 instagram: instagram,
                 type: type,
                 datetime: serverTimestamp(),
-                event: "16 Gen 2025",
+                event: "13 Feb 2025",
               });
-            
-              alert(`Grazie!`);
+
+              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 13 Febbraio 2025.`);
               setActivePopup(null); 
-              setAlertPopup("Grazie!")
+              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 13 Febbraio 2025.")
+            
             }
         } catch (error) {
           console.error("Errore:", error);
@@ -278,7 +279,7 @@ export default function About(){
               const listQuery = query(
                 collection(db, "VOLTaccessList"),
                 where("email", "==", email),
-                where("event", "==", "23 Gen 2025"),
+                where("event", "==", "20 Feb 2025"),
                 where("type", "==", type)
               );
               const listSnapshot = await getDocs(listQuery);
@@ -293,12 +294,12 @@ export default function About(){
                 instagram: instagram,
                 type: type,
                 datetime: serverTimestamp(),
-                event: "23 Gen 2025",
+                event: "20 Feb 2025",
               });
             
-              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 23 Gennaio 2025.`);
+              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 20 Febbraio 2025.`);
               setActivePopup(null); 
-              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 23 Gennaio 2025.")
+              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 20 Febbraio 2025.")
             }
         } catch (error) {
           console.error("Errore:", error);
@@ -410,7 +411,7 @@ export default function About(){
               const listQuery = query(
                 collection(db, "VOLTaccessList"),
                 where("email", "==", email),
-                where("event", "==", "30 Gen 2025"),
+                where("event", "==", "06 Feb 2025"),
                 where("type", "==", type)
               );
               const listSnapshot = await getDocs(listQuery);
@@ -425,12 +426,12 @@ export default function About(){
                 instagram: instagram,
                 type: type,
                 datetime: serverTimestamp(),
-                event: "30 Gen 2025",
+                event: "06 Feb 2025",
               });
             
-              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 30 Gennaio 2025.`);
+              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 6 Febbraio 2025.`);
               setActivePopup(null); 
-              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 30 Gennaio 2025.")
+              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 6 Febbraio 2025.")
             }
         } catch (error) {
           console.error("Errore:", error);
@@ -459,12 +460,20 @@ export default function About(){
 
             <main className="w-full max-w-sm">
 
-              {/*<Button
+                      <Button
+                                value="Subscribe"
+                                onClick={() => setActivePopup3("volt")}
+                                size="m"
+                                style={{width:'fit-content', margin:'auto'}}>
+											VOLT Milan Access 06 Feb 2025
+                      </Button>
+
+                      <Button
                                 value="Subscribe"
                                 onClick={() => setActivePopup("volt")}
                                 size="m"
-                                style={{width:'fit-content', margin:'auto'}}>
-											VOLT Milan Access 16 Jan 2025
+                                style={{width:'fit-content', margin:'auto', marginTop: '1rem', marginBottom: '1rem'}}>
+											VOLT Milan Access 13 Feb 2025
                       </Button>
 
                       <Button
@@ -472,21 +481,13 @@ export default function About(){
                                 onClick={() => setActivePopup2("volt")}
                                 size="m"
                                 style={{width:'fit-content', margin:'auto', marginBottom: '1rem'}}>
-											VOLT Milan Access 23 Jan 2025
-                      </Button>*/}
-
-                      <Button
-                                value="Subscribe"
-                                onClick={() => setActivePopup3("volt")}
-                                size="m"
-                                style={{width:'fit-content', margin:'auto'}}>
-											VOLT Milan Access 30 Jan 2025
+											VOLT Milan Access 20 Feb 2025
                       </Button>
 
             </main>
             <div className={styles.imageContainer}>
               
-              <img alt={'Volt Cover'} src={'/images/volt_30_01_2025.jpg'} className={styles.voltCover}
+              <img alt={'Volt Cover'} src={'/images/volt_06_02.jpeg'} className={styles.voltCover}
                   style={{border: '1px solid var(--neutral-alpha-weak)',marginTop: '3rem', marginBottom: '3rem'}}/>
               </div>
 

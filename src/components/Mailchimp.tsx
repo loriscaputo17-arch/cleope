@@ -103,7 +103,7 @@ export const Mailchimp = (
 
                                             <img width={'100%'}
                                                                     alt={'Volt Calendar'}
-                                                                    src={'/images/jancalendar.jpeg'}
+                                                                    src={'/images/febcalendar.png'}
                                                                     style={{
                                                                         border: '1px solid var(--neutral-alpha-weak)',
                                                                         marginTop: '3rem'
