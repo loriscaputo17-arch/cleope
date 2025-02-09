@@ -19,7 +19,7 @@ export default function Dashboard() {
     const [data, setData] = useState<Row[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const events = ['06 Feb 2025', '13 Feb 2025', '20 Feb 2025'];
+    const events = ['13 Feb 2025', '20 Feb 2025'];
 
     // Function to fetch data from Firebase
     const fetchData = async () => {

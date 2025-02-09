@@ -462,17 +462,9 @@ export default function About(){
 
                       <Button
                                 value="Subscribe"
-                                onClick={() => setActivePopup3("volt")}
-                                size="m"
-                                style={{width:'fit-content', margin:'auto'}}>
-											VOLT Milan Access 06 Feb 2025
-                      </Button>
-
-                      <Button
-                                value="Subscribe"
                                 onClick={() => setActivePopup("volt")}
                                 size="m"
-                                style={{width:'fit-content', margin:'auto', marginTop: '1rem', marginBottom: '1rem'}}>
+                                style={{width:'fit-content', margin:'auto', marginBottom: '1rem'}}>
 											VOLT Milan Access 13 Feb 2025
                       </Button>
 
@@ -487,7 +479,7 @@ export default function About(){
             </main>
             <div className={styles.imageContainer}>
               
-              <img alt={'Volt Cover'} src={'/images/volt_06_02.jpeg'} className={styles.voltCover}
+              <img alt={'Volt Cover'} src={'/images/venuevolt.jpeg'} className={styles.voltCover}
                   style={{border: '1px solid var(--neutral-alpha-weak)',marginTop: '3rem', marginBottom: '3rem'}}/>
               </div>
 
