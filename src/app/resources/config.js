@@ -18,6 +18,7 @@ const routes = {
     '/volt': true,
     '/dashboard': true,
     '/dashboardOld': true,
+    '/abouten': true,
 }
 
 // Enable password protection on selected routes
