@@ -460,13 +460,13 @@ export default function About(){
 
             <main className="w-full max-w-sm">
 
-                      <Button
+                      {/*<Button
                                 value="Subscribe"
                                 onClick={() => setActivePopup("volt")}
                                 size="m"
                                 style={{width:'fit-content', margin:'auto', marginBottom: '1rem'}}>
 											VOLT Milan Access 13 Feb 2025
-                      </Button>
+                      </Button>*/}
 
                       <Button
                                 value="Subscribe"
