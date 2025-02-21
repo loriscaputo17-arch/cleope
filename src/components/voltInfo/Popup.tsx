@@ -15,9 +15,6 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
       return (
         <div>
         <header className="mb-0">
-          <div className="w-20 h-20 bg-transparent rounded-full flex items-center justify-center m-auto">
-            <img src="https://static1.squarespace.com/static/ta/58909d6e1e5b6ccc19c26826/166/assets/volt-bianco.svg" alt="Logo" className="h-20" style={{margin: 'auto'}} width={'70px'} height={'70px'} />
-          </div>
         </header>
          <div style={{
           gridTemplateColumns: 'repeat(1, 1fr)', // grid-cols-1
@@ -25,12 +22,11 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
         }}>
           {/* Lista */}
           <div className="p-4 rounded-lg">
-            <h3 className="text-lg font-semibold mb-2">VOLT - Lista CLEOPE</h3>
+            <h3 className="text-lg font-semibold mb-2">Anakin x Mauna Kea - Rinascente Milano</h3>
 
             <div className="mb-2">
               <p style={{marginTop: '1rem', marginBottom: '1rem', fontSize: '14px'}}>
-              Inserisci la tua email e il tuo Instagram per richiedere di entrare nella lista CLEOPE per l'evento del 13 Febbraio 2025. 
-              Questo non garantisce l'accesso all'evento, ma è necessario per partecipare al processo di preselezione all'ingresso.
+              Inserisci la tua email e il tuo Instagram per confermare la tua presenza.
               </p>
             </div>
 
@@ -62,7 +58,7 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
                           marginLeft: 'auto',
                           marginRight: 'auto',
                           marginTop: '2rem',
-                        }}>Scrivici per prenotare un tavolo al Volt</a>
+                        }}>Scrivici per domande o richieste.</a>
                       </div>
 
 
@@ -73,7 +69,7 @@ export default function Popup({ type, onClose, onSaveCode, onSwitchPopUp }) {
                                 size="m"
                                 style={{marginLeft: 'auto'}}
                                 >
-                                Richiedi Info
+                                Invia
                               </Button>
 
                             <Button
