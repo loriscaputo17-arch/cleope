@@ -475,14 +475,6 @@ export default function About(){
 											VOLT Milan Access 27 Feb 2025
                       </Button>
 
-                      <Button
-                                  value="Subscribe"
-                                  size="m"
-                                  onClick={() => setActivePopup("volt")}
-                                  style={{width:'fit-content', margin:'auto', marginBottom: '1rem'}}>
-                        Anakin x Mauna Kea - Rinascente Milano
-                      </Button>
-
                       <a href="https://www.eventbrite.it/e/biglietti-insomnia-x-cleope-the-flat-by-macan-mfw-1251579220139?aff=Cleope">
                         <Button
                                   value="Subscribe"
