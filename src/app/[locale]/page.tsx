@@ -106,6 +106,22 @@ export default function Home(
 								</Button>
 							</Flex>
 						</RevealFx>
+						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
+							<Flex style={{width: 'fit-content', marginBottom: '1rem'}}>
+								<Button
+									id="volt"
+									data-border="rounded"
+									href={`https://www.eventbrite.it/e/biglietti-insomnia-x-cleope-the-flat-by-macan-mfw-1251579220139?aff=Cleope`}
+									size="m">
+									<Flex
+										gap="8"
+										alignItems="center">
+											The Flat by Macan MFW 28 Feb 2025
+											<Arrow trigger="#volt"/>
+									</Flex>
+								</Button>
+							</Flex>
+						</RevealFx>
 						<RevealFx style={{ marginTop:'2rem'}}
 							translateY="8" delay={0.2} fillWidth justifyContent="flex-start" paddingBottom="m">
 							<Text

@@ -480,7 +480,7 @@ export default function About(){
                                   value="Subscribe"
                                   size="m"
                                   style={{width:'fit-content', margin:'auto', marginBottom: '1rem'}}>
-                        Insomnia x CLEOPE The Flat by Macan MFW
+                        The Flat by Macan MFW 28 Feb 2025
                         </Button>
                       </a>
 
