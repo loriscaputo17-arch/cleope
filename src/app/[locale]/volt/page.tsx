@@ -278,7 +278,7 @@ export default function About(){
               const listQuery = query(
                 collection(db, "VOLTaccessList"),
                 where("email", "==", email),
-                where("event", "==", "27 Feb 2025"),
+                where("event", "==", "6 Mar 2025"),
                 where("type", "==", type)
               );
               const listSnapshot = await getDocs(listQuery);
@@ -293,12 +293,12 @@ export default function About(){
                 instagram: instagram,
                 type: type,
                 datetime: serverTimestamp(),
-                event: "27 Feb 2025",
+                event: "6 Mar 2025",
               });
             
-              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 27 Febbraio 2025.`);
+              alert(`Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 6 Mar 2025.`);
               setActivePopup(null); 
-              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 27 Febbraio 2025.")
+              setAlertPopup("Grazie! Hai appena fatto richiesta di iscrizione alla lista Cleope all'evento VOLT del 6 Mar 2025.")
             }
         } catch (error) {
           console.error("Errore:", error);
@@ -472,17 +472,8 @@ export default function About(){
                                 onClick={() => setActivePopup2("volt")}
                                 size="m"
                                 style={{width:'fit-content', margin:'auto', marginBottom: '1rem'}}>
-											VOLT Milan Access 27 Feb 2025
+											VOLT Milan Access 6 Mar 2025
                       </Button>
-
-                      <a href="https://www.eventbrite.it/e/biglietti-insomnia-x-cleope-the-flat-by-macan-mfw-1251579220139?aff=Cleope">
-                        <Button
-                                  value="Subscribe"
-                                  size="m"
-                                  style={{width:'fit-content', margin:'auto', marginBottom: '1rem'}}>
-                        The Flat by Macan MFW 28 Feb 2025
-                        </Button>
-                      </a>
 
 
             </main>
