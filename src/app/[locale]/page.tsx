@@ -100,7 +100,7 @@ export default function Home(
 									<Flex
 										gap="8"
 										alignItems="center">
-											VOLT Milan Access 6 Mar 2025
+											VOLT Milan Access 13 Mar 2025
 											<Arrow trigger="#volt"/>
 									</Flex>
 								</Button>
