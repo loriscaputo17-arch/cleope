@@ -114,12 +114,12 @@ export const Header = () => {
                                     <Flex paddingX="2" hide="s">Cleope</Flex>
                                 </ToggleButton>
                             )}
-                            { routes['/volt'] && (
+                            { routes['/nextevents'] && (
                                 <ToggleButton
                                     prefixIcon="grid"
-                                    href={`/${params?.locale}/volt`}
-                                    selected={pathname.startsWith('/volt')}>
-                                    <Flex paddingX="2" hide="s">Volt</Flex>
+                                    href={`/${params?.locale}/nextevents`}
+                                    selected={pathname.startsWith('/nextevents')}>
+                                    <Flex paddingX="2" hide="s">Next Events</Flex>
                                 </ToggleButton>
                             )}
                             { routes['/blog'] && (

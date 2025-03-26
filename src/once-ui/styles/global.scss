@@ -68,3 +68,16 @@ a {
 ::-webkit-scrollbar-corner {
     background-color: var(--static-transparent);
 }
+
+/* Cambia colore delle frecce */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #3700ff !important; /* Cambia con il colore desiderato */
+    font-size: 24px;
+}
+
+/* Opzionale: Cambia colore delle frecce quando l'utente passa sopra */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color: #ffcc00; /* Cambia con il colore desiderato */
+}

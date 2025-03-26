@@ -19,6 +19,9 @@ const routes = {
     '/dashboard': true,
     '/dashboardOld': true,
     '/abouten': true,
+    '/events': true,
+    '/event/[slug]': true,
+    '/nextevents': true,
 }
 
 // Enable password protection on selected routes

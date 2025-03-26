@@ -5,6 +5,8 @@ import { Projects } from '@/components/work/Projects';
 
 import { baseURL, routes, renderContent } from '@/app/resources'; 
 import { Mailchimp } from '@/components';
+import EventsCarousel from '@/components/EventsCarousel';
+import CustomCalendar from '@/components/CustomCalendar';
 import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
@@ -95,12 +97,12 @@ export default function Home(
 								<Button
 									id="volt"
 									data-border="rounded"
-									href={`/${locale}/volt`}
+									href={`/${locale}/events`}
 									size="m">
 									<Flex
 										gap="8"
 										alignItems="center">
-											VOLT Milan Access 13 Mar 2025
+											Join Our Events
 											<Arrow trigger="#volt"/>
 									</Flex>
 								</Button>
@@ -117,6 +119,7 @@ export default function Home(
 							</Text>
 						</RevealFx>
 
+						<div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
 						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
 							<Flex style={{width: 'fit-content'}}>
 								<Button
@@ -134,10 +137,56 @@ export default function Home(
 								</Button>
 							</Flex>
 						</RevealFx>
+
+						<RevealFx>
+							<Flex
+									style={{
+										backdropFilter: 'blur(var(--static-space-1))',
+										border: '1px solid var(--brand-alpha-medium)',
+										width: 'fit-content'
+									}}
+									alpha="brand-weak" radius="full"
+									fillWidth padding="4" gap="8"
+									alignItems="center">
+									<Flex paddingLeft="12">
+										<Icon
+											name="calendar"
+											onBackground="brand-weak"/>
+									</Flex>
+									<Flex
+										paddingX="8">
+										Brand Collaboration with Us
+									</Flex>
+									<IconButton
+										href={'https://cal.com/cleope-events'}
+										data-border="rounded"
+										variant="tertiary"
+										icon="chevronRight"/>
+								</Flex>
+						</RevealFx>
+						</div>
+
+						
 						
 					</Flex>
 				
 			</Flex>
+
+			<Flex justifyContent="center" alignItems="center" fillWidth>
+				<video 
+					src="https://framerusercontent.com/assets/ccHwyPwFzg6OUXL6peBqewDFXW4.mp4" 
+					autoPlay 
+					loop 
+					muted 
+					playsInline
+					style={{
+						maxWidth: '50%',
+						borderRadius: '12px',
+						boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)'
+					}}
+				/>
+			</Flex>
+
 			<RevealFx translateY="16" delay={0.6}>
 				<Projects range={[1,1]} locale={locale}/>
 			</RevealFx>
@@ -183,25 +232,12 @@ export default function Home(
                                     icon="chevronRight"/>
                             </Flex>
 					</div>
-				</Flex>
-			{routes['/blog'] && (
-				<Flex
-					fillWidth gap="24"
-					mobileDirection="column">
-					<Flex flex={1} paddingLeft="l">
-						<Heading
-							as="h2"
-							variant="display-strong-xs"
-							wrap="balance">
-							Ultimi Eventi
-						</Heading>
-					</Flex>
-					<Flex
-						flex={3} paddingX="20">
-						<Posts range={[1,4]} columns="2" locale={locale}/>
-					</Flex>
-				</Flex>
-			)}
+			</Flex>
+
+			<CustomCalendar />
+
+			<EventsCarousel />
+
 			{ newsletter.display &&
 				<Mailchimp newsletter={newsletter} />
 			}

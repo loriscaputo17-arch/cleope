@@ -101,13 +101,13 @@ export const Mailchimp = (
                                                 </Flex>
                                             </Button>
 
-                                            <img width={'100%'}
+                                            {/*<img width={'100%'}
                                                                     alt={'Volt Calendar'}
                                                                     src={'/images/febcalendar.png'}
                                                                     style={{
                                                                         border: '1px solid var(--neutral-alpha-weak)',
                                                                         marginTop: '3rem'
-                                                                    }}/>
+                                                                    }}/>*/}
         </Flex>
     )
 }

@@ -109,7 +109,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             as="h2"
                             wrap="balance"
                             variant="heading-strong-xl">
-                            Fashion Event Curators
+                            CLEOPE: Fashion Label
                         </Heading>
                     </Flex>
                 )}
@@ -117,18 +117,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     <Flex
                         flex={7} direction="column"
                         gap="16">
-                        {avatars?.length > 0 && (
-                            <AvatarGroup
-                                avatars={avatars}
-                                size="m"
-                                reverseOrder/>
-                        )}
                         {description?.trim() && (
                             <Text
                                 wrap="balance"
                                 variant="body-default-s"
                                 onBackground="neutral-weak">
-                                CLEOPE è un evento innovativo che unisce moda, musica ed intrattenimento in location esclusive.
+                                è il punto d'incontro tra moda, musica ed eventi esclusivi. Non siamo solo una semplice organizzazione di eventi, ma un vero e proprio hub creativo che connette brand di moda, spazi innovativi, DJs di tendenza, modelli e content creators.
+
+                                Organizziamo fashion parties unici, dove lo stile incontra la nightlife e il networking diventa un'esperienza. Attraverso collaborazioni strategiche con marchi di moda, location esclusive e talenti emergenti, trasformiamo ogni evento in un’occasione per ridefinire il concetto di coolness e avanguardia.
+
+                                Selezione, estetica e vibrazioni: tutto è curato nei minimi dettagli per creare atmosfere indimenticabili e far vivere la moda in un modo nuovo.
+
+                                Benvenuti nella rivoluzione del fashion entertainment.
                             </Text>
                         )}
                         {content?.trim() && (
