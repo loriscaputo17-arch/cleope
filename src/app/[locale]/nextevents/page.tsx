@@ -11,14 +11,29 @@ export default function Events() {
   const [formData, setFormData] = useState({ name: "", surname: "", phone: "" });
 
   const events = [
-    { id: 1, name: "CLEOPE x VOLT Club Milan", date:'27th Mar 2025', type: "volt", special: true },
-    { id: 2, name: "INSOMNIA X CLEOPE The Flat by Macan", date:'29th Mar 2025', type: "standard", ticket: 'https://www.eventbrite.it/e/insomnia-x-cleope-the-flat-by-macan-tickets-1295655894659?aff=Cleope'},
-    { id: 3, name: "Aesthetica Roma", date:'03rd Apr 2025', type: "aesthetica", special: true },
-    { id: 4, name: "CLEOPE x VOLT Club Milan", date:'3rd Apr 2025', type: "volt", special: true },
-    { id: 5, name: "CLEOPE X BLUE GROOVE ARCA Milano", date:'04th Apr 2025', type: "standard", ticket: 'https://dice.fm/event/92yk7n-cleope-x-blue-groove-4th-apr-arca-milano-tickets?lng=it' },
-    { id: 6, name: "CLEOPE x VOLT Club Milan", date:'10th Apr 2025', type: "volt", special: true },
-    { id: 7, name: "CLEOPE x VOLT Club Milan", date:'17th Apr 2025', type: "volt", special: true },
+    { id: 1, name: "CLEOPE x VOLT Club Milan", date: "27th Mar 2025", type: "volt", special: true },
+    { id: 2, name: "INSOMNIA X CLEOPE The Flat by Macan", date: "29th Mar 2025", type: "standard", ticket: "https://www.eventbrite.it/e/insomnia-x-cleope-the-flat-by-macan-tickets-1295655894659?aff=Cleope" },
+    { id: 3, name: "Aesthetica Roma", date: "03rd Apr 2025", type: "aesthetica", special: true },
+    { id: 4, name: "CLEOPE x VOLT Club Milan", date: "3rd Apr 2025", type: "volt", special: true },
+    { id: 5, name: "CLEOPE X BLUE GROOVE ARCA Milano", date: "04th Apr 2025", type: "standard", ticket: "https://dice.fm/event/92yk7n-cleope-x-blue-groove-4th-apr-arca-milano-tickets?lng=it" },
+    { id: 6, name: "CLEOPE x VOLT Club Milan", date: "10th Apr 2025", type: "volt", special: true },
+    { id: 7, name: "CLEOPE x VOLT Club Milan", date: "17th Apr 2025", type: "volt", special: true },
   ];
+
+  // Funzione per filtrare gli eventi futuri o di oggi
+  const getFilteredEvents = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Rimuove l'orario per confrontare solo la data
+
+    return events.filter(event => {
+      const eventDate = new Date(Date.parse(event.date.replace(/(\d+)(st|nd|rd|th)/, "$1"))); // Converte la stringa in data
+      eventDate.setHours(0, 0, 0, 0); // Rimuove l'orario
+
+      return eventDate >= today;
+    });
+  };
+
+  const filteredEvents = getFilteredEvents();
 
   const handleRegister = async (eventType: string) => {
     if (!formData.name || !formData.surname || !formData.phone) {
@@ -47,7 +62,7 @@ export default function Events() {
     <div className="min-h-screen bg-black text-white p-6">
       {/* Logo */}
       <div className="flex justify-center mb-24">
-        <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={'90px'} height={'90px'} style={{margin: 'auto'}} />
+        <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={"90px"} height={"90px"} style={{ margin: "auto" }} />
       </div>
 
       {/* Titolo */}
@@ -55,37 +70,43 @@ export default function Events() {
 
       {/* Griglia eventi */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events.map((event) => (
-          <div key={event.id} className="bg-gray-800 p-4 rounded-lg text-center" style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem'}}>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">{event.name}</h3>
-              <p className="text-lg font-semibold mb-2">{event.date}</p>
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
+            <div key={event.id} className="bg-gray-800 p-4 rounded-lg text-center" style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
+              <div>
+                <h3 className="text-lg font-semibold mb-2">{event.name}</h3>
+                <p className="text-lg font-semibold mb-2">{event.date}</p>
+              </div>
+
+              {event.special ? (
+                <Button className="font-regular mb-2" style={{ marginLeft: "auto" }} onClick={() => setActiveEvent(event.type)}>
+                  Register
+                </Button>
+              ) : (
+                <a href={event.ticket} target="_blank">
+                  <Button>More Info</Button>
+                </a>
+              )}
             </div>
-            
-            {event.special ? (
-              <>
-                <Button className="font-regular mb-2" style={{marginLeft: 'auto'}} onClick={() => setActiveEvent(event.type)}>Register</Button>
-              </>
-            ) : (
-              <a href={event.ticket} target="_blank">
-                <Button>More Info</Button>
-              </a>
-            )}
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-lg">No upcoming events.</p>
+        )}
       </div>
 
       {/* Popup Registrazione */}
       {activeEvent && (
-        <div style={{position: 'fixed', inset: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+        <div style={{ position: "fixed", inset: "0", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
           <div className="bg-gray-900 p-6 rounded-lg text-center">
-            <h2 className="text-xl font-bold mb-4" style={{marginBottom: '1rem'}}>Registrazione per {activeEvent}</h2>
+            <h2 className="text-xl font-bold mb-4" style={{ marginBottom: "1rem" }}>
+              Registrazione per {activeEvent}
+            </h2>
 
-            <div style={{marginBottom: '1rem'}}>
+            <div style={{ marginBottom: "1rem" }}>
               <Input
-              formNoValidate
-              labelAsPlaceholder
-              id="mce-nome"
+                formNoValidate
+                labelAsPlaceholder
+                id="mce-nome"
                 name="NOME"
                 type="nome"
                 label="Nome"
@@ -95,11 +116,11 @@ export default function Events() {
               />
             </div>
 
-            <div style={{marginBottom: '1rem'}}>
+            <div style={{ marginBottom: "1rem" }}>
               <Input
-              formNoValidate
-              labelAsPlaceholder
-              id="mce-cognome"
+                formNoValidate
+                labelAsPlaceholder
+                id="mce-cognome"
                 name="COGNOME"
                 type="cognome"
                 label="Cognome"
@@ -110,11 +131,11 @@ export default function Events() {
               />
             </div>
 
-            <div style={{marginBottom: '1rem'}}>
+            <div style={{ marginBottom: "1rem" }}>
               <Input
-              formNoValidate
-              labelAsPlaceholder
-              id="mce-phone"
+                formNoValidate
+                labelAsPlaceholder
+                id="mce-phone"
                 name="PHONE"
                 type="phone"
                 label="Phone"
@@ -124,8 +145,11 @@ export default function Events() {
                 className="mb-3"
               />
             </div>
-            <div className="flex justify-between" style={{gap: '1rem'}}>
-              <Button onClick={() => setActiveEvent(null)} className="mr-2">Annulla</Button>
+
+            <div className="flex justify-between" style={{ gap: "1rem" }}>
+              <Button onClick={() => setActiveEvent(null)} className="mr-2">
+                Annulla
+              </Button>
               <Button onClick={() => handleRegister(activeEvent)}>Invia</Button>
             </div>
           </div>
