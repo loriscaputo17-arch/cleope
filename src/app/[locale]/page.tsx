@@ -119,7 +119,7 @@ export default function Home(
 							</Text>
 						</RevealFx>
 
-						<div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+						<div className={styles.responsiveContainer}>
 						<RevealFx translateY="12" delay={0.4} style={{width: 'fit-content'}}>
 							<Flex style={{width: 'fit-content'}}>
 								<Button
@@ -165,8 +165,6 @@ export default function Home(
 								</Flex>
 						</RevealFx>
 						</div>
-
-						
 						
 					</Flex>
 				
@@ -242,5 +240,6 @@ export default function Home(
 				<Mailchimp newsletter={newsletter} />
 			}
 		</Flex>
+		
 	);
 }
