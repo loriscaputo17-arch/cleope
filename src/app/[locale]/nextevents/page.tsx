@@ -21,14 +21,13 @@ export default function Events() {
     { id: 8, name: "CLEOPE x VOLT Club Milan", date: "17th Apr 2025", type: "volt", special: true },
   ];
 
-  // Funzione per filtrare gli eventi futuri o di oggi
   const getFilteredEvents = () => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Rimuove l'orario per confrontare solo la data
+    today.setHours(0, 0, 0, 0); 
 
     return events.filter(event => {
       const eventDate = new Date(Date.parse(event.date.replace(/(\d+)(st|nd|rd|th)/, "$1"))); // Converte la stringa in data
-      eventDate.setHours(0, 0, 0, 0); // Rimuove l'orario
+      eventDate.setHours(0, 0, 0, 0);
 
       return eventDate >= today;
     });
