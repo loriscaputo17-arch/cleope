@@ -97,7 +97,7 @@ export default function Home(
 								<Button
 									id="volt"
 									data-border="rounded"
-									href={`/${locale}/events`}
+									href={`/${locale}/nextevents`}
 									size="m">
 									<Flex
 										gap="8"
