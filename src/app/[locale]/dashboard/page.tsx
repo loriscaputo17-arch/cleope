@@ -5,32 +5,45 @@ import { db } from "@/lib/firebase";
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import styles from './dashboard.module.scss';
 
-// Define the type for rows in the data array
 type Row = {
     id: string;
+    name: string;
+    surname: string;
+    phone: string;
     email: string;
-    instagram: string;
-    type: string;
-    datetime: string;
-    event: string;
+    eventType: string;
+    createdAt: string;
 };
 
 export default function Dashboard() {
     const [data, setData] = useState<Row[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const events = ['20 Feb 2025','27 Feb 2025', '6 Mar 2025', '13 Mar 2025'];
+    const events = ['Downtown April 12th']; // <-- Puoi aggiungere altri nomi di eventi qui
 
-    // Function to fetch data from Firebase
     const fetchData = async () => {
         try {
-            const collectionRef = collection(db, 'VOLTaccessList');
-            const queries = events.map(event => query(collectionRef, where('event', '==', event)));
+            const collectionRef = collection(db, 'eventRegistrations');
+            const queries = events.map(event =>
+                query(collectionRef, where('eventType', '==', event))
+            );
+
             const snapshotPromises = queries.map(q => getDocs(q));
             const snapshots = await Promise.all(snapshotPromises);
 
             const rows: Row[] = snapshots.flatMap(snapshot =>
-                snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Row))
+                snapshot.docs.map(doc => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id,
+                        name: data.name || '',
+                        surname: data.surname || '',
+                        phone: data.phone || '',
+                        email: data.email || '',
+                        eventType: data.eventType || '',
+                        createdAt: data.createdAt?.toDate().toISOString() || '',
+                    };
+                })
             );
 
             setData(rows);
@@ -43,8 +56,15 @@ export default function Dashboard() {
 
     const generateCSV = () => {
         const csvRows = [
-            ['Email', 'Instagram', 'Event'], // Header row
-            ...data.map(row => [row.email, row.instagram, row.event]), // Data rows
+            ['Name', 'Surname', 'Phone', 'Email', 'Event Type', 'Created At'],
+            ...data.map(row => [
+                row.name,
+                row.surname,
+                row.phone,
+                row.email,
+                row.eventType,
+                row.createdAt,
+            ]),
         ];
 
         const csvContent = csvRows.map(e => e.join(',')).join('\n');
@@ -66,12 +86,13 @@ export default function Dashboard() {
     return (
         <Flex className={styles.dashboard} direction="column" padding="l">
             <Heading variant="display-strong-l" marginBottom="l">Event Dashboard</Heading>
-            <Button onClick={generateCSV} label="Download CSV" size="m"  />
+            <Button onClick={generateCSV} label="Download CSV" size="m" />
+
             {loading ? (
                 <Text>Loading...</Text>
             ) : (
                 events.map(event => {
-                    const filteredData = data.filter(row => row.event === event); // Filter rows for this event
+                    const filteredData = data.filter(row => row.eventType === event);
                     return (
                         <Flex key={event} direction="column" marginBottom="xl">
                             <Heading variant="heading-strong-m" marginBottom="m">
@@ -81,39 +102,32 @@ export default function Dashboard() {
                                 <table className={styles.table}>
                                     <thead>
                                         <tr>
+                                            <th>Name</th>
+                                            <th>Surname</th>
+                                            <th>Phone</th>
                                             <th>Email</th>
-                                            <th>Instagram</th>
-                                            <th>Type</th>
-                                            <th>Date & Time</th>
-                                            <th>Actions</th>
+                                            <th>Event Type</th>
+                                            <th>Created At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {filteredData.map(row => (
                                             <tr key={row.id}>
-                                                <td data-label="Email">
-                                                    <a href={`mailto:${row.email}`} className={styles.link}>{row.email}</a>
-                                                </td>
-                                                <td data-label="Instagram">
+                                                <td>{row.name}</td>
+                                                <td>{row.surname}</td>
+                                                <td>{row.phone}</td>
+                                                <td>
                                                     <a
-                                                        href={`https://instagram.com/${row.instagram}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className={styles.link}>
-                                                        @{row.instagram}
+                                                        href={`mailto:${row.email}`}
+                                                        className={styles.link}
+                                                    >
+                                                        {row.email}
                                                     </a>
                                                 </td>
-                                                <td data-label="Type">
-                                                    <Tag>{row.type}</Tag>
+                                                <td>
+                                                    <Tag>{row.eventType}</Tag>
                                                 </td>
-                                                <td data-label="Date & Time">{new Date(row.datetime).toLocaleString()}</td>
-                                                <td data-label="Actions">
-                                                    <Button
-                                                        onClick={() => console.log(`Sending email to ${row.email}`)}
-                                                        label="Send Email"
-                                                        size="s"
-                                                    />
-                                                </td>
+                                                <td>{new Date(row.createdAt).toLocaleString()}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -126,3 +140,4 @@ export default function Dashboard() {
         </Flex>
     );
 }
+
