@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Flex, Button, Heading, Text, Tag, Input, Checkbox } from '@/once-ui/components';
+import { Flex, Button, Heading, Text } from '@/once-ui/components';
 import { db } from "@/lib/firebase";
 import {
     collection,
@@ -10,7 +10,7 @@ import {
     setDoc,
     doc,
     getDoc,
-    addDoc,  // Per aggiungere nuovi documenti
+    addDoc,
 } from 'firebase/firestore';
 import styles from './dashboard.module.scss';
 
@@ -35,10 +35,8 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [statuses, setStatuses] = useState<Record<string, AttendanceStatus>>({});
-    
-    // Nuovi stati per la gestione dell'utente da aggiungere
     const [newUser, setNewUser] = useState({ name: '', surname: '', phone: '' });
-    
+
     const events = ['Downtown April 12th'];
 
     const fetchData = async () => {
@@ -68,7 +66,6 @@ export default function Dashboard() {
 
             setData(rows);
 
-            // Fetch statuses
             const statusSnapshots = await Promise.all(
                 rows.map(row => getDoc(doc(db, 'eventAttendance', row.id)))
             );
@@ -100,26 +97,23 @@ export default function Dashboard() {
             bounced: false,
             interesting: false,
         };
-    
+
         const updatedStatus = {
             ...currentStatus,
             [field]: !currentStatus[field],
         };
-    
+
         setStatuses(prev => ({
             ...prev,
             [rowId]: updatedStatus,
         }));
-    
-        console.log("Updating status for", rowId, updatedStatus); // DEBUG
-    
+
         try {
             await setDoc(doc(db, 'eventAttendance', rowId), updatedStatus, { merge: true });
-            console.log("Saved successfully");
         } catch (error) {
             console.error('Error updating status:', error);
         }
-    };    
+    };
 
     const generateCSV = () => {
         const csvRows = [
@@ -150,63 +144,77 @@ export default function Dashboard() {
         try {
             const newUserData = { ...newUser, eventType: events[0], createdAt: new Date() };
 
-            // Aggiungi il nuovo utente a Firebase
-            const docRef = await addDoc(collection(db, 'eventRegistrations'), newUserData);
-            console.log("User added with ID: ", docRef.id);
-
-            // Ricarica i dati
+            await addDoc(collection(db, 'eventRegistrations'), newUserData);
             fetchData();
-            // Reset del modulo
             setNewUser({ name: '', surname: '', phone: '' });
         } catch (error) {
             console.error("Error adding user: ", error);
         }
     };
 
+    const countStatus = (rows: Row[]) => {
+        let entered = 0;
+        let bounced = 0;
+
+        rows.forEach(row => {
+            const status = statuses[row.id];
+            if (status?.entered) entered++;
+            if (status?.bounced) bounced++;
+        });
+
+        return { entered, bounced };
+    };
+
     useEffect(() => {
         fetchData();
     }, []);
 
-    const filteredData = data.filter(row =>
-        `${row.name} ${row.surname}`.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredData = data
+        .filter(row =>
+            `${row.name} ${row.surname}`.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .sort((a, b) => {
+            const fullNameA = `${a.name} ${a.surname}`.toLowerCase();
+            const fullNameB = `${b.name} ${b.surname}`.toLowerCase();
+            return fullNameA.localeCompare(fullNameB);
+        });
 
     return (
         <Flex className={styles.dashboard} direction="column" padding="l">
             <Heading variant="display-strong-l" marginBottom="l">Event Dashboard</Heading>
-            
+
             {/* Modulo per aggiungere un nuovo utente */}
-            <div style={{marginTop: '1rem'}}>
+            <div style={{ marginTop: '1rem' }}>
                 <Heading variant="heading-strong-s" marginBottom="m">Aggiungi Nuovo Utente</Heading>
-                <input 
+                <input
                     placeholder="Nome"
                     value={newUser.name}
-                    onChange={(e) => setNewUser({...newUser, name: e.target.value})}
-                    style={{marginBottom: '0.5rem', padding: '0.5rem'}}
+                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                    style={{ marginBottom: '0.5rem', padding: '0.5rem' }}
                 />
-                <input 
+                <input
                     placeholder="Cognome"
                     value={newUser.surname}
-                    onChange={(e) => setNewUser({...newUser, surname: e.target.value})}
-                    style={{marginBottom: '0.5rem', padding: '0.5rem',}}
+                    onChange={(e) => setNewUser({ ...newUser, surname: e.target.value })}
+                    style={{ marginBottom: '0.5rem', padding: '0.5rem' }}
                 />
-                <input 
+                <input
                     placeholder="Telefono (opzionale)"
                     value={newUser.phone}
-                    onChange={(e) => setNewUser({...newUser, phone: e.target.value})}
-                    style={{marginBottom: '1rem', padding: '0.5rem',}}
+                    onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
+                    style={{ marginBottom: '1rem', padding: '0.5rem' }}
                 />
-                <Button onClick={addNewUser} label="Aggiungi Utente" size="m" style={{marginBottom: '3rem'}} />
+                <Button onClick={addNewUser} label="Aggiungi Utente" size="m" style={{ marginBottom: '3rem' }} />
             </div>
 
             <div>
                 <input
                     placeholder="Cerca per nome o cognome..."
                     value={searchTerm}
-                    style={{padding: '0.5rem', width: '80vw'}}
+                    style={{ padding: '0.5rem', width: '80vw' }}
                     onChange={e => setSearchTerm(e.target.value)}
                 />
-                <Button style={{marginTop: '1rem', marginBottom: '1rem'}} onClick={generateCSV} label="Download CSV" size="m" />
+                <Button style={{ marginTop: '1rem', marginBottom: '1rem' }} onClick={generateCSV} label="Download CSV" size="m" />
             </div>
 
             {loading ? (
@@ -214,10 +222,12 @@ export default function Dashboard() {
             ) : (
                 events.map(event => {
                     const eventData = filteredData.filter(row => row.eventType === event);
+                    const { entered, bounced } = countStatus(eventData);
+
                     return (
                         <Flex key={event} direction="column" marginBottom="xl">
-                            <Heading variant="heading-strong-m" marginBottom="m">
-                                Event: {event} ({eventData.length} iscritti)
+                            <Heading variant="heading-strong-m" marginBottom="m" style={{marginBottom: "2rem", marginTop: "1rem"}}>
+                                Event: {event} ({eventData.length} iscritti — ✅ {entered} entrati, ❌ {bounced} rimbalzati)
                             </Heading>
                             <div className={styles.tableWrapper}>
                                 <table className={styles.table}>
