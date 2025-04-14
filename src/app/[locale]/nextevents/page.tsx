@@ -18,7 +18,7 @@ export default function Events() {
     { id: 5, name: "CLEOPE X BLUE GROOVE ARCA Milano", date: "04th Apr 2025", type: "standard", ticket: "https://dice.fm/event/92yk7n-cleope-x-blue-groove-4th-apr-arca-milano-tickets?lng=it" },
     { id: 6, name: "CLEOPE x VOLT Club Milan", date: "10th Apr 2025", type: "volt", special: true },
     { id: 7, name: "Afrodite x Cleope Downtown Milan", date: "12th Apr 2025", type: "Downtown April 12th", special: true },
-    /*{ id: 8, name: "CLEOPE x VOLT Club Milan", date: "17th Apr 2025", type: "volt", special: true },*/
+    { id: 8, name: "CLEOPE x VOLT Club Milan", date: "17th Apr 2025", type: "volt", special: true },
   ];
 
   const getFilteredEvents = () => {
