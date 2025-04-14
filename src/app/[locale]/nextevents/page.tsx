@@ -26,7 +26,7 @@ export default function Events() {
     today.setHours(0, 0, 0, 0); 
 
     return events.filter(event => {
-      const eventDate = new Date(Date.parse(event.date.replace(/(\d+)(st|nd|rd|th)/, "$1"))); // Converte la stringa in data
+      const eventDate = new Date(Date.parse(event.date.replace(/(\d+)(st|nd|rd|th)/, "$1"))); 
       eventDate.setHours(0, 0, 0, 0);
 
       return eventDate >= today;
