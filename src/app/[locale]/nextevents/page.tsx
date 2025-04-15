@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Events() {
   const [activeEvent, setActiveEvent] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ name: "", surname: "", phone: "" });
+  const [formData, setFormData] = useState({ name: "", surname: "", phone: "", email: "" });
 
   const events = [
     { id: 1, name: "CLEOPE x VOLT Club Milan", date: "27th Mar 2025", type: "volt", special: true },
@@ -18,7 +18,10 @@ export default function Events() {
     { id: 5, name: "CLEOPE X BLUE GROOVE ARCA Milano", date: "04th Apr 2025", type: "standard", ticket: "https://dice.fm/event/92yk7n-cleope-x-blue-groove-4th-apr-arca-milano-tickets?lng=it" },
     { id: 6, name: "CLEOPE x VOLT Club Milan", date: "10th Apr 2025", type: "volt", special: true },
     { id: 7, name: "Afrodite x Cleope Downtown Milan", date: "12th Apr 2025", type: "Downtown April 12th", special: true },
-    { id: 8, name: "CLEOPE x VOLT Club Milan", date: "17th Apr 2025", type: "volt17.04", special: true },
+    { id: 8, name: "CLEOPE x VOLT Club Milan", date: "17th Apr 2025", type: "Volt 17.04", special: true },
+    { id: 9, name: "CLEOPE x Cvlture Salerno", date: "19th Apr 2025", type: "Cleope Fashion Party 19.04", special: true },
+    { id: 10, name: "CLEOPE x VOLT Club Milan", date: "24th Apr 2025", type: "Volt 24.04", special: true },
+    { id: 11, name: "Aesthetica Roma", date: "26th Apr 2025", type: "Aesthetica 26.04", special: true },
   ];
 
   const getFilteredEvents = () => {
@@ -142,6 +145,21 @@ export default function Events() {
                 placeholder="Phone"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="mb-3"
+              />
+            </div>
+
+            <div style={{ marginBottom: "1rem" }}>
+              <Input
+                formNoValidate
+                labelAsPlaceholder
+                id="mce-email"
+                name="EMAIL"
+                type="email"
+                label="Email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="mb-3"
               />
             </div>
