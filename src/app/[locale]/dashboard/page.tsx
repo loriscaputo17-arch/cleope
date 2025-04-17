@@ -9,7 +9,7 @@ export default function Dashboard() {
     const [selectedEvent, setSelectedEvent] = useState(events[0]);
 
     return (
-        <Flex className={styles.dashboard} direction="column" padding="l">
+        <div style={{ width: '80vw'}}>
             <Heading variant="display-strong-l" marginBottom="l">Event Dashboard</Heading>
 
             <select
@@ -39,7 +39,7 @@ export default function Dashboard() {
             </select>
 
             <EventSection event={selectedEvent} />
-        </Flex>
+        </div>
     );
 }
 

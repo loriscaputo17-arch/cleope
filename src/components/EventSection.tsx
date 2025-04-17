@@ -133,7 +133,7 @@ export default function EventSection({ event }: { event: string }) {
     const { entered, bounced } = countStatus();
 
     return (
-        <Flex direction="column" style={{ marginBottom: '3rem' }}>
+        <div>
             <Heading variant="heading-strong-m">
                 Event: {event} ({filteredData.length} iscritti — ✅ {entered} entrati, ❌ {bounced} rimbalzati)
             </Heading>
@@ -178,8 +178,6 @@ export default function EventSection({ event }: { event: string }) {
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'right 0.75rem center',
                     backgroundSize: '1rem',
-                    marginLeft: '1rem',
-                    marginRight: '1rem'
                 }}
                 />
                 <input placeholder="Telefono" value={newUser.phone} onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })} 
@@ -205,7 +203,6 @@ export default function EventSection({ event }: { event: string }) {
                 <Button onClick={addNewUser} label="Aggiungi Utente" size="m" style={{marginBottom: '2rem'}} />
             </div>
 
-<div style={{display: 'flex'}}>
 
             <input placeholder="Cerca per nome o cognome..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} style={{
                     marginBottom: '2rem',
@@ -225,9 +222,8 @@ export default function EventSection({ event }: { event: string }) {
                     backgroundSize: '1rem',
                     marginRight: '1rem',
                 }} />
-            <Button onClick={generateCSV} label="Download CSV" size="m" />
+            <Button onClick={generateCSV} label="Download CSV" size="m" style={{marginBottom: '1rem'}}/>
 
-            </div>
 
             {loading ? (
                 <Text>Loading...</Text>
@@ -247,7 +243,7 @@ export default function EventSection({ event }: { event: string }) {
                         {filteredData.map(row => (
                             <tr key={row.id}>
                                 <td>
-                                <button
+                                    <div> <button
                     onClick={() => navigator.clipboard.writeText(`${row.name} ${row.surname}`)}
                     style={{
                         marginRight: '0.5rem',
@@ -263,22 +259,23 @@ export default function EventSection({ event }: { event: string }) {
                     📋
                 </button>
 
-                                    {row.name}</td>
+                                    {row.name}</div>
+                                </td>
                                 <td>{row.surname}</td>
                                 <td>{row.phone}</td>
                                 <td>
                                     <div onClick={() => handleCheckboxChange(row.id, 'entered')}>
-                                        {statuses[row.id]?.entered ? '✔️' : '❌'}
+                                       Entrato &nbsp;{statuses[row.id]?.entered ? '✔️' : '❌'}
                                     </div>
                                 </td>
                                 <td>
                                     <div onClick={() => handleCheckboxChange(row.id, 'bounced')}>
-                                        {statuses[row.id]?.bounced ? '✔️' : '❌'}
+                                        Rimbalzato &nbsp;{statuses[row.id]?.bounced ? '✔️' : '❌'}
                                     </div>
                                 </td>
                                 <td>
                                     <div onClick={() => handleCheckboxChange(row.id, 'interesting')}>
-                                        {statuses[row.id]?.interesting ? '✔️' : '❌'}
+                                        Cool &nbsp;{statuses[row.id]?.interesting ? '✔️' : '❌'}
                                     </div>
                                 </td>
                             </tr>
@@ -286,6 +283,6 @@ export default function EventSection({ event }: { event: string }) {
                     </tbody>
                 </table>
             )}
-        </Flex>
+        </div>
     );
 }
