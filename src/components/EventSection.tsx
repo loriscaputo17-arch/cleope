@@ -237,6 +237,7 @@ export default function EventSection({ event }: { event: string }) {
                         <tr>
                             <th>Nome</th>
                             <th>Cognome</th>
+                            <th>Cell</th>
                             <th>Entrato</th>
                             <th>Rimbalzato</th>
                             <th>Interessante</th>
@@ -261,9 +262,10 @@ export default function EventSection({ event }: { event: string }) {
                 >
                     📋
                 </button>
-                
+
                                     {row.name}</td>
                                 <td>{row.surname}</td>
+                                <td>{row.phone}</td>
                                 <td>
                                     <div onClick={() => handleCheckboxChange(row.id, 'entered')}>
                                         {statuses[row.id]?.entered ? '✔️' : '❌'}
