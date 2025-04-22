@@ -22,6 +22,7 @@ export default function Events() {
     { id: 9, name: "CLEOPE x Cvlture Salerno", date: "19th Apr 2025", type: "Cleope Fashion Party 19.04", special: true },
     { id: 10, name: "CLEOPE x VOLT Club Milan", date: "24th Apr 2025", type: "Volt 24.04", special: true },
     { id: 11, name: "Aesthetica Roma", date: "26th Apr 2025", type: "Aesthetica 26.04", special: true },
+    { id: 12, name: "Afrodite x CLEOPE Downtown Milano", date: "26th Apr 2025", type: "Downtown 26.04", special: true },
   ];
 
   const getFilteredEvents = () => {
