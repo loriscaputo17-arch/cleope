@@ -23,6 +23,9 @@ export default function Events() {
     { id: 10, name: "CLEOPE x VOLT Club Milan", date: "24th Apr 2025", type: "Volt 24.04", special: true },
     { id: 11, name: "Aesthetica Roma", date: "26th Apr 2025", type: "Aesthetica 26.04", special: true },
     { id: 12, name: "Afrodite x CLEOPE Downtown Milano", date: "26th Apr 2025", type: "Downtown 26.04", special: true },
+    { id: 13, name: "CLEOPE x VOLT Club Milan", date: "1st Apr 2025", type: "Volt 01.04", special: true },
+    { id: 14, name: "Afrodite x CLEOPE Downtown Milano", date: "3rd Apr 2025", type: "Downtown 03.04", special: true },
+
   ];
 
   const getFilteredEvents = () => {
