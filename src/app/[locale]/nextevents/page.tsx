@@ -25,6 +25,8 @@ export default function Events() {
     { id: 12, name: "Afrodite x CLEOPE Downtown Milano", date: "26th Apr 2025", type: "Downtown 26.04", special: true },
     { id: 13, name: "CLEOPE x VOLT Club Milan", date: "1st May 2025", type: "Volt 01.05", special: true },
     { id: 14, name: "Afrodite x CLEOPE Downtown Milano", date: "3rd May 2025", type: "Downtown 03.05", special: true },
+    { id: 15, name: "Cleope at Caffe Pascucci Ibiza", date: "3rd May 2025", type: "Pascucci Ibiza 03.05", special: true },
+    { id: 16, name: "CLEOPE x Tantra Ibiza", date: "4th May 2025", type: "Tantra Ibiza 04.05", special: true },
 
   ];
 
