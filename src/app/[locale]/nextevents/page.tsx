@@ -27,6 +27,8 @@ export default function Events() {
     { id: 14, name: "Afrodite x CLEOPE Downtown Milano", date: "3rd May 2025", type: "Downtown 03.05", special: true },
     { id: 15, name: "Cleope at Caffe Pascucci Ibiza", date: "3rd May 2025", type: "Pascucci Ibiza 03.05", special: true },
     { id: 16, name: "CLEOPE x Tantra Ibiza", date: "4th May 2025", type: "Tantra Ibiza 04.05", special: true },
+    { id: 17, name: "CLEOPE X BLUE GROOVE ARCA Milano", date: "10th May 2025", type: "standard", ticket: "https://dice.fm/event/pyexrl-cleope-x-blue-groove-10th-may-arca-milano-tickets" },
+
 
   ];
 
