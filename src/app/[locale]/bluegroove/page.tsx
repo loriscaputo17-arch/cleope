@@ -27,9 +27,7 @@ export default function Events() {
     { id: 14, name: "Afrodite x CLEOPE Downtown Milano", date: "3rd May 2025", type: "Downtown 03.05", special: true },
     { id: 15, name: "Cleope at Caffe Pascucci Ibiza", date: "3rd May 2025", type: "Pascucci Ibiza 03.05", special: true },
     { id: 16, name: "CLEOPE x Tantra Ibiza", date: "4th May 2025", type: "Tantra Ibiza 04.05", special: true },
-    { id: 17, name: "CLEOPE X BLUE GROOVE ARCA Milano", date: "10th May 2025", type: "standard", ticket: "https://dice.fm/event/pyexrl-cleope-x-blue-groove-10th-may-arca-milano-tickets" },
-    { id: 18, name: "Afrodite x CLEOPE Downtown Milano", date: "10th May 2025", type: "Downtown 10.05", special: true },
-    { id: 19, name: "CLEOPE x VOLT Club Milan", date: "8th May 2025", type: "Volt 08.05", special: true },
+    { id: 17, name: "Blue Groove at Downtown Milano", date: "10th May 2025", type: "Downtown 10.05 Blue Groove", special: true },
   ];
 
   const getFilteredEvents = () => {
@@ -61,8 +59,8 @@ export default function Events() {
         createdAt: serverTimestamp(),
       });
 
-      alert("Registrazione completata! Ora verrai reindirizzato su WhatsApp.");
-      window.location.href = `https://api.whatsapp.com/send/?phone=%2B393513895086&text=Salve!%20Mi%20sono%20registrato%20per%20l'evento%20${encodeURIComponent(eventType)}.%20Ecco%20i%20miei%20dati:%20${encodeURIComponent(formData.name)}%20${encodeURIComponent(formData.surname)},%20${encodeURIComponent(formData.phone)}&type=phone_number&app_absent=0`;
+      alert("Registrazione completata!");
+      //window.location.href = `https://api.whatsapp.com/send/?phone=%2B393513895086&text=Salve!%20Mi%20sono%20registrato%20per%20l'evento%20${encodeURIComponent(eventType)}.%20Ecco%20i%20miei%20dati:%20${encodeURIComponent(formData.name)}%20${encodeURIComponent(formData.surname)},%20${encodeURIComponent(formData.phone)}&type=phone_number&app_absent=0`;
     } catch (error) {
       console.error("Errore:", error);
       alert("Errore durante la registrazione.");
@@ -71,13 +69,9 @@ export default function Events() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
-      {/* Logo */}
-      <div className="flex justify-center mb-24">
-        <img src="/logo.svg" alt="Logo" className="h-24 w-auto" width={"90px"} height={"90px"} style={{ margin: "auto" }} />
-      </div>
 
       {/* Titolo */}
-      <h1 className="text-center text-2xl font-bold mb-24 mt-12">Next Events by CLEOPE</h1>
+      <h1 className="text-center text-2xl font-bold mb-24 mt-12">Blue Groove</h1>
 
       {/* Griglia eventi */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

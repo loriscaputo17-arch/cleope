@@ -22,6 +22,7 @@ const routes = {
     '/events': true,
     '/event/[slug]': true,
     '/nextevents': true,
+    '/bluegroove': true,
 }
 
 // Enable password protection on selected routes
