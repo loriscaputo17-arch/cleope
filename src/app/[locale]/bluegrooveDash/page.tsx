@@ -5,7 +5,7 @@ import EventSection from '@/components/EventSection';
 import styles from './dashboard.module.scss';
 
 export default function Dashboard() {
-    const events = ['Downtown April 12th', 'Volt 17.04', 'Cleope Fashion Party 19.04', 'Aesthetica 26.04', 'Downtown 26.04', 'Volt 01.05', 'Downtown 03.05', 'Volt 08.05', 'Downtown 10.05'];
+    const events = ['Downtown 10.05 Blue Groove'];
     const [selectedEvent, setSelectedEvent] = useState(events[0]);
 
     return (
