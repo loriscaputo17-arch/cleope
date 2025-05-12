@@ -42,7 +42,7 @@ const home = {
     label: 'Home',
     title: `CLEOPE`,
     description: `CLEOPE - Fashion Party`,
-    headline: <>Next Fashion Partyc ??</>,
+    headline: <>Next Fashion Party ??</>,
     subline: <>CLEOPE - Fashion Party | Night Party. Life is too short to be mass approved.</>
 }
 
