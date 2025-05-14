@@ -12,7 +12,7 @@ export default function CleopeEventPage() {
 
         <Text variant="body-default-l" onBackground="neutral-weak">
             CLEOPE è molto più di un evento: è un’esperienza sensoriale dove moda, arte e musica si fondono in un rituale creativo unico.  
-            Il 30 maggio, nella suggestiva cornice open-air di <strong>Magnolia Roma</strong>, andrà in scena la nuova edizione del CLEOPE Fashion Party:  
+            Il 30 maggio, nella suggestiva cornice open-air di <strong>60 Foro Italico (Magnolia Roma) </strong>, andrà in scena la nuova edizione del CLEOPE Fashion Party:  
             una notte pensata per i brand più visionari, per stilisti emergenti, designer audaci e menti libere della scena fashion contemporanea.
         </Text>
 
@@ -57,7 +57,7 @@ export default function CleopeEventPage() {
         <Heading variant="display-strong-s">📲 Promozione</Heading>
         <Text variant="body-default-l">
             CLEOPE non è solo live: è visibilità.  
-            Promuoviamo l’evento prima, durante e dopo attraverso i canali social di <strong>@cleopeofficial</strong> con contenuti teaser, reel, interviste e copertura live.  
+            Promuoviamo l’evento prima, durante e dopo attraverso i canali social di <strong>@cleopeofficial</strong> con contenuti.  
             I brand partecipanti saranno taggati e valorizzati in tutta la comunicazione.
         </Text>
 
@@ -65,8 +65,7 @@ export default function CleopeEventPage() {
         <Text variant="body-default-l">
             Indirizzo: Viale delle Olimpiadi, 00135 Roma RM</Text>
         <Text variant="body-default-l">
-            Un giardino urbano nascosto tra gli alberi di Roma.  
-            <strong>Magnolia</strong> è uno spazio all’aperto suggestivo, pensato per eventi immersivi.  
+            Un giardino urbano nascosto tra gli alberi di Roma. <strong> Magnolia</strong> è uno spazio all’aperto suggestivo, pensato per eventi immersivi.  
             Perfetto per vivere una notte estiva tra installazioni, moda e musica sotto le stelle.
         </Text>
         <img
