@@ -24,6 +24,7 @@ const routes = {
     '/nextevents': true,
     '/bluegroove': true,
     '/bluegrooveDash': true,
+    '/presentation': true,
 }
 
 // Enable password protection on selected routes
