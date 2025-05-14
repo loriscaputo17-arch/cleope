@@ -42,7 +42,7 @@ export default function CleopeEventPage() {
 
         <Heading variant="display-strong-s">👠 Sfilata</Heading>
         <Text variant="body-default-l">
-            Ogni brand avrà l’opportunità di portare in passerella <strong>2-3 look</strong> con <strong>fino a 4 modelli</strong>.  
+            Ogni brand avrà l’opportunità di portare in passerella <strong>2-3 look</strong> con <strong>fino a 4 modelli</strong> (questi valori possono variare se concordati con il brand).  
             È possibile scegliere tra modelli professionisti del team CLEOPE o utilizzare il proprio cast.  
             La sfilata si svolgerà su una passerella dinamica, tra luci e musica, trasformando il pubblico in parte attiva dello show.
         </Text>
