@@ -59,6 +59,7 @@ export default function Events() {
         name: formData.name,
         surname: formData.surname,
         phone: formData.phone,
+        email: formData.email,
         eventType,
         createdAt: serverTimestamp(),
       });

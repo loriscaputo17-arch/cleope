@@ -122,13 +122,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                                 wrap="balance"
                                 variant="body-default-s"
                                 onBackground="neutral-weak">
-                                è il punto d'incontro tra moda, musica ed eventi esclusivi. Non siamo solo una semplice organizzazione di eventi, ma un vero e proprio hub creativo che connette brand di moda, spazi innovativi, DJs di tendenza, modelli e content creators.
-
-                                Organizziamo fashion parties unici, dove lo stile incontra la nightlife e il networking diventa un'esperienza. Attraverso collaborazioni strategiche con marchi di moda, location esclusive e talenti emergenti, trasformiamo ogni evento in un’occasione per ridefinire il concetto di coolness e avanguardia.
-
-                                Selezione, estetica e vibrazioni: tutto è curato nei minimi dettagli per creare atmosfere indimenticabili e far vivere la moda in un modo nuovo.
-
-                                Benvenuti nella rivoluzione del fashion entertainment.
+                                Siamo un hub creativo dove moda, musica ed eventi esclusivi si incontrano. Connettiamo brand, location innovative, DJs, modelli e content creators per dare vita a fashion parties unici. Ogni evento è un’esperienza immersiva di stile, networking e avanguardia, curata nei minimi dettagli per ridefinire il concetto di fashion entertainment.
                             </Text>
                         )}
                         {content?.trim() && (
