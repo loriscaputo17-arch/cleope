@@ -169,7 +169,7 @@ export default function About(
                             variant="display-default-xs"
                             onBackground="neutral-weak"
                             style={{fontSize: '14px', lineHeight: '20px', marginTop: '1rem' }}>
-                            CLEOPE è un fashion party innovativo che combina musica, intrattenimento e moda in location esclusive. 
+CLEOPE è una fashion label che organizza eventi per supportare brand di moda e artisti.
                         </Text>
                         {social.length > 0 && (
                             <Flex
@@ -325,58 +325,6 @@ export default function About(
                                     </Flex>
 
                                     
-                                ))}
-                            </Flex>
-                        </>
-                    )}
-
-                    { about.technical.display && (
-                        <>
-                            <Heading
-                                as="h2"
-                                id={'Values'}
-                                variant="display-strong-s" marginBottom="40">
-                                Exclusivity
-                            </Heading>
-                            <Flex
-                                direction="column"
-                                fillWidth gap="l">
-                                {about.technical.skills.map((skill, index) => (
-                                    <Flex
-                                        key={`${skill}-${index}`}
-                                        fillWidth gap="4"
-                                        direction="column">
-                                        <Text
-                                            variant="heading-strong-l">
-                                            {skill.title}
-                                        </Text>
-                                        <Text
-                                            variant="body-default-m"
-                                            onBackground="neutral-weak">
-                                            {skill.description}
-                                        </Text>
-                                        {skill.images && skill.images.length > 0 && (
-                                            <div style={{marginTop: '1rem'
-                                            }}
-                                                >
-                                                {skill.images.map((image, index) => (
-                                                    <Flex
-                                                        key={index}
-                                                        border="neutral-medium"
-                                                        borderStyle="solid-1"
-                                                        radius="m"
-                                                        minWidth={image.width} height={20}>
-                                                        <SmartImage
-                                                            enlarge
-                                                            radius="m"
-                                                            sizes={image.width.toString()}
-                                                            alt={image.alt}
-                                                            src={image.src}/>
-                                                    </Flex>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </Flex>
                                 ))}
                             </Flex>
                         </>

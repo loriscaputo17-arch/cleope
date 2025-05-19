@@ -158,7 +158,7 @@ export default function Home(
 										Brand Collaboration with Us
 									</Flex>
 									<IconButton
-										href={'https://cal.com/cleope-events'}
+										href={'https://api.whatsapp.com/send/?phone=%2B393513895086'}
 										data-border="rounded"
 										variant="tertiary"
 										icon="chevronRight"/>
@@ -224,17 +224,13 @@ export default function Home(
                                     Fissa una call
                                 </Flex>
                                 <IconButton
-                                    href={'https://cal.com/cleope-events'}
+                                    href={'https://api.whatsapp.com/send/?phone=%2B393513895086'}
                                     data-border="rounded"
                                     variant="tertiary"
                                     icon="chevronRight"/>
                             </Flex>
 					</div>
 			</Flex>
-
-			<CustomCalendar />
-
-			<EventsCarousel />
 
 			{ newsletter.display &&
 				<Mailchimp newsletter={newsletter} />

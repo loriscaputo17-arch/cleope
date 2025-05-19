@@ -118,12 +118,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         flex={7} direction="column"
                         gap="16">
                         {description?.trim() && (
-                            <Text
-                                wrap="balance"
-                                variant="body-default-s"
-                                onBackground="neutral-weak">
-                                Siamo un hub creativo dove moda, musica ed eventi esclusivi si incontrano. Connettiamo brand, location innovative, DJs, modelli e content creators per dare vita a fashion parties unici. Ogni evento è un’esperienza immersiva di stile, networking e avanguardia, curata nei minimi dettagli per ridefinire il concetto di fashion entertainment.
-                            </Text>
+                            <p>
+                                Siamo un <b>hub creativo</b> che unisce moda, musica ed eventi esclusivi. Connettiamo brand, location, DJs, modelli e content creators per creare <b>fashion parties</b> unici e immersivi, dove stile, networking e innovazione ridefiniscono il fashion entertainment.
+                            </p>
                         )}
                         {content?.trim() && (
                             <SmartLink

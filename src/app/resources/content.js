@@ -75,13 +75,10 @@ const about = {
                 timeframe: '2022 - Present',
                 role: 'Aperitif Time',
                 achievements: [
-                    <>Una serata con aperitivo e DJ set, arricchita da un’esposizione di brand di moda in aree dedicate, cocktail bar, sfilata con modelli e brand partner, e un DJ set finale per continuare la festa.</>,
-                    <>Lo stile é protagonista. Il focus è sulla sfilata in collaborazione con modelli e brand, oltre alle esposizioni dei brand durante la serata, con la possibilità di vendere i loro prodotti. </>
+                    <>Un aperitivo esclusivo con DJ set, sfilata in pista da ballo e aree espositive dedicate ai brand. I modelli creano uno show dinamico tra musica e moda. Un’occasione per scoprire nuovi brand, fare conoscenze e vivere moda e musica da vicino.</>,
                 ],
                 achievements2: [
-                    <>An evening with an aperitif and DJ set, enhanced by a fashion brand exhibition in dedicated areas, cocktail bars, a runway show featuring models and partner brands, and a final DJ set to keep the party going.</>,  
-                    <>Style takes center stage. The focus is on the runway show in collaboration with models and brands, as well as brand exhibitions throughout the evening, with the opportunity to sell their products.</>
-                    ],
+                    <>An exclusive aperitif with DJ set, dance floor fashion show and exhibition areas dedicated to brands. The models create a dynamic show between music and fashion. An opportunity to discover new brands, meet new people and experience fashion and music up close.</>,                    ],
                 images: [ // optional: leave the array empty if you don't want to display images
                     {
                         src: '/images/projects/project-01/cover-04.jpg',
@@ -98,16 +95,16 @@ const about = {
                 ]
             },
             {
-                company: 'Night Party',
+                company: 'Night Party – Music, Style & Atmosphere',
                 timeframe: '2022 - Present',
                 role: 'Night Time',
                 achievements: [
-                    <>The Night Party is an exclusive event dedicated to music and atmosphere, featuring a carefully curated music selection thanks to collaborations with DJs and unique formats for each evening.</>,  
-                    <>The focus of the evening is on photo shoots carried out in collaboration with models, brands, and guests at the party, creating an immersive experience that combines style, entertainment, and unforgettable moments.</>
+                    <>Eventi esclusivi in location ricercate, accessibili tramite selezione all’ingresso o su invito. Collaboriamo con DJ di livello per una selezione musicale d’eccellenza e di tendenza. 
+Al centro della scena: lo stile dei partecipanti, shooting live con modelli, brand e ospiti, per un’esperienza unica tra nightlife e fashion.</>,  
                     ],
                 achievements2: [
-                    <>An evening with an aperitif and DJ set, enhanced by a fashion brand exhibition in dedicated areas, cocktail bars, a runway show featuring models and partner brands, and a final DJ set to keep the party going.</>,  
-                    <>Style takes center stage. The focus is on the runway show in collaboration with models and brands, as well as brand exhibitions throughout the evening, with the opportunity to sell their products.</>
+                    <>Exclusive events in sought-after locations, accessible through selection at the door or by invitation. We collaborate with high-level DJs for an excellent and trendy musical selection.
+At the center of the scene: the style of the participants, live shooting with models, brands and guests, for a unique experience between nightlife and fashion.</>,  
                     ],
                 images: [ // optional: leave the array empty if you don't want to display images
                     {
@@ -132,16 +129,16 @@ const about = {
         institutions: [
             {
                 name: 'Brand Exhibition',
-                description: <>Allestiamo spazi espositivi personalizzati e valorizzare i brand e incrementare le vendite e networking. Garantiamo visibilità online con contenuti dedicati post-evento offrendo servizi fotografici e multimediali, aumentando la riconoscibilità del marchio. Contattaci su cleope.events@gmail.com per partecipare al prossimo evento.</>,
-                description2: <>We set up customized exhibition spaces to enhance brand value, boost sales, and foster networking. We ensure online visibility with dedicated post-event content, offering photography and multimedia services to increase brand recognition. Contact us at cleope.events@gmail.com to participate in the next event.</>,
+                description: <>Collaborare con Cleope significa entrare in contatto diretto con il pubblico in eventi esclusivi. Offriamo spazi espositivi personalizzabili, location selezionate, atmosfera curata, supporti per l’allestimento e visibilità social post-evento. I brand possono promuovere, raccontare e vendere i propri prodotti in modo autentico e coinvolgente.</>,
+                description2: <>Collaborating with Cleope means coming into direct contact with the public in exclusive events. We offer customizable exhibition spaces, selected locations, a curated atmosphere, set-up supports and post-event social visibility. Brands can promote, tell and sell their products in an authentic and engaging way.</>,
                 image: [
                     
                 ]
             },
             {
                 name: 'Runway Show',
-                description: <>Per la sfilata, collaboriamo con i brand per organizzare una passerella sulla nostra pista, accompagnata da un DJ set e supportata da servizi fotografici e video professionali. I brand possono scegliere di lavorare con le nostre modelle o con le proprie. Sono disponibili pacchetti personalizzati per partecipare. Contattaci a cleope.events@gmail.com per riservare il tuo spazio al prossimo evento.</>,
-                description2: <>For the runway show, we collaborate with brands to organize a catwalk on our dance floor, accompanied by a DJ set and supported by professional photography and video services. Brands can choose to work with our models or bring their own. Customized packages are available for participation. Contact us at cleope.events@gmail.com to reserve your spot at the next event.</>,
+                description: <>Organizziamo sfilate dinamiche durante i nostri eventi, con DJ set e un pubblico selezionato. I brand possono sfilare con le nostre modelle o le proprie. È uno show d’impatto, perfetto per creare contenuti social forti e aumentare la visibilità del brand.</>,
+                description2: <>We organize dynamic fashion shows during our events, with DJ sets and a select audience. Brands can show with our models or their own. It is an impactful show, perfect for creating strong social content and increasing brand visibility.</>,
                 image: [
                     {
                         src: '/images/gallery/img-02.jpg',
