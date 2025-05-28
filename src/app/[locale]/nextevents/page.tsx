@@ -35,6 +35,7 @@ export default function Events() {
     { id: 21, name: "CLEOPE x VOLT Club Milan", date: "22th May 2025", type: "Volt 22.05", special: true },
     { id: 21, name: "CLEOPE x VOLT Club Milan", date: "29th May 2025", type: "Volt 29.05", special: true },
     { id: 21, name: "CLEOPE Fashion Party Foro Italico Roma", date: "30th May 2025", type: "standard", ticket: "https://shorturl.at/IFpZs" },
+    { id: 23, name: "CLEOPE x VOLT Club Milan", date: "05th May 2025", type: "Volt 05.06", special: true },
 
   ];
 
