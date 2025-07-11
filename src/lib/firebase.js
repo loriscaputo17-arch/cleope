@@ -1,26 +1,19 @@
-// lib/firebaseClient.js
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+// src/lib/firebase.ts
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDA2ACwYzqZNtBnkM5tFgZtAgsyb9gbNc8",
   authDomain: "cleope-80cdc.firebaseapp.com",
   projectId: "cleope-80cdc",
-  storageBucket: "cleope-80cdc.firebasestorage.app",
+  storageBucket: "cleope-80cdc.appspot.com",
   messagingSenderId: "101049745166",
   appId: "1:101049745166:web:f9d506f17fb3f57739a15f",
-  measurementId: "G-57VJGES842",
+  measurementId: "G-57VJGES842"
 };
 
-// Inizializza Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase app (solo se non è già inizializzato)
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Ottieni Firestore
-const db = getFirestore(app);
-
-// Ottieni Auth
-const auth = getAuth(app);
-
-export { db, auth };
-
+// Exporta Firestore
+export const db = getFirestore(app);
