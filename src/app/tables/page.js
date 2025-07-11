@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";              // Importa db
 import { collection, getDocs } from "firebase/firestore";  // Importa getDocs e collection
+import Image from 'next/image'
 
 export default function TablePage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +83,8 @@ export default function TablePage() {
     <main className="w-full bg-black text-white">
       {/* HERO SECTION */}
       <section className="relative w-full h-screen">
-        <img
+        <Image
+          width={1000} height={1000}
           src="/images/IMG_0506.jpg"
           alt="Table"
           className="w-full h-full object-cover"

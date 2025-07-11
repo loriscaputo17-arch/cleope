@@ -116,11 +116,11 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-4 grid-rows-2 gap-4 w-full max-w-5xl z-10">
-          <img src="/images/IMG_0509.jpg" alt="Club crowd" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
-          <img src="/images/IMG_0520.jpg" alt="Party scene" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
-          <img src="/images/IMG_0526.jpg" alt="Fashion detail" className="object-cover w-full h-64 col-span-2 row-span-1 rounded-lg" />
-          <img src="/images/IMG_0513.jpg" alt="DJ performing" className="object-cover w-full h-64 md:col-span-1 col-span-2 row-span-1 rounded-lg" />
-          <img src="/images/IMG_0504.jpg" alt="Neon lights" className="object-cover w-full h-64 md:col-span-1 col-span-4 row-span-1 rounded-lg" />
+          <Image width={1000} height={1000} src="/images/IMG_0509.jpg" alt="Club crowd" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
+          <Image width={1000} height={1000} src="/images/IMG_0520.jpg" alt="Party scene" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
+          <Image width={1000} height={1000} src="/images/IMG_0526.jpg" alt="Fashion detail" className="object-cover w-full h-64 col-span-2 row-span-1 rounded-lg" />
+          <Image width={1000} height={1000} src="/images/IMG_0513.jpg" alt="DJ performing" className="object-cover w-full h-64 md:col-span-1 col-span-2 row-span-1 rounded-lg" />
+          <Image width={1000} height={1000} src="/images/IMG_0504.jpg" alt="Neon lights" className="object-cover w-full h-64 md:col-span-1 col-span-4 row-span-1 rounded-lg" />
         </div>
       </section>
 
@@ -276,7 +276,8 @@ export default function Home() {
       <section className="relative w-full py-40 md:px-6 flex items-end justify-between md:max-w-[80vw] max-w-[90vw] mx-auto rounded-md">
         {/* Sfondo immagine */}
         <div className="absolute inset-0">
-          <img 
+          <Image 
+          width={1000} height={1000}
             src="/images/IMG_0504.jpg"
             alt="Tables & Access"
             className="w-full h-full object-cover rounded-md"
@@ -297,7 +298,7 @@ export default function Home() {
               Reserve exclusive tables, VIP areas and backstage passes for an unforgettable experience.
             </p>
             <Link
-              href="/book"
+              href="/tables"
               className="inline-block bg-white text-black px-6 py-3 rounded-md uppercase text-xs tracking-widest hover:bg-neutral-200 transition"
             >
               Reserve Now
