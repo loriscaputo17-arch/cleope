@@ -27,11 +27,11 @@ export const Header = () => {
           ))}
         </nav>
 
-        <Link href="/" className="text-2xl font-lovelo tracking-wider font-bold">
+        <Link href="/" className="font-lovelo tracking-wider font-bold">
           <img
             src="/logo/logowhite.png"
             alt="Logo"
-            className="object-cover w-full h-10 col-span-2 row-span-2 rounded-lg"
+            className="object-cover w-full md:h-10 h-5 col-span-2 row-span-2 rounded-lg"
             />
         </Link>
 
