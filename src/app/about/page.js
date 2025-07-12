@@ -47,7 +47,7 @@ export default function AboutPage() {
       <section className="relative flex flex-col md:flex-row items-center gap-10 py-20 px-4 md:px-12 mr-auto ml-auto md:max-w-[80vw] max-w-[90vw]">
         <div className="w-full md:w-1/2">
           <img
-            src="/images/IMG_0507.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0523.JPG?alt=media&token=ce2b3ad8-eb40-4fca-8814-95bb549adbd2"
             alt="Team"
             className="w-full rounded-md object-cover shadow-lg"
           />
