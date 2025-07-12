@@ -85,7 +85,7 @@ export default function TablePage() {
       <section className="relative w-full h-screen">
         <img
           width={1000} height={1000}
-          src="/logo/IMG_0506.jpg"
+          src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0506.JPG?alt=media&token=7770406e-cb0b-4e84-bff7-518b713297ad"
           alt="Table"
           className="w-full h-full object-cover"
         />

@@ -123,7 +123,7 @@ useEffect(() => {
           {selectedEvent ? (
             <div className="flex flex-col gap-2">
               <img
-                src={selectedEvent.img ? selectedEvent.img : "/images/IMG_0500.jpg"}
+                src={selectedEvent.img ? selectedEvent.img : "https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0500.JPG?alt=media&token=77c85fc7-766b-43fe-be1e-cfb36bf82dea"}
 
                 alt={selectedEvent.title}
                 className="w-full h-80 object-cover rounded-md"
@@ -154,7 +154,7 @@ useEffect(() => {
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur flex items-center justify-center px-4">
           <div className="relative w-full max-w-2xl bg-black rounded-lg overflow-hidden">
             <img
-              src={selectedEvent.img ? selectedEvent.img : "/images/IMG_0500.jpg"}
+              src={selectedEvent.img ? selectedEvent.img : "https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0500.JPG?alt=media&token=77c85fc7-766b-43fe-be1e-cfb36bf82dea"}
               alt={selectedEvent.title}
               width={800}
               height={400}

@@ -116,11 +116,11 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-4 grid-rows-2 gap-4 w-full max-w-5xl z-10">
-          <img width={1000} height={1000} src="/logo/IMG_0509.jpg" alt="Club crowd" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
-          <img width={1000} height={1000} src="/logo/IMG_0520.jpg" alt="Party scene" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
-          <img width={1000} height={1000} src="/logo/IMG_0526.jpg" alt="Fashion detail" className="object-cover w-full h-64 col-span-2 row-span-1 rounded-lg" />
-          <img width={1000} height={1000} src="/logo/IMG_0513.jpg" alt="DJ performing" className="object-cover w-full h-64 md:col-span-1 col-span-2 row-span-1 rounded-lg" />
-          <img width={1000} height={1000} src="/logo/IMG_0504.jpg" alt="Neon lights" className="object-cover w-full h-64 md:col-span-1 col-span-4 row-span-1 rounded-lg" />
+          <img width={1000} height={1000} src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0509.JPG?alt=media&token=317eda7e-cf65-41af-8ae9-dea6bdfd38eb" alt="Club crowd" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
+          <img width={1000} height={1000} src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0520.JPG?alt=media&token=a8ee1067-51eb-415f-99be-ba02a4ac0ec4" alt="Party scene" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
+          <img width={1000} height={1000} src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0526.JPG?alt=media&token=588bd0c9-14df-462c-ad0e-e40162f9947b" alt="Fashion detail" className="object-cover w-full h-64 col-span-2 row-span-1 rounded-lg" />
+          <img width={1000} height={1000} src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0513.JPG?alt=media&token=d2d16b06-82b1-4fe2-ad13-d10c4ccd8d7d" alt="DJ performing" className="object-cover w-full h-64 md:col-span-1 col-span-2 row-span-1 rounded-lg" />
+          <img width={1000} height={1000} src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0514.JPG?alt=media&token=4a19fb40-4f3b-41e2-9f4e-e437b29afc6e" alt="Neon lights" className="object-cover w-full h-64 md:col-span-1 col-span-4 row-span-1 rounded-lg" />
         </div>
       </section>
 
@@ -152,7 +152,7 @@ export default function Home() {
                 onClick={() => setSelectedEvent(event)}
               >
                 <img
-                  src={event.img ? event.img : "/images/IMG_0500.jpg"}
+                  src={event.img ? event.img : "https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0500.JPG?alt=media&token=77c85fc7-766b-43fe-be1e-cfb36bf82dea"}
 
                   alt={event.title}
                   width={300}
@@ -214,7 +214,7 @@ export default function Home() {
           <div className="relative w-full max-w-2xl bg-black rounded-lg overflow-hidden">
             
             <img
-              src={selectedEvent.img ? selectedEvent.img : "/images/IMG_0500.jpg"}
+              src={selectedEvent.img ? selectedEvent.img : "https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0500.JPG?alt=media&token=77c85fc7-766b-43fe-be1e-cfb36bf82dea"}
               alt={selectedEvent.title}
               width={800}
               height={400}
@@ -276,9 +276,9 @@ export default function Home() {
       <section className="relative w-full py-40 md:px-6 flex items-end justify-between md:max-w-[80vw] max-w-[90vw] mx-auto rounded-md">
         {/* Sfondo immagine */}
         <div className="absolute inset-0">
-          <Image 
+          <img 
           width={1000} height={1000}
-            src="/images/IMG_0504.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0504.JPG?alt=media&token=006592a8-dad0-4293-b0dd-4264d4838517"
             alt="Tables & Access"
             className="w-full h-full object-cover rounded-md"
           />
