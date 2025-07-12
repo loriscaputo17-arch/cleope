@@ -286,7 +286,7 @@ export default function Home() {
         </div>
 
         {/* Contenuto */}
-        <div className="relative z-10 flex flex-col md:flex-row w-full justify-between items-end">
+        <div className="relative z-10 flex flex-col md:flex-row w-full justify-between items-end md:mr-0 mr-6">
           {/* Titolo a sx */}
           <h3 className="text-4xl md:text-6xl font-bold text-white max-w-sm">
             Tables & Access
@@ -294,7 +294,7 @@ export default function Home() {
 
           {/* Descrizione + CTA a dx */}
           <div className="mt-6 md:mt-0 text-right max-w-md">
-            <p className="text-neutral-200 mb-4">
+            <p className="text-neutral-100 mb-4 md:w-full w-80">
               Reserve exclusive tables, VIP areas and backstage passes for an unforgettable experience.
             </p>
             <Link
