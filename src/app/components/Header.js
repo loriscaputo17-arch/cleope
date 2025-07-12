@@ -31,7 +31,7 @@ export const Header = () => {
           <img
             src="/logo/logowhite.png"
             alt="Logo"
-            className="object-cover w-full md:h-10 h-5 col-span-2 row-span-2 rounded-lg"
+            className="object-cover md:w-full w-50 md:h-10 col-span-2 row-span-2 rounded-lg"
             />
         </Link>
 
