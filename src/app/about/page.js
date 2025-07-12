@@ -127,7 +127,7 @@ export default function AboutPage() {
 
         <div className="w-full md:w-1/2">
           <img
-            src="/images/IMG_0507.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0507.JPG?alt=media&token=c4211af3-dbe5-474a-8459-65d3af342fb2"
             alt="Team"
             className="w-full rounded-md object-cover shadow-lg"
           />
