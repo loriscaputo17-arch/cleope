@@ -95,7 +95,7 @@ export default function Home() {
               Events. Brands. Music.
             </p>
             <Link
-              href="/book"
+              href="/nextevents"
               className="text-[12px] uppercase font-bold hover:underline text-left block"
             >
               An Entertainment Hub.
@@ -107,7 +107,7 @@ export default function Home() {
               ITALY // SUMMER TOUR 2025 - STARTED.
             </p>
             <Link
-              href="/book"
+              href="/nextevents"
               className="text-[12px] uppercase font-bold hover:underline text-right block"
             >
               Book your table here
