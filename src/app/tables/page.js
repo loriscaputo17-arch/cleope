@@ -83,9 +83,9 @@ export default function TablePage() {
     <main className="w-full bg-black text-white">
       {/* HERO SECTION */}
       <section className="relative w-full h-screen">
-        <Image
+        <img
           width={1000} height={1000}
-          src="/images/IMG_0506.jpg"
+          src="/logo/IMG_0506.jpg"
           alt="Table"
           className="w-full h-full object-cover"
         />

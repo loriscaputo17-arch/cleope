@@ -116,11 +116,11 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-4 grid-rows-2 gap-4 w-full max-w-5xl z-10">
-          <Image width={1000} height={1000} src="/images/IMG_0509.jpg" alt="Club crowd" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
-          <Image width={1000} height={1000} src="/images/IMG_0520.jpg" alt="Party scene" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
-          <Image width={1000} height={1000} src="/images/IMG_0526.jpg" alt="Fashion detail" className="object-cover w-full h-64 col-span-2 row-span-1 rounded-lg" />
-          <Image width={1000} height={1000} src="/images/IMG_0513.jpg" alt="DJ performing" className="object-cover w-full h-64 md:col-span-1 col-span-2 row-span-1 rounded-lg" />
-          <Image width={1000} height={1000} src="/images/IMG_0504.jpg" alt="Neon lights" className="object-cover w-full h-64 md:col-span-1 col-span-4 row-span-1 rounded-lg" />
+          <img width={1000} height={1000} src="/logo/IMG_0509.jpg" alt="Club crowd" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
+          <img width={1000} height={1000} src="/logo/IMG_0520.jpg" alt="Party scene" className="object-cover w-full h-64 col-span-2 row-span-2 rounded-lg" />
+          <img width={1000} height={1000} src="/logo/IMG_0526.jpg" alt="Fashion detail" className="object-cover w-full h-64 col-span-2 row-span-1 rounded-lg" />
+          <img width={1000} height={1000} src="/logo/IMG_0513.jpg" alt="DJ performing" className="object-cover w-full h-64 md:col-span-1 col-span-2 row-span-1 rounded-lg" />
+          <img width={1000} height={1000} src="/logo/IMG_0504.jpg" alt="Neon lights" className="object-cover w-full h-64 md:col-span-1 col-span-4 row-span-1 rounded-lg" />
         </div>
       </section>
 
