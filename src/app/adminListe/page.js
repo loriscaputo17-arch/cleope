@@ -10,22 +10,11 @@ export default function AdminListe() {
   const [attendees, setAttendees] = useState([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [loadingAttendees, setLoadingAttendees] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(true);
   const [error, setError] = useState("");
 
   const [selectedPR, setSelectedPR] = useState("All");
     const [searchTerm, setSearchTerm] = useState("");
-
-  // Prompt password on mount
-  useEffect(() => {
-    const pw = prompt("Enter admin password:");
-    if (pw === "123") {
-      setAuthenticated(true);
-    } else {
-      alert("Not authorized");
-      setAuthenticated(false);
-    }
-  }, []);
 
   // Load events after auth
   useEffect(() => {
