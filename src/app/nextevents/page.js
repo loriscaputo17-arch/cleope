@@ -20,23 +20,27 @@ export default function CalendarPage() {
 
   const [events, setEvents] = useState([]);
 
-useEffect(() => {
-  const fetchEvents = async () => {
-    const querySnapshot = await getDocs(collection(db, "events"));
-    const fetchedEvents = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const querySnapshot = await getDocs(collection(db, "events"));
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); 
 
-    // Ordina per data decrescente (più recente prima)
-    fetchedEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+      const fetchedEvents = querySnapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .filter(event => {
+          const eventDate = new Date(event.date); 
+          return eventDate >= today;
+        });
 
-    console.log(fetchedEvents);
-    setEvents(fetchedEvents);
-  };
+      setEvents(fetchedEvents);
+    };
 
-  fetchEvents();
-}, []);
+    fetchEvents();
+  }, []);
 
 
   const filteredEvents = events.filter(event => {

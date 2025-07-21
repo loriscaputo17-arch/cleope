@@ -24,12 +24,20 @@ export default function Home() {
       try {
         const eventsCol = collection(db, "events");
         const eventsSnapshot = await getDocs(eventsCol);
-        const eventsList = eventsSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
 
-        eventsList.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // azzera ore/minuti/secondi
+
+        const eventsList = eventsSnapshot.docs
+          .map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }))
+          .filter(event => {
+            const eventDate = new Date(event.date);
+            return eventDate >= today;
+            
+          });
 
         setEvents(eventsList);
       } catch (error) {
@@ -38,6 +46,7 @@ export default function Home() {
         setLoadingEvents(false);
       }
     }
+
     fetchEvents();
   }, []);
 
@@ -83,11 +92,6 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
-        <h1 className="absolute bg-black text-[25vw] md:text-[25vw] font-bold tracking-tight text-neutral-200 pointer-events-none select-none"
-          style={{height: '100vw', alignItems: 'center', justifyContent: 'center', display: 'flex'}}
-        >
-          CLEOPE
-        </h1>
 
         <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full max-w-5xl z-10 mt-[5rem] mb-4">
           <div>
