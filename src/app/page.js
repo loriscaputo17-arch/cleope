@@ -180,7 +180,7 @@ className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none 
 
         {/* Content left */}
         <div className="z-20 max-w-xl text-center md:text-left px-6 md:ml-[8vw] mb-10 md:mb-0">
-          <p className={`bg-[#0000ff47] text-[#8989ff] border-[#8989ff] uppercase mb-4 text-[10px] tracking-widest mb-2 rounded-full py-2 px-4 border w-[fit-content]`}>
+          <p className={`bg-[#0000ff47] text-[#8989ff] md:ml-0 ml-auto md:mr-0 mr-auto  border-[#8989ff] uppercase mb-4 text-[10px] tracking-widest mb-2 rounded-full py-2 px-4 border w-[fit-content]`}>
             Electronic Hub
           </p>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold">CLEOPE</h1>
