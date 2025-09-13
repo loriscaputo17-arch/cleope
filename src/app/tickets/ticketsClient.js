@@ -63,8 +63,6 @@ export default function TicketsPage() {
     return <main className="text-white p-12">Event not found.</main>;
   }
 
-  console.log(eventData)
-
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-black text-white px-4 py-12">
       <h1 className="text-4xl font-extrabold uppercase mb-4 tracking-widest text-center mt-8">
@@ -76,53 +74,49 @@ export default function TicketsPage() {
 
       <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
         <div>
-          <label className="block text-sm uppercase mb-1">First Name</label>
           <input
             type="text"
             name="firstName"
+            placeholder="First Name"
             value={form.firstName}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border-b border-white text-white"
-          />
+            className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"          />
         </div>
         <div>
-          <label className="block text-sm uppercase mb-1">Last Name</label>
           <input
             type="text"
             name="lastName"
+            placeholder="Last Name"
             value={form.lastName}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border-b border-white text-white"
-          />
+            className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"            />
         </div>
         <div>
-          <label className="block text-sm uppercase mb-1">Email Address</label>
           <input
             type="email"
             name="email"
+            placeholder="Email"
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border-b border-white text-white"
-          />
+            className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"          />
         </div>
         <div>
-          <label className="block text-sm uppercase mb-1">Phone Number</label>
           <input
             type="tel"
             name="phone"
+            placeholder="Phone Number"
             value={form.phone}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border-b border-white text-white"
-          />
+            className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"          />
         </div>
 
         <button
           type="submit"
-          className="w-full bg-white text-black py-3 uppercase font-semibold tracking-widest rounded-md hover:bg-neutral-200 transition cursor-pointer"
+          className="rounded-full w-full bg-white text-black py-3 uppercase tracking-widest hover:bg-neutral-200 transition cursor-pointer"
         >
           Join the List
         </button>
