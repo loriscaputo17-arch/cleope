@@ -193,7 +193,7 @@ export default function FormPage() {
         </div>
 
        </div>
-        <h1 className="text-3xl text-center mb-6">
+        <h1 className="text-xl text-center mb-6">
           <strong>🎄 COURMAYEUR</strong> <span className="italic">2025 </span>🎄
         </h1>
 
