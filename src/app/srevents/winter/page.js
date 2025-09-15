@@ -217,7 +217,8 @@ export default function FormPage() {
           <Input name="cognome" placeholder="Surname" value={formData.cognome} onChange={handleChange} error={errors.cognome} />
           <Input name="email" type="email" placeholder="E-mail" value={formData.email} onChange={handleChange} error={errors.email} />
           <Input name="telefono" type="tel" placeholder="Phone Number" value={formData.telefono} onChange={handleChange} error={errors.telefono} />
-          <Input name="cdl" placeholder="CdL of belonging" value={formData.cdl} onChange={handleChange} error={errors.cdl} />
+          <Select name="universita" label="University of affiliation" value={formData.universita} onChange={handleChange} options={["San Raffaele","Humanitas"]} error={errors.universita} />
+          <Input name="cdl" placeholder="Degree course of belonging" value={formData.cdl} onChange={handleChange} error={errors.cdl} />
 
           {/* Chi ti porta */}
           <Input name="pr" placeholder="Who's bringing you here? (Name and Surname of PR/Representative)" value={formData.pr} onChange={handleChange} error={errors.pr} />
@@ -259,8 +260,6 @@ export default function FormPage() {
           </div>
           <Textarea name="infoNoleggio" placeholder="Any additional information (for rental)" value={formData.infoNoleggio} onChange={handleChange} />
 
-          {/* Università */}
-          <Select name="universita" label="University of affiliation" value={formData.universita} onChange={handleChange} options={["San Raffaele","Humanitas"]} error={errors.universita} />
           <Textarea name="infoExtra" placeholder="Any additional information" value={formData.infoExtra} onChange={handleChange} />
 
           {/* Bottone */}
