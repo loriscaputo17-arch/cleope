@@ -24,3 +24,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes snow {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) translateX(20px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) translateX(-20px);
+    opacity: 0.5;
+  }
+}
+
+.animate-snow {
+  animation: snow linear infinite;
+}
+
