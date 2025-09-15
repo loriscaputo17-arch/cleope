@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Access List Platform",
-  description: "An Entertainment Hub.",
+  description: "Access List Platform.",
   icons: {
     icon: "/favicon.ico",
   },
