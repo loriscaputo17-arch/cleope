@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "CLEOPE",
+  title: "Access List Platform",
   description: "An Entertainment Hub.",
   icons: {
     icon: "/favicon.ico",

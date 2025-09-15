@@ -6,7 +6,10 @@ import { Footer } from "./Footer";
 
 export default function ClientLayout({ children }) {
   const pathname = usePathname();
-  const hideLayout = pathname === "/share";
+
+  // lista di percorsi in cui NON vogliamo mostrare header/footer
+  const hiddenRoutes = ["/share", "/srevents/winter"];
+  const hideLayout = hiddenRoutes.includes(pathname);
 
   return (
     <>
@@ -16,3 +19,4 @@ export default function ClientLayout({ children }) {
     </>
   );
 }
+
