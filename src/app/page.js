@@ -11,6 +11,7 @@ export default function Home() {
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [events, setEvents] = useState([])
   const [loadingEvents, setLoadingEvents] = useState(true)
+  const [ticketLink, setTicketLink] = useState(null); 
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -22,6 +23,7 @@ export default function Home() {
   const [success, setSuccess] = useState(false)
 
   const [showPopup, setShowPopup] = useState(false)
+  const [showNewsletter, setShowNewsletter] = useState(false);
 
   useEffect(() => {
     // mostra popup solo la prima volta
@@ -85,18 +87,35 @@ export default function Home() {
     e.preventDefault()
     setLoading(true)
     try {
-      await addDoc(collection(db, "newsletter"), {
-        email: formData.email,
-        createdAt: new Date()
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       })
-      setSuccess(true)
-      setFormData({ email: "" })
+      if (res.ok) {
+
+        setTimeout(() => {
+        setShowNewsletter(false);
+        setLoading(false);
+        if (ticketLink) {
+            window.open(ticketLink, "_blank");
+          }
+        }, 1000);
+
+      } else {
+        alert("There was an error. Please try again.")
+      }
     } catch (err) {
       console.error(err)
       alert("Errore, riprova più tardi.")
     }
     setLoading(false)
   }
+
+  const handleGetTickets = (link) => {
+    setTicketLink(link);
+    setShowNewsletter(true); // mostra popup newsletter
+  };
 
   return (
     <main className="relative w-full overflow-hidden text-white bg-black">
@@ -138,7 +157,7 @@ export default function Home() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"                />
+                  className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"                />
                 <button
                   type="submit"
                   disabled={loading}
@@ -160,15 +179,71 @@ className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none 
         </div>
       )}
 
-      {/* HERO */}
+      {showNewsletter && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="relative bg-neutral-900 rounded-2xl shadow-2xl overflow-hidden max-w-2xl w-full"
+          >
+            {/* img sopra */}
+            <div className="relative w-full h-40">
+              <Image
+                src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0523.JPG?alt=media&token=ce2b3ad8-eb40-4fca-8814-95bb549adbd2"
+                alt="Newsletter background"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                <h3 className="text-2xl text-center md:text-3xl font-bold uppercase w-[60%]">
+                  Be part of the coolest community in town.
+                </h3>
+              </div>
+            </div>
+
+            {/* contenuto */}
+            <div className="p-6 text-center">
+              <p className="text-neutral-300 mb-4 w-[70%] ml-auto mr-auto">
+                Exclusive brand collaborations, immersive pop-ups, and a community redefining nightlife.
+              </p>
+
+              <form onSubmit={handleSubmitNewsletter} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="cursor-pointer w-full rounded-full bg-white text-black py-3 hover:bg-neutral-200 transition text-sm"
+                >
+                  {loading ? "Submitting..." : "Subscribe"}
+                </button>
+                {success && <p className="text-green-400 text-xs mt-2">Thanks for subscribing!</p>}
+              </form>
+
+              <button
+                onClick={() => setShowNewsletter(false)}
+                className="absolute top-3 right-3 bg-black/50 text-white rounded-full px-3 py-1 text-sm hover:bg-black/80"
+              >
+                ✕
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
       <section className="relative flex flex-col md:flex-row items-center justify-between text-left pb-[6rem] pt-[6rem] md:pb-[10rem] md:pt-[10rem] min-h-[90vh]">
 
-        {/* Finta griglia sopra */}
         <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
           <div className="w-full h-full bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:160px_160px]" />
         </div>
 
-        {/* Static background image sotto il contenuto */}
         <div className="absolute bottom-0 left-0 w-full h-full overflow-hidden">
           <Image
             src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0507.JPG?alt=media&token=c4211af3-dbe5-474a-8459-65d3af342fb2"
@@ -429,10 +504,20 @@ className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none 
                 {new Date(selectedEvent.date).toLocaleDateString('it-IT')} — {selectedEvent.time}
               </p>
               <div className="flex gap-4">
-                <Link href="/tables" className="bg-white text-black px-4 py-2 text-xs uppercase rounded hover:bg-neutral-200">Book Table</Link>
-                <Link href={selectedEvent.entryLink ?? `/tickets?event=${selectedEvent.id}`} target="_blank" className="border border-white text-white px-4 py-2 text-xs uppercase rounded hover:bg-white hover:text-black transition">
+                <Link href="/tables" className="bg-white text-black px-4 py-2 text-xs uppercase rounded hover:bg-neutral-200 rounded-full">Book Table</Link>
+                {/*<Link href={selectedEvent.entryLink ?? `/tickets?event=${selectedEvent.id}`} target="_blank"  */}
+                
+                <button
+                  onClick={() =>
+                    handleGetTickets(
+                      selectedEvent.entryLink
+                        ? selectedEvent.entryLink
+                        : `/tickets?event=${encodeURIComponent(selectedEvent.id)}`
+                    )
+                  }
+                  className="border border-white text-white px-4 py-2 text-xs uppercase rounded hover:bg-white hover:text-black transition rounded-full">
                   Get Tickets
-                </Link>
+                </button>
               </div>
               <button onClick={() => setSelectedEvent(null)} className="absolute top-4 right-4 text-white text-xl">✕</button>
             </div>
