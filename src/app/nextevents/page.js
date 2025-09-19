@@ -5,6 +5,8 @@ import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // per redirect manuale
+import { motion } from "framer-motion";
 
 export default function CalendarPage() {
   const currentDate = new Date();
@@ -20,8 +22,20 @@ export default function CalendarPage() {
   const [selectedYear, setSelectedYear] = useState(currentYear);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [showNewsletter, setShowNewsletter] = useState(false);
+  const [ticketLink, setTicketLink] = useState(null); 
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  })
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [events, setEvents] = useState([]);
+  const router = useRouter();
 
   // Fetch events
   useEffect(() => {
@@ -43,7 +57,6 @@ export default function CalendarPage() {
       eventDate.getMonth() === selectedMonth &&
       eventDate.getFullYear() === selectedYear
     ) {
-      // Se il mese è quello attuale → mostra solo futuri
       if (selectedMonth === currentMonth && selectedYear === currentYear) {
         return eventDate >= currentDate;
       }
@@ -51,6 +64,53 @@ export default function CalendarPage() {
     }
     return false;
   });
+
+  // Gestione newsletter
+  const handleGetTickets = (link) => {
+    setTicketLink(link);
+    setShowNewsletter(true); // mostra popup newsletter
+  };
+
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log(formData)
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+
+        setTimeout(() => {
+        setShowNewsletter(false);
+        setLoading(false);
+        if (ticketLink) {
+            window.open(ticketLink, "_blank");
+          }
+        }, 1000);
+
+      } else {
+        alert("There was an error. Please try again.")
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  };
+
+  // Se rifiuta → continua comunque
+  const handleSkip = () => {
+    setShowNewsletter(false);
+    if (ticketLink) {
+      window.open(ticketLink, "_blank");
+    }
+  };
 
   return (
     <main className="md:max-w-[80vw] max-w-[90vw] mx-auto min-h-screen bg-black text-white px-4 py-16 md:px-12">
@@ -231,20 +291,92 @@ export default function CalendarPage() {
                   Book Table
                 </Link>
 
-                <Link
-                  href={
-                    selectedEvent.entryLink
-                      ? selectedEvent.entryLink
-                      : `/tickets?event=${encodeURIComponent(selectedEvent.id)}`
+                <button
+                  onClick={() =>
+                    handleGetTickets(
+                      selectedEvent.entryLink
+                        ? selectedEvent.entryLink
+                        : `/tickets?event=${encodeURIComponent(selectedEvent.id)}`
+                    )
                   }
-                  target="_blank"
                   className="rounded-full border border-white text-white px-4 py-2 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition"
                 >
                   Get Tickets
-                </Link>
+                </button>
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {showNewsletter && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="relative bg-neutral-900 rounded-2xl shadow-2xl overflow-hidden max-w-2xl w-full"
+          >
+            {/* img sopra */}
+            <div className="relative w-full h-40">
+              <Image
+                src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0523.JPG?alt=media&token=ce2b3ad8-eb40-4fca-8814-95bb549adbd2"
+                alt="Newsletter background"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                <h3 className="text-2xl text-center md:text-3xl font-bold uppercase w-[60%]">
+                  Be part of the coolest community in town. 
+                </h3>
+              </div>
+            </div>
+
+            {/* contenuto */}
+            <div className="p-6 text-center">
+              <p className="text-neutral-300 mb-4 w-[70%] ml-auto mr-auto">
+                Exclusive brand collaborations, immersive pop-ups, and a community redefining nightlife.
+              </p>
+
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60"
+                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="cursor-pointer w-full rounded-full bg-white text-black py-3 hover:bg-neutral-200 transition text-sm"
+                >
+                  {loading ? "Submitting..." : "Subscribe"}
+                </button>
+                {success && (
+                  <p className="text-green-400 text-xs mt-2">
+                    Thanks for subscribing!
+                  </p>
+                )}
+              </form>
+
+              <button
+                onClick={handleSkip}
+                className="mt-4 text-neutral-400 underline text-sm cursor-pointer"
+              >
+                No thanks, continue to tickets →
+              </button>
+
+              <button
+                onClick={() => setShowNewsletter(false)}
+                className="absolute top-3 right-3 bg-black/50 text-white rounded-full px-3 py-1 text-sm hover:bg-black/80 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+          </motion.div>
         </div>
       )}
     </main>

@@ -118,15 +118,15 @@ export default function Home() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                <h3 className="text-2xl text-center md:text-3xl font-bold uppercase">
+                <h3 className="text-2xl text-center md:text-3xl font-bold uppercase w-[60%]">
                   Be part of the coolest community in town.
-                  </h3>
+                </h3>
               </div>
             </div>
 
             {/* contenuto */}
             <div className="p-6 text-center">
-              <p className="text-neutral-300 mb-4">
+              <p className="text-neutral-300 mb-4 w-[70%] ml-auto mr-auto">
                 Exclusive brand collaborations, immersive pop-ups, and a community redefining nightlife.
               </p>
 
