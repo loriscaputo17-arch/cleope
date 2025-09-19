@@ -44,6 +44,8 @@ export default function Home() {
           .map(doc => ({ id: doc.id, ...doc.data() }))
           .filter(event => new Date(event.date) >= today)
 
+        console.log(eventsList)
+
         setEvents(eventsList)
       } catch (error) {
         console.error("Errore nel recupero degli eventi:", error)
@@ -217,8 +219,8 @@ className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none 
       </section>
 
       {/* UPCOMING EVENTS */}
-      {loadingEvents && (
-        <section className="w-full py-24 bg-gradient-to-b from-black to-blue-950 px-6">
+      {!loadingEvents && (
+        <section className="w-full py-24 //bg-gradient-to-b from-black to-blue-950 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-8">Upcoming Events</h2>
 
@@ -236,16 +238,16 @@ className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none 
                       src={event.img ?? "/fallback.jpg"}
                       alt={event.title}
                       width={800}
-                      height={600}
-                      className="object-cover w-full h-80 group-hover:scale-105 transition-transform duration-500"
+                      height={1000}
+                      className="object-cover w-full h-100 group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col justify-end">
-                      <span className="text-xs bg-white/10 px-3 py-1 rounded-full w-fit backdrop-blur-sm">
+                      <span className="text-xs bg-white/10 px-3 py-1 rounded-full w-fit backdrop-blur-sm mb-2">
                         {event.tag}
                       </span>
                       <h4 className="text-xl font-bold">{event.title}</h4>
-                      <div className="text-sm text-neutral-300 flex justify-between">
-                        <span>{new Date(event.date).toLocaleDateString("it-IT")}</span>
+                      <div className="text-sm text-neutral-300 flex justify-between mt-2">
+                        <span className="text-[12px]">{new Date(event.date).toLocaleDateString("it-IT")}</span>
                         <span>{event.time}</span>
                       </div>
                     </div>

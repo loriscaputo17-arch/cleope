@@ -116,61 +116,59 @@ export default function FormPage() {
   };
 
   return (
-<main className="h-screen flex items-center justify-center px-6 relative overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
-  {/* aurora boreale natalizia */}
-  <div className="absolute inset-0">
-    <div className="absolute w-[600px] h-[600px] bg-green-500/20 rounded-full blur-3xl top-0 left-0 animate-pulse" />
-    <div className="absolute w-[500px] h-[500px] bg-red-500/20 rounded-full blur-3xl bottom-0 right-0 animate-pulse" />
-  </div>
+  <main className="h-screen flex items-center justify-center px-6 relative overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
+    <div className="absolute inset-0">
+      <div className="absolute w-[600px] h-[600px] bg-green-500/20 rounded-full blur-3xl top-0 left-0 animate-pulse" />
+      <div className="absolute w-[500px] h-[500px] bg-red-500/20 rounded-full blur-3xl bottom-0 right-0 animate-pulse" />
+    </div>
 
-  {/* neve più realistica */}
-  <div className="absolute inset-0 pointer-events-none">
-    {Array.from({ length: 80 }).map((_, i) => (
-      <div
-        key={i}
-        className="absolute bg-white rounded-full opacity-90 animate-snow"
-        style={{
-          width: `${Math.random() * 4 + 2}px`,
-          height: `${Math.random() * 4 + 2}px`,
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
-          animationDuration: `${5 + Math.random() * 10}s`,
-          animationDelay: `${Math.random() * 10}s`,
-        }}
-      />
-    ))}
-  </div>
+    {/* neve più realistica */}
+    <div className="absolute inset-0 pointer-events-none">
+      {Array.from({ length: 80 }).map((_, i) => (
+        <div
+          key={i}
+          className="absolute bg-white rounded-full opacity-90 animate-snow"
+          style={{
+            width: `${Math.random() * 4 + 2}px`,
+            height: `${Math.random() * 4 + 2}px`,
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDuration: `${5 + Math.random() * 10}s`,
+            animationDelay: `${Math.random() * 10}s`,
+          }}
+        />
+      ))}
+    </div>
 
-  {/* montagne background */}
-  <div className="absolute bottom-0 left-0 w-full h-56">
-    <svg
-      className="absolute bottom-0 w-full h-full text-slate-800"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 320"
-      preserveAspectRatio="none"
-      fill="currentColor"
-    >
-      <path d="M0,160L80,149.3C160,139,320,117,480,133.3C640,149,800,203,960,213.3C1120,224,1280,192,1360,176L1440,160L1440,320L0,320Z"></path>
-    </svg>
-  </div>
+    {/* montagne background */}
+    <div className="absolute bottom-0 left-0 w-full h-56">
+      <svg
+        className="absolute bottom-0 w-full h-full text-slate-800"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        fill="currentColor"
+      >
+        <path d="M0,160L80,149.3C160,139,320,117,480,133.3C640,149,800,203,960,213.3C1120,224,1280,192,1360,176L1440,160L1440,320L0,320Z"></path>
+      </svg>
+    </div>
 
-  {/* montagne foreground con neve */}
-  <div className="absolute bottom-0 left-0 w-full h-64">
-    <svg
-      className="absolute bottom-0 w-full h-full text-slate-600"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 320"
-      preserveAspectRatio="none"
-      fill="currentColor"
-    >
-      <path d="M0,256L60,224C120,192,240,128,360,122.7C480,117,600,171,720,186.7C840,203,960,181,1080,186.7C1200,192,1320,224,1380,240L1440,256L1440,320L0,320Z"></path>
-    </svg>
-  </div>
+    {/* montagne foreground con neve */}
+    <div className="absolute bottom-0 left-0 w-full h-64">
+      <svg
+        className="absolute bottom-0 w-full h-full text-slate-600"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        fill="currentColor"
+      >
+        <path d="M0,256L60,224C120,192,240,128,360,122.7C480,117,600,171,720,186.7C840,203,960,181,1080,186.7C1200,192,1320,224,1380,240L1440,256L1440,320L0,320Z"></path>
+      </svg>
+    </div>
 
-      {/* card */}    <div className="absolute bottom-0 left-0 w-full h-3 rounded-t-3xl bg-white/70 blur-sm" />
-
-    <div className="relative w-full max-w-2xl bg-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl text-white overflow-y-auto max-h-screen h-[90vh]">
-    <div className="absolute -top-2 left-0 w-full h-3 rounded-t-3xl bg-white/70 blur-sm" />
+    <div className="absolute bottom-0 left-0 w-full h-3 rounded-t-3xl bg-white/70 blur-sm" />
+      <div className="relative w-full max-w-2xl bg-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl text-white overflow-y-auto max-h-screen h-[80vh]">
+      <div className="absolute -top-2 left-0 w-full h-3 rounded-t-3xl bg-white/70 blur-sm" />
 
        <div className="flex items-center gap-4 mx-auto w-[fit-content] mb-4">
 
