@@ -1,8 +1,8 @@
-// /app/api/send-confirmation/route.ts
+// /app/api/send-confirmation/route.js
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function POST(Re) {
+export async function POST(req) {
   try {
     const { to, subject, name, phone, optionLabel } = await req.json();
 
@@ -11,13 +11,13 @@ export async function POST(Re) {
     }
 
     const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: Number(process.env.SMTP_PORT) === 465,
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-    },
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: 465,
+      auth: {
+        user: "cleope.events@gmail.com",
+        pass: "zpyi vybi vlyk sumv",
+      },
     });
 
     const html = `
@@ -32,11 +32,17 @@ export async function POST(Re) {
           <li><strong>Email:</strong> ${to}</li>
         </ul>
         <p>Ti aspettiamo! ✨</p>
+         <p>Team Cleope</p>
+
+         <a href="https://www.instagram.com/cleopeofficial">Seguici su Instagram</a>
+        <a href="https://www.tiktok.com/@cleopeofficial">Seguici su TikTok</a>
+        <a href="https://wa.me/+393513895086">Se hai domande per i prossimi eventi scrivici</a>
+
       </div>
     `;
 
     await transporter.sendMail({
-      from: process.env.MAIL_FROM || process.env.SMTP_USER,
+      from: "CLEOPE <cleope.events@gmail.com>" || process.env.SMTP_USER,
       to,
       subject,
       html,

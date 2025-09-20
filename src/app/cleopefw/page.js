@@ -49,10 +49,10 @@ export default function BookPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             to: email,
-            subject: "Conferma prenotazione CLEOPE",
+            subject: "Conferma prenotazione CLEOPE LAB Fashion Week 25 Settembre",
             name: fullName,
             phone,
-            optionLabel: "CLEOPE (21:00 - 00:00) – Free entry",
+            optionLabel: "CLEOPE LAB - Brand Exhibition (21:00 - 00:00) – Free entry",
           }),
         });
         alert("Richiesta inviata! Ti abbiamo mandato una mail di conferma.");
