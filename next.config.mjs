@@ -5,6 +5,7 @@ const nextConfig = {
       "firebasestorage.googleapis.com",
       "www.google.com",
       "images.xceed.me",
+      "www.ticketnation.it",
     ],
   },
   reactStrictMode: true,
