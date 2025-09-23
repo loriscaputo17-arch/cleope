@@ -5,7 +5,7 @@ import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // per redirect manuale
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 export default function CalendarPage() {
@@ -50,15 +50,20 @@ export default function CalendarPage() {
     fetchEvents();
   }, []);
 
-  // Filter by month/year
+  // Filter by month/year (fix per includere anche gli eventi di oggi)
   const filteredEvents = events.filter(event => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0);
+
     if (
       eventDate.getMonth() === selectedMonth &&
       eventDate.getFullYear() === selectedYear
     ) {
       if (selectedMonth === currentMonth && selectedYear === currentYear) {
-        return eventDate >= currentDate;
+        return eventDate >= today;
       }
       return true;
     }
@@ -68,9 +73,8 @@ export default function CalendarPage() {
   // Gestione newsletter
   const handleGetTickets = (link) => {
     setTicketLink(link);
-    setShowNewsletter(true); // mostra popup newsletter
+    setShowNewsletter(true);
   };
-
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -79,7 +83,6 @@ export default function CalendarPage() {
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log(formData)
     try {
       const res = await fetch("/api/newsletter", {
         method: "POST",
@@ -87,15 +90,13 @@ export default function CalendarPage() {
         body: JSON.stringify(formData),
       })
       if (res.ok) {
-
         setTimeout(() => {
-        setShowNewsletter(false);
-        setLoading(false);
-        if (ticketLink) {
+          setShowNewsletter(false);
+          setLoading(false);
+          if (ticketLink) {
             window.open(ticketLink, "_blank");
           }
         }, 1000);
-
       } else {
         alert("There was an error. Please try again.")
       }
@@ -104,7 +105,6 @@ export default function CalendarPage() {
     }
   };
 
-  // Se rifiuta → continua comunque
   const handleSkip = () => {
     setShowNewsletter(false);
     if (ticketLink) {
@@ -170,11 +170,10 @@ export default function CalendarPage() {
                   key={event.id}
                   onClick={() => {
                     setSelectedEvent(event);
-                    if (window.innerWidth < 768) {  // breakpoint "md"
+                    if (window.innerWidth < 768) {
                       setShowPopup(true);
                     }
                   }}
-
                   className="flex items-center justify-between py-4 cursor-pointer hover:bg-white/5 px-2 rounded-md transition"
                 >
                   <div>
