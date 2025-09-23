@@ -81,29 +81,31 @@ export default function CalendarPage() {
   };
 
   const handleNewsletterSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-      if (res.ok) {
-        setTimeout(() => {
-          setShowNewsletter(false);
-          setLoading(false);
-          if (ticketLink) {
-            window.open(ticketLink, "_blank");
-          }
-        }, 1000);
-      } else {
-        alert("There was an error. Please try again.")
-      }
-    } catch (err) {
-      console.error(err)
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const res = await fetch("/api/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+    if (res.ok) {
+      setTimeout(() => {
+        setShowNewsletter(false);
+        setLoading(false);
+        if (ticketLink) {
+          // redirect nella stessa finestra (compatibile mobile)
+          window.location.href = ticketLink;
+        }
+      }, 1000);
+    } else {
+      alert("There was an error. Please try again.")
     }
-  };
+  } catch (err) {
+    console.error(err)
+    alert("Errore, riprova più tardi.")
+  }
+};
 
   const handleSkip = () => {
     setShowNewsletter(false);
