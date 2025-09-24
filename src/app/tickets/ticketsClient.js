@@ -69,7 +69,7 @@ export default function TicketsPage() {
         {eventData.title}
       </h1>
       <p className="text-neutral-400 mb-8 text-center">
-        You’re about to join the list
+        The list is sold oout, you can leave your info here just to get updates, 
       </p>
 
       <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
