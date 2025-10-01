@@ -83,7 +83,7 @@ export default function BookPage() {
 
   return (
     <main className="min-h-screen w-full bg-black text-white px-4 py-10">
-      <div className="max-w-6xl mx-auto mt-16">
+      <div className="max-w-6xl mx-auto mt-8">
         <h1 className="text-2xl md:text-3xl font-bold mb-2">Lista Prenotazioni Courmayeur 12-14 Dicembre 2025</h1>
 
         {/* Contatore */}
