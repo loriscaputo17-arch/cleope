@@ -1,5 +1,6 @@
-// /app/api/send-confirmation/route.js
-import { NextResponse } from "next/server";
+
+
+    import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 export async function POST(req) {
@@ -20,29 +21,52 @@ export async function POST(req) {
       },
     });
 
-    const html = `
-      <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6">
-        <h2>Conferma prenotazione – CLEOPE</h2>
-        <p>Ciao ${name},</p>
-        <p>grazie per la tua richiesta. Ecco il riepilogo:</p>
-        <ul>
-          <li><strong>Evento:</strong> ${optionLabel}</li>
-          <li><strong>Nome:</strong> ${name}</li>
-          <li><strong>Telefono:</strong> ${phone}</li>
-          <li><strong>Email:</strong> ${to}</li>
-        </ul>
-        <p>Ti aspettiamo! ✨</p>
-         <p>Team Cleope</p>
+const html = `
+  <div style="font-family:Arial,Helvetica,sans-serif; background:#f0f0f0; color:#000; padding:30px; text-align:center">
+    
+    <h1 style="color:#000; text-transform:uppercase; letter-spacing:3px; margin-bottom:20px;">
+      RSVP Confirmation – THE MERGE
+    </h1>
 
-         <a href="https://www.instagram.com/cleopeofficial">Seguici su Instagram</a>
-        <a href="https://www.tiktok.com/@cleopeofficial">Seguici su TikTok</a>
-        <a href="https://wa.me/+393513895086">Se hai domande per i prossimi eventi scrivici</a>
+    <p style="font-size:16px; line-height:1.5; margin-bottom:20px;">
+      Hi <strong>${name}</strong>,<br/>
+      we’ve received your RSVP for the secret party.<br/>
+      You’re officially on the <strong>waiting list</strong>.
+    </p>
 
-      </div>
-    `;
+    <div style="background:#fff; border:1px solid #ccc; padding:20px; margin:20px auto; max-width:400px; text-align:left;">
+      <h3 style="margin-top:0; font-size:16px; font-weight:bold;">Your details</h3>
+      <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:1.6;">
+        <li><strong>Event:</strong> ${optionLabel}</li>
+        <li><strong>Name:</strong> ${name}</li>
+        <li><strong>Phone:</strong> ${phone}</li>
+        <li><strong>Email:</strong> ${to}</li>
+      </ul>
+    </div>
+
+    <p style="margin-top:30px; font-size:15px; line-height:1.5;">
+      In the next days you will receive a <strong>private link</strong> to purchase early access tickets.<br/>
+      Stay tuned – the mystery location will be revealed soon.
+    </p>
+
+    <hr style="margin:40px auto; border:none; border-top:1px solid #ccc; width:80%;" />
+
+    <p style="font-size:13px;">
+      CLEOPE Team
+    </p>
+
+    <div style="margin-top:20px;">
+      <a href="https://www.instagram.com/cleopeofficial" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">Instagram</a>
+      <a href="https://www.tiktok.com/@cleopeofficial" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">TikTok</a>
+      <a href="https://wa.me/+393513895086" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">WhatsApp</a>
+    </div>
+  </div>
+`;
+
+
 
     await transporter.sendMail({
-      from: "CLEOPE <cleope.events@gmail.com>" || process.env.SMTP_USER,
+      from: "CLEOPE <cleope.events@gmail.com>",
       to,
       subject,
       html,
@@ -54,3 +78,4 @@ export async function POST(req) {
     return NextResponse.json({ error: "Mail send failed" }, { status: 500 });
   }
 }
+
