@@ -120,7 +120,7 @@ export default function BookPage() {
           </span>{" "}
           <br />
           Entrance via <strong>online ticket</strong>,<br />
-          by clicking the link.
+          Get the RSVP below.
         </p>
 
         <div className="mt-8 text-center">
