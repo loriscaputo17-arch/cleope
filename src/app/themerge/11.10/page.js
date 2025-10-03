@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";  // 👈 import
 import { db } from "@/lib/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
@@ -11,6 +12,9 @@ const COLLECTION_NAME = "11oct_merge";
 const EVENT_DATE = new Date("2025-10-11T00:00:00");
 
 export default function BookPage() {
+  const searchParams = useSearchParams();
+  const inviteCode   = searchParams.get("code"); // 👈 prendi il parametro
+
   const [firstName, setFirstName]   = useState("");
   const [lastName, setLastName]     = useState("");
   const [email, setEmail]           = useState("");
@@ -56,23 +60,33 @@ export default function BookPage() {
 
     setSubmitting(true);
     try {
-      const payload = { firstName, lastName, email, phone, createdAt: serverTimestamp() };
+      // 👇 aggiunto inviteCode al payload
+      const payload = { 
+        firstName, 
+        lastName, 
+        email, 
+        phone, 
+        code: inviteCode || null,   // se non c’è → null
+        createdAt: serverTimestamp() 
+      };
+
       await addDoc(collection(db, COLLECTION_NAME), payload);
       setShowPopup(true);
 
       await fetch("/api/send_email", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    to: email,
-    subject: "Your RSVP for THE MERGE – Secret Party",
-    name: `${firstName} ${lastName}`,
-    phone,
-    optionLabel: "THE MERGE – Secret Party (Early Access)",
-  }),
-});
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: email,
+          subject: "Your RSVP for THE MERGE – Secret Party",
+          name: `${firstName} ${lastName}`,
+          phone,
+          optionLabel: "THE MERGE – Secret Party (Early Access)",
+          code: inviteCode || undefined,  // opzionale anche nell'email
+        }),
+      });
 
-              setFirstName(""); setLastName(""); setEmail(""); setPhone("");
+      setFirstName(""); setLastName(""); setEmail(""); setPhone("");
     } catch (err) {
       console.error(err);
       setError("C'è stato un problema. Riprova tra poco.");
