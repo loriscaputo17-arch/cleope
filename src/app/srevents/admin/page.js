@@ -14,7 +14,10 @@ export default function BookPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const q = query(collection(db, "srevents_courmayeur_2025"), orderBy("createdAt", "desc"));
+        const q = query(
+          collection(db, "srevents_courmayeur_2025"),
+          orderBy("createdAt", "desc")
+        );
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map((doc) => {
           const d = doc.data();
@@ -50,11 +53,15 @@ export default function BookPage() {
     setFiltered(
       records.filter(
         (r) =>
-          r.firstName?.toLowerCase().includes(term) ||
-          r.lastName?.toLowerCase().includes(term) ||
+          r.nome?.toLowerCase().includes(term) ||
+          r.cognome?.toLowerCase().includes(term) ||
           r.email?.toLowerCase().includes(term) ||
-          r.phone?.toLowerCase().includes(term) ||
-          r.option?.toLowerCase().includes(term)
+          r.telefono?.toLowerCase().includes(term) ||
+          r.universita?.toLowerCase().includes(term) ||
+          r.cdl?.toLowerCase().includes(term) ||
+          r.gruppo?.toLowerCase().includes(term) ||
+          r.camera?.toLowerCase().includes(term) ||
+          r.noleggio?.join(", ").toLowerCase().includes(term)
       )
     );
   }, [search, records]);
@@ -72,7 +79,7 @@ export default function BookPage() {
   }
 
   async function copyNames() {
-    const allNames = records.map((r) => `${r.firstName} ${r.lastName}`).join("\n");
+    const allNames = records.map((r) => `${r.nome} ${r.cognome}`).join("\n");
     try {
       await navigator.clipboard.writeText(allNames);
       alert("Nomi copiati negli appunti!");
@@ -83,8 +90,10 @@ export default function BookPage() {
 
   return (
     <main className="min-h-screen w-full bg-black text-white px-4 py-10">
-      <div className="max-w-6xl mx-auto mt-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2">Lista Prenotazioni Courmayeur 12-14 Dicembre 2025</h1>
+      <div className="max-w-7xl mx-auto mt-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2">
+          Lista Prenotazioni Courmayeur 12-14 Dicembre 2025
+        </h1>
 
         {/* Contatore */}
         <p className="text-white/70 mb-6">
@@ -102,7 +111,7 @@ export default function BookPage() {
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <input
             type="text"
-            placeholder="Cerca per nome, email, telefono, opzione..."
+            placeholder="Cerca per nome, email, telefono, università..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="flex-1 px-4 py-3 rounded-xl bg-black/40 border border-white/15 focus:outline-none focus:border-white/40 placeholder-white/60 text-sm"
@@ -127,7 +136,19 @@ export default function BookPage() {
                   <th className="px-4 py-3 text-left">Cognome</th>
                   <th className="px-4 py-3 text-left">Email</th>
                   <th className="px-4 py-3 text-left">Telefono</th>
-                  <th className="px-4 py-3 text-left">Opzione</th>
+                  <th className="px-4 py-3 text-left">Università</th>
+                  <th className="px-4 py-3 text-left">CDL</th>
+                  <th className="px-4 py-3 text-left">Convenzione</th>
+                  <th className="px-4 py-3 text-left">Camera</th>
+                  <th className="px-4 py-3 text-left">Info Camera</th>
+                  <th className="px-4 py-3 text-left">Gruppo</th>
+                  <th className="px-4 py-3 text-left">Info Gruppo</th>
+                  <th className="px-4 py-3 text-left">Noleggio</th>
+                  <th className="px-4 py-3 text-left">Info Noleggio</th>
+                  <th className="px-4 py-3 text-left">Pullman</th>
+                  <th className="px-4 py-3 text-left">Info Pullman</th>
+                  <th className="px-4 py-3 text-left">Partecipanti</th>
+                  <th className="px-4 py-3 text-left">PR</th>
                 </tr>
               </thead>
               <tbody>
@@ -138,16 +159,32 @@ export default function BookPage() {
                       className="border-t border-white/10 hover:bg-white/5 transition"
                     >
                       <td className="px-4 py-3">{formatDate(r.createdAt)}</td>
-                      <td className="px-4 py-3">{r.firstName}</td>
-                      <td className="px-4 py-3">{r.lastName}</td>
+                      <td className="px-4 py-3">{r.nome}</td>
+                      <td className="px-4 py-3">{r.cognome}</td>
                       <td className="px-4 py-3">{r.email}</td>
-                      <td className="px-4 py-3">{r.phone}</td>
-                      <td className="px-4 py-3 uppercase">{r.option}</td>
+                      <td className="px-4 py-3">{r.telefono}</td>
+                      <td className="px-4 py-3">{r.universita}</td>
+                      <td className="px-4 py-3">{r.cdl}</td>
+                      <td className="px-4 py-3">{r.convenzione}</td>
+                      <td className="px-4 py-3">{r.camera}</td>
+                      <td className="px-4 py-3">{r.infoCamera}</td>
+                      <td className="px-4 py-3">{r.gruppo}</td>
+                      <td className="px-4 py-3">{r.infoGruppo}</td>
+                      <td className="px-4 py-3">
+                        {Array.isArray(r.noleggio)
+                          ? r.noleggio.join(", ")
+                          : r.noleggio}
+                      </td>
+                      <td className="px-4 py-3">{r.infoNoleggio}</td>
+                      <td className="px-4 py-3">{r.pullman}</td>
+                      <td className="px-4 py-3">{r.infoPullman}</td>
+                      <td className="px-4 py-3">{r.partecipanti}</td>
+                      <td className="px-4 py-3">{r.pr}</td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="6" className="px-4 py-6 text-center text-white/60">
+                    <td colSpan="18" className="px-4 py-6 text-center text-white/60">
                       Nessun risultato trovato
                     </td>
                   </tr>
