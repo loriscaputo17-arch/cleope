@@ -39,7 +39,7 @@ const html = `
 
     <!-- Bottone di conferma -->
     <div style="margin:30px 0;">
-      <a href="http://localhost:3001/themerge/confirmation?email=${encodeURIComponent(to)}"
+      <a href="https://cleopeofficial.com/themerge/confirmation?email=${encodeURIComponent(to)}"
          style="display:inline-block; padding:15px 30px; background:#28a745; color:#fff;
                 font-size:16px; font-weight:bold; text-decoration:none; border-radius:6px;">
         SI, Confermo

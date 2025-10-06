@@ -38,7 +38,7 @@ export async function POST(req) {
     }
 
     // ⚠️ Sostituisci con il tuo dominio pubblico in produzione
-    const baseUrl = "https://localhost:3001"; // es: https://themerge.yourdomain.com
+    const baseUrl = "https://cleopeofficial.com"; // es: https://themerge.yourdomain.com
 
     // Link che codifichiamo nel QR (check-in)
     const qrData = `${baseUrl}/themerge/checkin?code=${encodeURIComponent(
