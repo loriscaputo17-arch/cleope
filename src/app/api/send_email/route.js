@@ -25,35 +25,35 @@ const html = `
   <div style="font-family:Arial,Helvetica,sans-serif; background:#f0f0f0; color:#000; padding:30px; text-align:center">
     
     <h1 style="color:#000; text-transform:uppercase; letter-spacing:3px; margin-bottom:20px;">
-      RSVP Confirmation – THE MERGE
+      RSVP – Conferma la tua partecipazione
     </h1>
 
     <p style="font-size:16px; line-height:1.5; margin-bottom:20px;">
-      Hi <strong>${name}</strong>,<br/>
-      we’ve received your RSVP for the secret party.<br/>
-      You’re officially on the <strong>waiting list</strong>.
+      Ciao <strong>${name}</strong>,<br/>
+      ti sei iscritto in lista all'evento <strong>THE MERGE</strong> per l'<strong>11 Ottobre a Milano</strong>.
     </p>
 
-    <div style="background:#fff; border:1px solid #ccc; padding:20px; margin:20px auto; max-width:400px; text-align:left;">
-      <h3 style="margin-top:0; font-size:16px; font-weight:bold;">Your details</h3>
-      <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:1.6;">
-        <li><strong>Event:</strong> ${optionLabel}</li>
-        <li><strong>Name:</strong> ${name}</li>
-        <li><strong>Phone:</strong> ${phone}</li>
-        <li><strong>Email:</strong> ${to}</li>
-      </ul>
+    <p style="font-size:15px; margin-bottom:20px;">
+      Dato l'alto numero di richieste ti chiediamo di <strong>confermare la tua partecipazione</strong>.
+    </p>
+
+    <!-- Bottone di conferma -->
+    <div style="margin:30px 0;">
+      <a href="http://localhost:3001/themerge/confirmation?email=${encodeURIComponent(to)}"
+         style="display:inline-block; padding:15px 30px; background:#28a745; color:#fff;
+                font-size:16px; font-weight:bold; text-decoration:none; border-radius:6px;">
+        SI, Confermo
+      </a>
     </div>
 
-    <p style="margin-top:30px; font-size:15px; line-height:1.5;">
-      In the next days you will receive a <strong>private link</strong> to purchase early access tickets.<br/>
-      Stay tuned – the mystery location will be revealed soon.
+    <p style="font-size:14px; line-height:1.5; margin-top:20px;">
+      Per ottenere il <strong>QR Code</strong> da presentare all'ingresso<br/>
+      è obbligatorio confermare la propria presenza.
     </p>
 
     <hr style="margin:40px auto; border:none; border-top:1px solid #ccc; width:80%;" />
 
-    <p style="font-size:13px;">
-      CLEOPE Team
-    </p>
+    <p style="font-size:13px;">CLEOPE Team</p>
 
     <div style="margin-top:20px;">
       <a href="https://www.instagram.com/cleopeofficial" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">Instagram</a>
@@ -62,8 +62,6 @@ const html = `
     </div>
   </div>
 `;
-
-
 
     await transporter.sendMail({
       from: "CLEOPE <cleope.events@gmail.com>",
