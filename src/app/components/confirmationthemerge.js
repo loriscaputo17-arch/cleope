@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { doc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 export default function ConfirmationPage() {
   const searchParams = useSearchParams();
@@ -16,8 +16,17 @@ export default function ConfirmationPage() {
 
     async function confirmRSVP() {
       try {
-        const q = query(collection(db, "11oct_merge"), where("email", "==", email));
-        const snap = await getDocs(q);
+        let snap;
+
+        // 🔹 1. cerca in 11oct_merge
+        let q = query(collection(db, "11oct_merge"), where("email", "==", email));
+        snap = await getDocs(q);
+
+        // 🔹 2. se non trova nulla, cerca in 11oct_merge_sheet
+        if (snap.empty) {
+          q = query(collection(db, "11oct_merge_sheet"), where("email", "==", email));
+          snap = await getDocs(q);
+        }
 
         if (!snap.empty) {
           const docRef = snap.docs[0].ref;
