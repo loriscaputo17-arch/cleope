@@ -9,7 +9,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 const COLLECTION_NAME = "11oct_merge";
 
 // data target: 11 ottobre 2025, 00:00
-const EVENT_DATE = new Date("2025-10-11T00:00:00");
+const EVENT_DATE = new Date("2025-10-11T23:45:00");
 
 export default function BookPage() {
   const searchParams = useSearchParams();

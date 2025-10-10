@@ -45,8 +45,18 @@ export default function CheckinPage() {
           ...d.data(),
         }));
 
-        setBookings(bookingsData);
-        setCheckins(checkinsData);
+        // Rimuovi duplicati per email
+const uniqueMap = new Map();
+bookingsData.forEach((r) => {
+  if (!uniqueMap.has(r.email)) {
+    uniqueMap.set(r.email, r);
+  }
+});
+const uniqueBookings = Array.from(uniqueMap.values());
+
+// Usa solo i record unici
+setBookings(uniqueBookings);
+setFiltered(uniqueBookings);
         setFiltered(bookingsData);
       } catch (err) {
         console.error("Errore fetch:", err);
