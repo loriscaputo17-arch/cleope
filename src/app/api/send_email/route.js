@@ -14,8 +14,8 @@ export async function POST(req) {
       port: 465,
       secure: true,
       auth: {
-        user: "cleope.events@gmail.com",
-        pass: "zpyi vybi vlyk sumv",
+        user: "lorixyes@gmail.com",
+        pass: "uyez ribm rypi rwdz",
       },
     });
 
