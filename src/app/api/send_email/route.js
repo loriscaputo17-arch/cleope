@@ -12,61 +12,54 @@ export async function POST(req) {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
-      secure: true,
+      secure: 465,
       auth: {
-        user: "lorixyes@gmail.com",
-        pass: "uyez ribm rypi rwdz",
+        user: "cleope.events@gmail.com",
+        pass: "zpyi vybi vlyk sumv",
       },
     });
 
-    const html = `
-      <div style="font-family:Arial,Helvetica,sans-serif; background:#f0f0f0; color:#000; padding:30px; text-align:center">
-        
-        <h2 style="color:#000; text-transform:uppercase; letter-spacing:3px; margin-bottom:20px;">
-          REMINDER THE MERGE | MILANO
-        </h2>
+const html = `
+  <div style="font-family:Arial,Helvetica,sans-serif; background:#f0f0f0; color:#000; padding:30px; text-align:center">
+    
+    <h1 style="color:#000; text-transform:uppercase; letter-spacing:3px; margin-bottom:20px;">
+      RSVP – Conferma la tua partecipazione
+    </h1>
 
-        <p style="font-size:16px; line-height:1.5; margin-bottom:20px;">
-          Ciao <strong>${name}</strong>!<br/>
-          Stasera <strong>sabato 11 ottobre 2025</strong> ci vediamo al <strong>Superclub Milano</strong> – Via Tortona, 27, 20144 Milano MI.
-        </p>
+    <p style="font-size:16px; line-height:1.5; margin-bottom:20px;">
+      Ciao <strong>${name}</strong>,<br/>
+      ti sei iscritto in lista all'evento <strong>THE MERGE</strong> per l'<strong>11 Ottobre a Milano</strong>.
+    </p>
 
-        <p style="font-size:15px; margin-bottom:20px; line-height:1.6;">
-          <a href="https://maps.app.goo.gl/jeR2MNmYn8YbCrQE6" style="color:#000; font-weight:bold; text-decoration:none;">Clicca qui per la Location su Google Maps</a><br/>
-          Apertura porte: <strong>ore 23:45</strong><br/>
-          Ti consigliamo di arrivare in anticipo per l'elevata richiesta.
-        </p>
+    <p style="font-size:15px; margin-bottom:20px;">
+      Dato l'alto numero di richieste ti chiediamo di <strong>confermare la tua partecipazione</strong>.
+    </p>
 
-        <hr style="margin:30px auto; border:none; border-top:1px solid #ccc; width:80%;" />
+    <!-- Bottone di conferma -->
+    <div style="margin:30px 0;">
+      <a href="https://cleopeofficial.com/themerge/confirmation?email=${encodeURIComponent(to)}"
+         style="display:inline-block; padding:15px 30px; background:#28a745; color:#fff;
+                font-size:16px; font-weight:bold; text-decoration:none; border-radius:6px;">
+        SI, Confermo
+      </a>
+    </div>
 
-        <p style="font-size:15px; line-height:1.6; margin-bottom:20px;">
-          Mostra il <strong>QR code</strong> all'ingresso e acquista il ticket alla porta.<br/>
-          Entro l'<strong>01:00 → €15 con drink incluso</strong><br/>
-          Dopo l'<strong>01:00 → €20 con drink incluso</strong>
-        </p>
+    <p style="font-size:14px; line-height:1.5; margin-top:20px;">
+      Per ottenere il <strong>QR Code</strong> da presentare all'ingresso<br/>
+      è obbligatorio confermare la propria presenza.
+    </p>
 
-        <p style="font-size:15px; line-height:1.6; margin-bottom:20px;">
-          Le liste rimarranno aperte ancora per poche ore per dare possibilità di aggiungere gli ultimi +1:<br/>
-          <a href="https://www.cleopeofficial.com/themerge/11.10" style="color:#000; font-weight:bold;">https://www.cleopeofficial.com/themerge/11.10</a><br/>
-          Dopo verranno chiuse definitivamente.
-        </p>
+    <hr style="margin:40px auto; border:none; border-top:1px solid #ccc; width:80%;" />
 
-        <p style="font-size:15px; line-height:1.6; margin-bottom:20px;">
-          Ultimo tavolo disponibile per il prive.<br/>
-          Conferma la tua presenza in lista per assicurarti l'ingresso.
-        </p>
+    <p style="font-size:13px;">CLEOPE Team</p>
 
-        <hr style="margin:40px auto; border:none; border-top:1px solid #ccc; width:80%;" />
-
-        <p style="font-size:13px;">CLEOPE Team</p>
-
-        <div style="margin-top:20px;">
-          <a href="https://www.instagram.com/cleopeofficial" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">Instagram</a>
-          <a href="https://www.tiktok.com/@cleopeofficial" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">TikTok</a>
-          <a href="https://wa.me/+393513895086" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">WhatsApp</a>
-        </div>
-      </div>
-    `;
+    <div style="margin-top:20px;">
+      <a href="https://www.instagram.com/cleopeofficial" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">Instagram</a>
+      <a href="https://www.tiktok.com/@cleopeofficial" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">TikTok</a>
+      <a href="https://wa.me/+393513895086" style="margin:0 8px; color:#000; text-decoration:none; font-weight:bold;">WhatsApp</a>
+    </div>
+  </div>
+`;
 
     await transporter.sendMail({
       from: "CLEOPE <cleope.events@gmail.com>",
@@ -81,3 +74,4 @@ export async function POST(req) {
     return NextResponse.json({ error: "Mail send failed" }, { status: 500 });
   }
 }
+
