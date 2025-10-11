@@ -14,13 +14,14 @@ import {
   serverTimestamp,
   orderBy,
 } from "firebase/firestore";
+import Papa from "papaparse";
 
 export default function CheckinPage() {
   const searchParams = useSearchParams();
   const qrEmail = searchParams.get("email");
   const qrCode = searchParams.get("code");
 
-  const [bookings, setBookings] = useState([]);
+  const [records, setRecords] = useState([]); // Firestore + Sheet
   const [checkins, setCheckins] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,10 +29,14 @@ export default function CheckinPage() {
   const [checking, setChecking] = useState(null);
   const [popup, setPopup] = useState(null);
 
-  // 🔹 Carica dati iniziali
+  const SHEET_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vToPu9CltvMxaCjQNtJar6Fw2Z7o7vW6YwDdAmlR5lc38mRPxk-CzjVqOD82sHg1XVVWINo1LawjP4Q/pub?gid=1941734476&single=true&output=csv";
+
+  // 🔹 Carica Firestore + Sheet
   useEffect(() => {
     async function fetchData() {
       try {
+        // Firestore base
         const q1 = query(collection(db, "11oct_merge"), orderBy("createdAt", "desc"));
         const snap1 = await getDocs(q1);
         const bookingsData = snap1.docs.map((d) => ({
@@ -40,26 +45,45 @@ export default function CheckinPage() {
           createdAt: d.data().createdAt?.toDate
             ? d.data().createdAt.toDate()
             : null,
+          source: "firestore",
         }));
 
+        // Google Sheet
+        const res = await fetch(SHEET_URL);
+        const csvText = await res.text();
+        const parsed = Papa.parse(csvText, { header: true });
+        const sheetData = parsed.data
+          .filter((r) => r["Mail"])
+          .map((r, i) => ({
+            id: `sheet-${i}`,
+            firstName: r["Nome"] || "",
+            lastName: r["Cognome"] || "",
+            email: r["Mail"] || "",
+            phone: r["Telefono"] || "",
+            code: "",
+            createdAt: r["Data di creazione"]
+              ? new Date(r["Data di creazione"])
+              : null,
+            source: "sheet",
+          }));
+
+        // Check-in esistenti
         const q2 = query(collection(db, "11oct_merge_checkin"));
         const snap2 = await getDocs(q2);
-        const checkinsData = snap2.docs.map((d) => ({
-          id: d.id,
-          ...d.data(),
-        }));
+        const checkinsData = snap2.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+        // Unisci Firestore + Sheet
+        const all = [...bookingsData, ...sheetData];
 
         // Rimuovi duplicati per email
         const uniqueMap = new Map();
-        bookingsData.forEach((r) => {
-          if (!uniqueMap.has(r.email)) {
-            uniqueMap.set(r.email, r);
-          }
+        all.forEach((r) => {
+          if (!uniqueMap.has(r.email)) uniqueMap.set(r.email, r);
         });
-        const uniqueBookings = Array.from(uniqueMap.values());
+        const merged = Array.from(uniqueMap.values());
 
-        setBookings(uniqueBookings);
-        setFiltered(uniqueBookings);
+        setRecords(merged);
+        setFiltered(merged);
         setCheckins(checkinsData);
       } catch (err) {
         console.error("Errore fetch:", err);
@@ -73,7 +97,7 @@ export default function CheckinPage() {
   // 🔹 Filtro ricerca
   useEffect(() => {
     const term = search.toLowerCase();
-    const results = bookings.filter(
+    const results = records.filter(
       (r) =>
         r.firstName?.toLowerCase().includes(term) ||
         r.lastName?.toLowerCase().includes(term) ||
@@ -82,7 +106,7 @@ export default function CheckinPage() {
         r.code?.toLowerCase().includes(term)
     );
     setFiltered(results);
-  }, [search, bookings]);
+  }, [search, records]);
 
   // 🔹 Check-in automatico da QR
   useEffect(() => {
@@ -96,17 +120,13 @@ export default function CheckinPage() {
     try {
       setChecking(email);
 
-      const q = query(collection(db, "11oct_merge"), where("email", "==", email));
-      const snap = await getDocs(q);
-
-      let user = null;
-
-      if (snap.empty) {
-        // non esiste in lista → aggiungilo come guest
-        user = { firstName: "Guest", lastName: "", email, code: code || "cleope" };
-      } else {
-        user = snap.docs[0].data();
-      }
+      const user =
+        records.find((r) => r.email === email) || {
+          firstName: "Guest",
+          lastName: "",
+          email,
+          code: code || "cleope",
+        };
 
       const already = checkins.find((c) => c.email === email);
       if (already) {
@@ -160,7 +180,7 @@ export default function CheckinPage() {
     }
   }
 
-  // 🔹 Aggiungi nuovo nome manuale
+  // 🔹 Aggiungi manualmente
   async function handleAddNew(nameOrEmail) {
     try {
       setChecking(nameOrEmail);
@@ -171,7 +191,7 @@ export default function CheckinPage() {
         email: nameOrEmail.includes("@")
           ? nameOrEmail
           : `${first?.toLowerCase() || "guest"}@noemail.com`,
-        code: "cleope",
+        code: "manual",
         createdAt: serverTimestamp(),
       };
       await addDoc(collection(db, "11oct_merge_checkin"), newUser);
@@ -199,9 +219,9 @@ export default function CheckinPage() {
     });
   }
 
-  const totalBookings = bookings.length;
+  const totalRecords = records.length;
   const totalCheckins = checkins.length;
-  const totalMissing = totalBookings - totalCheckins;
+  const totalMissing = totalRecords - totalCheckins;
 
   return (
     <main className="min-h-screen w-full bg-black text-white px-4 pt-24 pb-10">
@@ -210,7 +230,7 @@ export default function CheckinPage() {
 
         <p className="text-white/70 mb-6">
           Totale prenotati:{" "}
-          <span className="font-semibold text-white">{totalBookings}</span> ·
+          <span className="font-semibold text-white">{totalRecords}</span> ·
           Checkati:{" "}
           <span className="font-semibold text-green-400">{totalCheckins}</span> ·
           Mancanti:{" "}
@@ -242,7 +262,7 @@ export default function CheckinPage() {
           />
         </div>
 
-        {/* Nessun risultato → aggiungi manualmente */}
+        {/* Nessun risultato */}
         {!loading && filtered.length === 0 && search && (
           <div className="text-center mt-8">
             <p className="mb-4 text-white/70">
@@ -266,11 +286,12 @@ export default function CheckinPage() {
               <table className="w-full text-sm md:text-base">
                 <thead className="bg-white/10">
                   <tr>
-                    <th className="px-4 py-3">Data Prenotazione</th>
+                    <th className="px-4 py-3">Data</th>
                     <th className="px-4 py-3">Nome</th>
                     <th className="px-4 py-3">Cognome</th>
                     <th className="px-4 py-3">Email</th>
                     <th className="px-4 py-3">Codice</th>
+                    <th className="px-4 py-3">Origine</th>
                     <th className="px-4 py-3">Stato</th>
                     <th className="px-4 py-3">Azioni</th>
                   </tr>
@@ -290,6 +311,7 @@ export default function CheckinPage() {
                         <td className="px-4 py-3">{r.lastName}</td>
                         <td className="px-4 py-3">{r.email}</td>
                         <td className="px-4 py-3 font-mono">{r.code}</td>
+                        <td className="px-4 py-3">{r.source}</td>
                         <td className="px-4 py-3">
                           {isChecked ? (
                             <span className="text-green-400 font-semibold">
