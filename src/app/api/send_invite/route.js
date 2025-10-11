@@ -85,8 +85,9 @@ export async function POST(req) {
       port: 465,
       secure: true,
       auth: {
-        user: "lorixyes@gmail.com",
-        pass: "uyez ribm rypi rwdz",
+        user: "cleope.events@gmail.com",
+        // Usa una ENV VAR in produzione: process.env.SMTP_PASS
+        pass: "zpyi vybi vlyk sumv",
       },
     });
 
