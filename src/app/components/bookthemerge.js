@@ -248,27 +248,64 @@ export default function BookPage() {
         </p>
 
         {showPopup && (
-  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/70">
-    <div className="bg-white/10 backdrop-blur-md border border-white/30 p-8 max-w-md text-center transform -skew-x-12">
-      <div className="skew-x-12">
-        <h2 className="text-xl md:text-2xl text-white font-bold uppercase tracking-widest drop-shadow-[0_0_6px_#00ffe0]">
-          Secret Party<br></br> Confirmed
-        </h2>
-        <p className="mt-4 text-sm md:text-base text-neutral-200">
-          Your <strong>RSVP has been received</strong>.  <br></br>
-          You will get an email shortly with more details. <br></br> 
-          Stay tuned — the location remains a mystery.
-        </p>
-        <button
-          onClick={() => setShowPopup(false)}
-          className="mt-6 px-6 py-2 bg-black/80 text-white font-bold uppercase tracking-wider transform -skew-x-12 hover:bg-black transition cursor-pointer"
-        >
-          <span className="block skew-x-12">Close</span>
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/70">
+            <div className="bg-white/10 backdrop-blur-md border border-white/30 p-8 max-w-md text-center transform -skew-x-12">
+              <div className="skew-x-12">
+                <h2 className="text-xl md:text-2xl text-white font-bold uppercase tracking-widest drop-shadow-[0_0_6px_#00ffe0]">
+                  RSVP VALIDO ✅
+                </h2>
+                <p className="mt-4 text-sm md:text-base text-neutral-200 leading-relaxed">
+                  Dai il tuo <strong>nome all’ingresso</strong> per accedere all’evento. <br />
+                  Mostra il tuo QR code o conferma email se richiesto.
+                </p>
+
+                <hr className="my-4 border-white/20" />
+
+                <div className="text-left text-neutral-300 text-xs md:text-sm leading-relaxed">
+                  <p className="font-semibold text-white mb-1">📍 THE MERGE – MILANO</p>
+                  <p>
+                    Superclub – Via Tortona 27, Milano <br />
+                    <a
+                      href="https://maps.app.goo.gl/jeR2MNmYn8YbCrQE6"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-[#00ffe0]"
+                    >
+                      Apri su Maps
+                    </a>
+                  </p>
+                  <p className="mt-2">
+                    🕓 Apertura porte: <strong>23:45</strong> <br />
+                    Ti consigliamo di arrivare presto per l’elevata richiesta.
+                  </p>
+                  <p className="mt-2">
+                    🎟️ Ingresso: <strong>€15</strong> entro 01:00, <strong>€20</strong> dopo. <br />
+                    Drink incluso.
+                  </p>
+                  <p className="mt-2">
+                    Lista ancora aperta:{" "}
+                    <a
+                      href="https://www.cleopeofficial.com/themerge/11.10"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-[#00ffe0]"
+                    >
+                      cleopeofficial.com/themerge/11.10
+                    </a>
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setShowPopup(false)}
+                  className="mt-6 px-6 py-2 bg-black/80 text-white font-bold uppercase tracking-wider transform -skew-x-12 hover:bg-black transition cursor-pointer"
+                >
+                  <span className="block skew-x-12">Chiudi</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
 
       </div>
     </main>

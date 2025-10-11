@@ -12,7 +12,6 @@ export default function BookPage() {
   const [search, setSearch] = useState("");
   const [sending, setSending] = useState(null);
 
-  // 🔹 Stati per la seconda tabella (Google Sheets)
   const [sheetRecords, setSheetRecords] = useState([]);
   const [sheetFiltered, setSheetFiltered] = useState([]);
   const [loadingSheet, setLoadingSheet] = useState(true);
@@ -35,7 +34,7 @@ export default function BookPage() {
           };
         });
 
-        // Rimuove duplicati per email
+        // 🔹 Rimuove duplicati per email
         const uniqueMap = new Map();
         data.forEach((r) => {
           if (!uniqueMap.has(r.email)) {
@@ -47,7 +46,7 @@ export default function BookPage() {
         setRecords(uniqueRecords);
         setFiltered(uniqueRecords);
       } catch (err) {
-        console.error("Errore fetch dati Firestore:", err);
+        console.error("Errore fetch Firestore:", err);
       } finally {
         setLoading(false);
       }
@@ -55,14 +54,14 @@ export default function BookPage() {
     fetchData();
   }, []);
 
-  // 🔹 Fetch Google Sheet CSV
+  // 🔹 Fetch Google Sheets CSV
   useEffect(() => {
     async function fetchSheet() {
       try {
         const response = await fetch(SHEET_URL);
         const csvText = await response.text();
-
         const parsed = Papa.parse(csvText, { header: true });
+
         const data = parsed.data
           .map((row, idx) => ({
             id: idx,
@@ -88,7 +87,7 @@ export default function BookPage() {
     fetchSheet();
   }, []);
 
-  // 🔹 Filtro ricerca per Firestore
+  // 🔹 Ricerca (Firestore)
   useEffect(() => {
     const term = search.toLowerCase();
     setFiltered(
@@ -103,7 +102,7 @@ export default function BookPage() {
     );
   }, [search, records]);
 
-  // 🔹 Filtro ricerca per Sheet
+  // 🔹 Ricerca (Sheet)
   useEffect(() => {
     const term = search.toLowerCase();
     setSheetFiltered(
@@ -125,55 +124,68 @@ export default function BookPage() {
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
     });
   }
 
+  // 🔹 Genera un codice se non presente
+  function fallbackCode(r) {
+    if (r.code && r.code.trim()) return r.code.trim();
+    const part = (r.email || "NOEMAIL").replace(/[^a-zA-Z0-9]/g, "").slice(0, 5).toUpperCase();
+    const rnd = Math.floor(1000 + Math.random() * 9000);
+    return `MERGE-${part}-${rnd}`;
+  }
+
+  // 🔹 Invio email con QR code (via API Brevo)
   async function sendEmail(r) {
     try {
       setSending(r.id);
-      await fetch("/api/send_email", {
+
+      const name = `${r.firstName || ""} ${r.lastName || ""}`.trim();
+      const code = fallbackCode(r);
+
+      const res = await fetch("/api/send_invite", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: r.email,
-          subject: "Your RSVP for THE MERGE – Secret Party",
-          name: `${r.firstName} ${r.lastName}`,
-          phone: r.phone,
-          optionLabel: "THE MERGE – Secret Party (Early Access)",
-          code: r.code || undefined,
+          name,
+          code,
         }),
       });
-      alert(`Email inviata a ${r.email}`);
+
+      if (!res.ok) throw new Error("Errore invio");
+
+      alert(`✅ Email con QR Code inviata a ${r.email}`);
     } catch (err) {
       console.error("Errore invio email:", err);
-      alert("Errore durante l'invio dell'email");
+      alert("❌ Errore durante l'invio dell'email");
     } finally {
       setSending(null);
     }
   }
 
-    async function importSheetToFirestore() {
-  try {
-    for (const row of sheetRecords) {
-      await addDoc(collection(db, "11oct_merge_sheet"), {
-        firstName: row.firstName,
-        lastName: row.lastName,
-        email: row.email,
-        phone: row.phone,
-        code: row.code || "",
-        createdAt: row.createdAt || serverTimestamp(),
-        confirmed: false,
-      });
+  // 🔹 Import da Google Sheets a Firestore
+  async function importSheetToFirestore() {
+    try {
+      for (const row of sheetRecords) {
+        await addDoc(collection(db, "11oct_merge_sheet"), {
+          firstName: row.firstName,
+          lastName: row.lastName,
+          email: row.email,
+          phone: row.phone,
+          code: row.code || "",
+          createdAt: row.createdAt || serverTimestamp(),
+          confirmed: false,
+        });
+      }
+      alert("✅ Dati importati su Firestore!");
+    } catch (err) {
+      console.error("Errore importazione:", err);
+      alert("❌ Errore durante l'importazione");
     }
-    alert("✅ Dati importati su Firestore!");
-  } catch (err) {
-    console.error("Errore importazione:", err);
-    alert("❌ Errore durante l'importazione");
   }
-}
 
-  // 🔹 UI Table component (riusabile)
+  // 🔹 Tabella riusabile
   const Table = ({ title, data, loading, totalCount }) => (
     <div className="mb-12">
       <h2 className="text-xl font-bold mb-3">{title}</h2>
@@ -199,7 +211,7 @@ export default function BookPage() {
                 <th className="px-4 py-3 text-left">Cognome</th>
                 <th className="px-4 py-3 text-left">Email</th>
                 <th className="px-4 py-3 text-left">Telefono</th>
-                <th className="px-4 py-3 text-left">Opzione</th>
+                <th className="px-4 py-3 text-left">Codice</th>
                 <th className="px-4 py-3 text-left">Azioni</th>
               </tr>
             </thead>
@@ -250,7 +262,7 @@ export default function BookPage() {
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <input
             type="text"
-            placeholder="Cerca per nome, email, telefono, opzione..."
+            placeholder="Cerca per nome, email, telefono, codice..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="flex-1 px-4 py-3 rounded-xl bg-black/40 border border-white/15 focus:outline-none focus:border-white/40 placeholder-white/60 text-sm"
@@ -266,14 +278,14 @@ export default function BookPage() {
         />
 
         <div className="flex justify-between items-center mb-4">
-  <h2 className="text-xl font-bold">Prenotazioni da Google Sheets</h2>
-  <button
-    onClick={importSheetToFirestore}
-    className="px-4 py-2 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600 transition"
-  >
-    Importa in Firestore
-  </button>
-</div>
+          <h2 className="text-xl font-bold">Prenotazioni da Google Sheets</h2>
+          <button
+            onClick={importSheetToFirestore}
+            className="px-4 py-2 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600 transition"
+          >
+            Importa in Firestore
+          </button>
+        </div>
 
         {/* 🔹 Tabella Google Sheets */}
         <Table
