@@ -8,7 +8,7 @@ export default function ClientLayout({ children }) {
   const pathname = usePathname();
 
   // lista di percorsi in cui NON vogliamo mostrare header/footer
-  const hiddenRoutes = ["/share", "/srevents/winter", "/srevents", "/themerge/11.10", "/srevents/admin", "/themerge/confirmation"];
+  const hiddenRoutes = ["/share", "/srevents/winter", "/srevents", "/themerge/11.10", "/srevents/admin", "/themerge/confirmation", "/loriscaputo"];
   const hideLayout = hiddenRoutes.includes(pathname);
 
   return (
