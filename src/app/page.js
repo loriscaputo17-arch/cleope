@@ -12,6 +12,7 @@ export default function Home() {
   const [events, setEvents] = useState([])
   const [loadingEvents, setLoadingEvents] = useState(true)
   const [ticketLink, setTicketLink] = useState(null); 
+  const [selectedMonth, setSelectedMonth] = useState("upcoming");
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -36,27 +37,24 @@ export default function Home() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const eventsCol = collection(db, "events")
-        const eventsSnapshot = await getDocs(eventsCol)
-
-        const today = new Date()
-        today.setHours(0, 0, 0, 0)
+        const eventsCol = collection(db, "events");
+        const eventsSnapshot = await getDocs(eventsCol);
 
         const eventsList = eventsSnapshot.docs
           .map(doc => ({ id: doc.id, ...doc.data() }))
-          .filter(event => new Date(event.date) >= today)
+          .filter(event => event.date) // solo se ha una data valida
+          .sort((a, b) => new Date(a.date) - new Date(b.date)); // ordina per data
 
-        console.log(eventsList)
-
-        setEvents(eventsList)
+        setEvents(eventsList);
       } catch (error) {
-        console.error("Errore nel recupero degli eventi:", error)
+        console.error("Errore nel recupero degli eventi:", error);
       } finally {
-        setLoadingEvents(false)
+        setLoadingEvents(false);
       }
     }
-    fetchEvents()
-  }, [])
+    fetchEvents();
+  }, []);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -239,223 +237,340 @@ export default function Home() {
         </div>
       )}
 
-      <section className="relative flex flex-col md:flex-row items-center justify-between text-left pb-[6rem] pt-[6rem] md:pb-[10rem] md:pt-[10rem] min-h-[90vh]">
+      <section className="relative flex flex-col md:flex-row items-center justify-between text-left py-[8rem] min-h-[90vh] overflow-hidden">
 
+        {/* GRID TEXTURE BG */}
         <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-          <div className="w-full h-full bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:160px_160px]" />
+          <div className="w-full h-full bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:140px_140px]" />
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full h-full overflow-hidden">
+        {/* BG IMAGE */}
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0507.JPG?alt=media&token=c4211af3-dbe5-474a-8459-65d3af342fb2"
             alt="CLEOPE background"
             fill
-            sizes="100vw"
-            quality={50}
-            className="object-cover object-center opacity-20 blur-sm"
+            className="object-cover object-center opacity-20 grayscale"
           />
         </div>
 
-        {/* Content left */}
-        <div className="z-20 max-w-xl text-center md:text-left px-6 md:ml-[8vw] mb-10 md:mb-0">
-          <p className={`bg-[#0000ff47] text-[#8989ff] md:ml-0 ml-auto md:mr-0 mr-auto  border-[#8989ff] uppercase mb-4 text-[10px] tracking-widest mb-2 rounded-full py-2 px-4 border w-[fit-content]`}>
-            Electronic Hub
+        {/* LEFT CONTENT */}
+        <div className="z-20 max-w-xl text-center md:text-left px-6 md:ml-[8vw]">
+          <p className="uppercase text-[10px] tracking-[0.3em] text-neutral-400 mb-4">Electronic Hub</p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight uppercase"
+          >
+            CLEOPE<br />
+            <span className="text-neutral-500">Entertainment Hub</span>
+          </motion.h1>
+
+          <p className="mt-6 text-neutral-300 max-w-md text-sm md:text-base leading-relaxed">
+            A creative collective merging <span className="text-white">music</span>, 
+            <span className="text-white"> fashion</span> and 
+            <span className="text-white"> experience design</span>.
+            We redefine the culture of nightlife.
           </p>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold">CLEOPE</h1>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-4">ENTERTAINMENT HUB</h1>
-          <p className="text-[14px] md:text-[16px] text-neutral-300 max-w-lg mx-auto md:mx-0 mb-6">
-            A dynamic organization created to offer concrete support to brands and venues, 
-            in a constantly evolving fashion and lifestyle landscape.
-          </p>
+
           <Link
             href="/nextevents"
-            className="inline-flex items-center gap-2 bg-white text-black pl-5 pr-2 py-1 text-[14px] rounded-full hover:bg-neutral-200 transition"
+            className="inline-flex items-center gap-3 mt-8 bg-white text-black px-6 py-3 text-sm rounded-full hover:bg-neutral-200 transition"
           >
             Explore Next Events
-            <div className="bg-black m-1 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="20px" height="20px" viewBox="0 0 640 640">
-                <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-              </svg>
-            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="18px" height="18px" viewBox="0 0 640 640">
+              <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+            </svg>
           </Link>
         </div>
 
-        {/* Circle with video right */}
-        <div className="z-20 flex items-center justify-center w-[60vw] h-[60vw] sm:w-[50vw] sm:h-[50vw] md:w-[40vw] md:h-[40vw] lg:w-[30vw] lg:h-[30vw] rounded-full overflow-hidden shadow-2xl border border-white/20 md:mr-[8vw]">
-          <video
-            src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/videocross.mp4?alt=media&token=08c66b8c-6d38-42df-a98c-b40c6f050835"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover rounded-full"
+        {/* RIGHT IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+          className="z-20 md:mr-[8vw] mt-12 md:mt-0 relative overflow-hidden rounded-[2rem] border border-white/10 w-[80vw] h-[100vw] sm:w-[60vw] sm:h-[75vw] md:w-[35vw] md:h-[50vw]"
+        >
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0520.JPG?alt=media&token=a8ee1067-51eb-415f-99be-ba02a4ac0ec4"
+            alt="CLEOPE Visual"
+            fill
+            className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
           />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+        </motion.div>
 
       </section>
 
-      {/* UPCOMING EVENTS */}
       {!loadingEvents && (
-        <section className="w-full py-24 //bg-gradient-to-b from-black to-blue-950 px-6">
+        <section className="w-full py-24 px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-8">Upcoming Events</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-8">CLEOPE Events</h2>
 
-            {events.length === 0 ? (
-              <p>No upcoming events.</p>
-            ) : (
-              <div className="grid md:grid-cols-3 gap-8">
-                {events.map((event) => (
-                  <div
-                    key={event.id}
-                    className="relative rounded-lg overflow-hidden group shadow-lg cursor-pointer"
-                    onClick={() => setSelectedEvent(event)}
-                  >
-                    <Image
-                      src={event.img ?? "/fallback.jpg"}
-                      alt={event.title}
-                      width={800}
-                      height={1000}
-                      className="object-cover w-full h-100 group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col justify-end">
-                      <span className="text-xs bg-white/10 px-3 py-1 rounded-full w-fit backdrop-blur-sm mb-2">
-                        {event.tag}
-                      </span>
-                      <h4 className="text-xl font-bold">{event.title}</h4>
-                      <div className="text-sm text-neutral-300 flex justify-between mt-2">
-                        <span className="text-[12px]">{new Date(event.date).toLocaleDateString("it-IT")}</span>
-                        <span>{event.time}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+            {/* Month Selector */}
+            {events.length > 0 && (
+              <div className="flex flex-wrap gap-3 mb-10">
+                {Array.from(
+                  new Set(
+                    events.map((e) =>
+                      new Date(e.date).toLocaleString("en-US", {
+                        month: "long",
+                        year: "numeric",
+                      })
+                    )
+                  )
+                )
+                  .sort(
+                    (a, b) =>
+                      new Date(a).getTime() - new Date(b).getTime()
+                  )
+                  .map((month) => (
+                    <button
+                      key={month}
+                      onClick={() => setSelectedMonth(month)}
+                      className={`cursor-pointer uppercase text-xs tracking-wide px-5 py-2 rounded-full border transition-all duration-300 ${
+                        selectedMonth === month
+                          ? "bg-white text-black border-white"
+                          : "border-white/20 text-white/70 hover:text-white hover:border-white/40"
+                      }`}
+                    >
+                      {month}
+                    </button>
+                  ))}
+                <button
+                  onClick={() => setSelectedMonth("upcoming")}
+                  className={`cursor-pointer uppercase text-xs tracking-wide px-5 py-2 rounded-full border transition-all duration-300 ${
+                    selectedMonth === "upcoming"
+                      ? "bg-white text-black border-white"
+                      : "border-white/20 text-white/70 hover:text-white hover:border-white/40"
+                  }`}
+                >
+                  Upcoming
+                </button>
               </div>
             )}
+
+            {/* Filtered Events */}
+            {(() => {
+              const now = new Date();
+
+              let filtered =
+                selectedMonth === "upcoming"
+                  ? events.filter((e) => new Date(e.date) >= now)
+                  : events.filter(
+                      (e) =>
+                        new Date(e.date).toLocaleString("en-US", {
+                          month: "long",
+                          year: "numeric",
+                        }) === selectedMonth
+                    );
+
+              if (filtered.length === 0)
+                return <p className="text-neutral-400">No events for this month.</p>;
+
+              return (
+                <div className="grid md:grid-cols-3 gap-8">
+                  {filtered.map((event) => (
+                    <motion.div
+                      key={event.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="relative rounded-xl overflow-hidden group border border-white/10 cursor-pointer"
+                      onClick={() => setSelectedEvent(event)}
+                    >
+                      <Image
+                        src={event.img ?? "/fallback.jpg"}
+                        alt={event.title}
+                        width={800}
+                        height={1000}
+                        className="object-cover w-full h-[500px] grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-5 flex flex-col justify-end">
+                        <span className="text-xs uppercase bg-white/10 px-3 py-1 rounded-full w-fit backdrop-blur-sm mb-2 tracking-widest">
+                          {event.tag ?? "Event"}
+                        </span>
+                        <h4 className="text-xl font-bold mb-1">{event.title}</h4>
+                        <p className="text-sm text-neutral-400 flex justify-between">
+                          <span>{new Date(event.date).toLocaleDateString("it-IT")}</span>
+                          <span>{event.time}</span>
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
         </section>
       )}
 
-      <section className="w-full py-20 px-6 bg-black text-white">
-        <div className="max-w-6xl mx-auto flex flex-col gap-8">
-          
-          {/* Riquadro grande */}
-          <div className="relative rounded-[20px] overflow-hidden shadow-xl h-[60vh] flex items-center justify-center">
-            <Image
-              src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/33.jpg?alt=media&token=f9ee79ed-f732-4c47-b80e-c72f5906ef2d"
-              alt="Aesthetic Parties"
-              fill
-              className="object-cover object-center blur-xs opacity-90"
-            />
-            <div className="absolute inset-0 bg-black/50" />
-            <div className="relative z-10 text-center max-w-lg px-6">
-              <p className="uppercase mb-4 text-[10px] tracking-widest rounded-full py-2 px-4 border bg-[#ffffff47] text-[#fff] border-[#fff] w-fit mx-auto">
-                Features
-              </p>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Aesthetic Parties</h2>
-              <p className="text-neutral-300 mb-6 leading-relaxed max-w-2xl">
-                Unconventional events where <span className="text-white font-semibold">fashion</span>, 
-                <span className="text-white font-semibold"> music</span>, and 
-                <span className="text-white font-semibold"> nightlife</span> merge into one immersive experience.  
-                Every party is designed to spark <span className="italic">creativity</span>,  
-                connect unique communities, and create memories that last long after the night ends.  
-                <br /><br />
-                <span className="text-white font-medium">Step into a new era of entertainment</span> — where every detail is style, sound, and energy. 
+      <section className="w-full py-32 px-6 bg-black text-white overflow-hidden">
+        <div className="max-w-6xl mx-auto flex flex-col gap-24">
+
+          <div className="relative group rounded-[24px] overflow-hidden border border-white/10 flex flex-col md:flex-row h-auto">
+            {/* IMG SX */}
+            <div className="relative w-full md:w-1/2 h-[40vh] md:h-full">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fflyer13nov.png?alt=media&token=548b2bbd-a62f-49f6-aec2-a8b6f27b26c9"
+                alt="Hamilton x Call of Duty Event"
+                
+                className="object-cover object-center"
+              />
+            </div>
+
+            {/* TESTO DX */}
+            <div className="relative flex flex-col justify-center items-start w-full md:w-1/2 p-8 md:p-14 text-left z-10 bg-gradient-to-b from-black via-neutral-950 to-black">
+              <p className="uppercase mb-4 text-[11px] tracking-[0.25em] bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
+                CLEOPE LAB
               </p>
 
-              <Link
-            href="/nextevents"
-            className="inline-flex items-center gap-2 bg-white text-black pl-5 pr-2 py-1 text-[14px] rounded-full hover:bg-neutral-200 transition"
-          >
-            Explore Next Events
-            <div className="bg-black m-1 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="20px" height="20px" viewBox="0 0 640 640">
-                <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-              </svg>
-            </div>
-          </Link>
+              <h2 className="text-4xl font-extrabold mb-6 tracking-tight leading-tight">
+                Hamilton Orologi x Call of Duty: Black Ops 6
+              </h2>
+
+              <p className="text-neutral-300 leading-relaxed mb-8 text-[15px] max-w-lg">
+                Hamilton si unisce a <span className="text-white font-semibold">Call of Duty</span> per lanciare un orologio in
+                <span className="text-white font-semibold"> edizione limitata</span> — presente nel gioco e disponibile anche nella realtà per i veri fan.
+                <br /><br />
+                <span className="text-white font-medium">Martedì 13 Novembre</span>  
+                <br />
+                <span className="text-white font-medium">18:00 — 22:00</span>
+                <br /><br />
+                <span className="text-white font-semibold">Open Bar</span> & <span className="text-white font-semibold">Open Food</span><br />
+                <span className="text-white font-semibold">Free Entry</span> (solo su prenotazione)<br />
+                Media & Ospiti · DJ Set Live · Welcome Kit per tutti gli ospiti  
+                <br /><br />
+                <span className="text-neutral-400 italic">Accesso solo su prenotazione — capienza limitata.</span>
+              </p>
+
+              <a
+                href="https://wa.me/+393513895086"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-white text-black px-8 py-3 text-sm rounded-full hover:bg-neutral-200 transition"
+              >
+                Text Us To Get Access
+                <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="18px" height="18px" viewBox="0 0 640 640">
+                  <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
-          {/* Due riquadri piccoli affiancati */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="relative rounded-[20px] overflow-hidden shadow-lg h-[40vh] flex items-center justify-center">
+          <div className="grid md:grid-cols-2 gap-10">
+            
+            {/* LEFT CARD */}
+            <div className="relative group h-[45vh] rounded-[24px] overflow-hidden border border-white/10">
               <Image
                 src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0504.JPG?alt=media&token=006592a8-dad0-4293-b0dd-4264d4838517"
                 alt="DJ Sets"
                 fill
-                className="object-cover object-center blur-xs opacity-90"
+                className="object-cover object-center transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="relative z-10 text-center px-6">
-                <p className="uppercase mb-4 text-[10px] tracking-widest rounded-full py-2 px-4 border bg-[#ffffff47] text-[#fff] border-[#fff] w-fit mx-auto">
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-700" />
+              <div className="relative z-10 flex flex-col items-center justify-center text-center p-8">
+                <p className="uppercase text-[11px] tracking-[0.3em] bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
                   Highlights
                 </p>
-                <h3 className="text-2xl md:text-3xl font-semibold mb-2">DJ Sets & Booking</h3>
-               <p className="text-neutral-300 text-sm max-w-xs mx-auto leading-relaxed">
-                Live performances with <span className="text-white font-semibold">international DJs</span>,  
-                curated lineups, and unique vibes across Europe’s most iconic clubs.  
-                <span className="italic">Feel the energy, follow the rhythm, and be part of the movement.</span>
-              </p>
+                <h3 className="text-3xl font-bold mb-3">DJ Sets & Booking</h3>
+                <p className="text-neutral-300 text-sm max-w-sm">
+                  Live performances with <span className="text-white font-semibold">international DJs</span>, 
+                  curated lineups, and immersive club experiences.&nbsp;
+                  <span className="italic">Follow the rhythm, feel the movement.</span>
+                </p>
               </div>
             </div>
 
-            <div className="relative rounded-[20px] overflow-hidden shadow-lg h-[40vh] flex items-center justify-center">
+            {/* RIGHT CARD */}
+            <div className="relative group h-[45vh] rounded-[24px] overflow-hidden border border-white/10">
               <Image
                 src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0520.JPG?alt=media&token=a8ee1067-51eb-415f-99be-ba02a4ac0ec4"
-                alt="Booking"
+                alt="Event Production"
                 fill
-                className="object-cover object-center blur-xs opacity-90"
+                className="object-cover object-center transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="relative z-10 text-center px-6">
-                <p className="uppercase mb-4 text-[10px] tracking-widest rounded-full py-2 px-4 border bg-[#ffffff47] text-[#fff] border-[#fff] w-fit mx-auto">
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-700" />
+              <div className="relative z-10 flex flex-col items-center justify-center text-center p-8">
+                <p className="uppercase text-[11px] tracking-[0.3em] bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-4">
                   Exclusive
                 </p>
-                <h3 className="text-2xl md:text-3xl font-semibold mb-2">Events Producion</h3>
-                <p className="text-neutral-300 text-sm max-w-xs mx-auto mb-4 leading-relaxed">
-                  Full-service <span className="text-white font-semibold">event production</span>,  
-                  from creative direction to staging, lights, and sound.  
-                  We design unforgettable nights where every detail matters.
+                <h3 className="text-3xl font-bold mb-3">Event Production</h3>
+                <p className="text-neutral-300 text-sm max-w-sm">
+                  Full-service <span className="text-white font-semibold">production</span> — 
+                  creative direction, sound, light & staging.  
+                  Crafted for timeless nights.
                 </p>
               </div>
             </div>
           </div>
 
-           <div className="relative rounded-[20px] overflow-hidden shadow-xl h-[70vh] flex items-center justify-center">
+          <div className="relative group rounded-[24px] overflow-hidden border border-white/10">
             <Image
               src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/22.jpg?alt=media&token=2e1d4838-e609-4af8-953c-832440de605d"
+              alt="Community"
+              fill
+              className="object-cover object-center transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-700" />
+            <div className="relative z-10 text-center max-w-2xl mx-auto py-24 px-6">
+              <p className="uppercase mb-4 text-[11px] tracking-[0.3em] bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
+                Community
+              </p>
+              <h2 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
+                The Network
+              </h2>
+              <p className="text-neutral-300 leading-relaxed mb-10 text-[15px]">
+                Beyond the beats and lights, CLEOPE is a <span className="text-white font-semibold">nationwide collective</span>  
+                &nbsp;uniting creative souls across Italy.  
+                Curated circles, exclusive guest lists, and shared inspiration —&nbsp;
+                <span className="text-white font-medium">this is where culture connects.</span>
+              </p>
+              <Link
+                href="/nextevents"
+                className="inline-flex items-center gap-3 bg-white text-black px-8 py-3 text-sm rounded-full hover:bg-neutral-200 transition"
+              >
+                Join the Movement
+                <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="18px" height="18px" viewBox="0 0 640 640">
+                  <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative group rounded-[24px] overflow-hidden border border-white/10">
+            <Image
+              src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/33.jpg?alt=media&token=f9ee79ed-f732-4c47-b80e-c72f5906ef2d"
               alt="Aesthetic Parties"
               fill
-              className="object-cover object-center blur-xs opacity-90"
+              className="object-cover object-center transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/50" />
-            <div className="relative z-10 text-center max-w-lg px-6">
-              <p className="uppercase mb-4 text-[10px] tracking-widest rounded-full py-2 px-4 border bg-[#ffffff47] text-[#fff] border-[#fff] w-fit mx-auto">
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-700" />
+            <div className="relative z-10 text-center max-w-2xl mx-auto py-24 px-6">
+              <p className="uppercase mb-4 text-[11px] tracking-[0.25em] bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
                 Features
               </p>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Community</h2>
-              <p className="text-neutral-300 mb-6 leading-relaxed max-w-2xl">
-                Beyond the music and fashion, CLEOPE is a <span className="text-white font-semibold">nationwide community</span>  
-                that connects people across Italy.  
-                <br /><br />
-                Our network is <span className="text-white font-semibold">targeted and curated by interests</span>,  
-                giving members the chance to find their tribe and grow together.  
-                With exclusive guest lists for the <span className="text-white font-semibold">best clubs, pop-ups, and events in the country</span>,  
-                our community is your key to the most authentic nightlife experiences.  
+              <h2 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
+                Aesthetic Parties
+              </h2>
+              <p className="text-neutral-300 leading-relaxed mb-10 text-[15px]">
+                Unconventional events where <span className="text-white font-semibold">fashion</span>,
+                <span className="text-white font-semibold"> music</span>, and
+                <span className="text-white font-semibold"> nightlife</span> merge into one immersive experience.  
+                Each night sparks <span className="italic">creativity</span> and connection — 
+                moments that linger long after the beat stops.
               </p>
-
-
               <Link
-            href="/nextevents"
-            className="inline-flex items-center gap-2 bg-white text-black pl-5 pr-2 py-1 text-[14px] rounded-full hover:bg-neutral-200 transition"
-          >
-            Explore Next Events
-            <div className="bg-black m-1 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="20px" height="20px" viewBox="0 0 640 640">
-                <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-              </svg>
-            </div>
-          </Link>
+                href="/nextevents"
+                className="inline-flex items-center gap-3 bg-white text-black px-8 py-3 text-sm rounded-full hover:bg-neutral-200 transition"
+              >
+                Explore Next Events
+                <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="18px" height="18px" viewBox="0 0 640 640">
+                  <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                </svg>
+              </Link>
             </div>
           </div>
         </div>
@@ -472,14 +587,12 @@ export default function Home() {
             <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60" />
             <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="px-4 py-3 border-b border-white/20 bg-transparent focus:outline-none w-full uppercase text-sm placeholder-white/60" />
             <button type="submit" disabled={loading} 
-            className="w-[fit-content] inline-flex items-center gap-2 bg-white text-black pl-5 pr-2 py-1 text-[14px] rounded-full hover:bg-neutral-200 transition"
-            >
+              className="w-[fit-content] inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-[14px] rounded-full hover:bg-neutral-200 transition"
+              >
               {loading ? "Submitting..." : "Subscribe"}
-              <div className="bg-black m-1 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="20px" height="20px" viewBox="0 0 640 640">
-                <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-              </svg>
-            </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="20px" height="20px" viewBox="0 0 640 640">
+                  <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+                </svg>
             </button>
             {success && <p className="text-green-400 text-xs mt-2">Thank you for subscribing!</p>}
           </form>
@@ -495,36 +608,102 @@ export default function Home() {
 
       {/* EVENT MODAL */}
       {selectedEvent && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur flex items-center justify-center px-4">
-          <div className="relative w-full max-w-2xl bg-black rounded-lg overflow-hidden">
-            <Image src={selectedEvent.img ?? "/fallback.jpg"} alt={selectedEvent.title} width={800} height={400} className="w-full h-64 object-cover" />
-            <div className="p-6">
-              <h3 className="text-2xl font-bold mb-2">{selectedEvent.title}</h3>
-              <p className="text-sm text-neutral-300 mb-2">{selectedEvent.description}</p>
-              <p className="text-sm text-neutral-400 mb-6">
-                {new Date(selectedEvent.date).toLocaleDateString('it-IT')} — {selectedEvent.time}
-              </p>
-              <div className="flex gap-4">
-                <Link href="/tables" className="bg-white text-black px-4 py-2 text-xs uppercase rounded hover:bg-neutral-200 rounded-full">Book Table</Link>
-                {/*<Link href={selectedEvent.entryLink ?? `/tickets?event=${selectedEvent.id}`} target="_blank"  */}
-                
-                <button
-                  onClick={() =>
-                    handleGetTickets(
-                      selectedEvent.entryLink
-                        ? selectedEvent.entryLink
-                        : `/tickets?event=${encodeURIComponent(selectedEvent.id)}`
-                    )
-                  }
-                  className="border border-white text-white px-4 py-2 text-xs uppercase rounded hover:bg-white hover:text-black transition rounded-full">
-                  Get Tickets
-                </button>
-              </div>
-              <button onClick={() => setSelectedEvent(null)} className="absolute top-4 right-4 text-white text-xl">✕</button>
+        <motion.div
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 40, opacity: 0 }}
+            className="relative w-full max-w-5xl h-[90vh] bg-neutral-950 rounded-3xl overflow-hidden border border-white/10 shadow-2xl flex flex-col md:flex-row"
+          >
+            {/* LEFT: Event Poster */}
+            <div className="relative w-full md:w-1/2 aspect-[4/5] md:aspect-auto">
+              <Image
+                src={selectedEvent.img || "/fallback.jpg"}
+                alt={selectedEvent.title}
+                fill
+                className="object-cover"
+              />
             </div>
-          </div>
-        </div>
+
+            {/* RIGHT: Content */}
+            <div className="flex-1 p-6 md:p-10 flex flex-col justify-between text-white overflow-y-auto">
+              <div>
+                <h3 className="text-3xl md:text-4xl font-bold uppercase mb-3 tracking-wide">
+                  {selectedEvent.title}
+                </h3>
+                <p className="text-sm text-neutral-400 mb-5 uppercase tracking-wide">
+                  {new Date(selectedEvent.date).toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}{" "}
+                  • {selectedEvent.time}
+                </p>
+                {selectedEvent.description && (
+                  <p className="text-sm text-neutral-200 leading-relaxed mb-8">
+                    {selectedEvent.description}
+                  </p>
+                )}
+              </div>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                {new Date(selectedEvent.date) >= new Date() ? (
+                  <>
+                    <Link
+                      href="/tables"
+                      className="rounded-full bg-white text-black px-6 py-3 text-xs uppercase tracking-widest hover:bg-neutral-200 transition text-center"
+                    >
+                      Book Table
+                    </Link>
+                    <button
+                      onClick={() =>
+                        handleGetTickets(
+                          selectedEvent.entryLink
+                            ? selectedEvent.entryLink
+                            : `/tickets?event=${encodeURIComponent(selectedEvent.id)}`
+                        )
+                      }
+                      className="rounded-full border border-white text-white px-6 py-3 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition text-center"
+                    >
+                      Get Tickets
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      disabled
+                      className="rounded-full bg-white/10 text-neutral-500 px-6 py-3 text-xs uppercase tracking-widest cursor-not-allowed text-center"
+                    >
+                      Book Table
+                    </button>
+                    <button
+                      disabled
+                      className="rounded-full border border-white/20 text-neutral-500 px-6 py-3 text-xs uppercase tracking-widest cursor-not-allowed text-center"
+                    >
+                      Get Tickets
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedEvent(null)}
+                className="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white text-lg px-3 py-1 rounded-full"
+              >
+                ✕
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
       )}
+
     </main>
   )
 }

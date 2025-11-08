@@ -28,7 +28,7 @@ export default function SharePage() {
       {/* Links */}
       <div className="flex flex-col gap-4 w-full max-w-sm mt-10">
         {[
-          { label: "THE MERGE - Secret Party", link: "/themerge/11.10" },
+          { label: "Homepage", link: "/" },
           { label: "Book a Table", link: "/tables" },
           { label: "About The Hub", link: "/about" },
           { label: "Join Newsletter", link: "/newsletter" },
