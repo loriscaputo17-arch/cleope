@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./components/ClientLayout";
-import Script from "next/script"; // 👈 Import necessario per lo script
+import Script from "next/script";
+import localFont from "next/font/local";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,18 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const cyGroteskGrand = localFont({
+  src: [
+    {
+      path: "./fonts/kobuzan-cy-grotesk-grand-dark.otf",
+      weight: "800",
+      style: "normal",
+    },
+  ],
+  variable: "--font-cy-grotesk-grand",
+});
+
 
 export const metadata = {
   title: "Access List Platform",
@@ -25,7 +38,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it">
       <head>
-        {/* ✅ Google Analytics */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
@@ -44,7 +56,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
+        className={`${cyGroteskGrand.variable} ${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
         <ClientLayout>{children}</ClientLayout>
       </body>
