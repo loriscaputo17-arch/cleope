@@ -7,7 +7,7 @@ export default function Sidebar({ section, setSection, setAccess }) {
   const logout = () => setAccess(false)
 
   return (
-    <div className="flex flex-col justify-between h-full py-8 px-4">
+    <div className="flex flex-col justify-between h-full py-8 px-4 w-full">
       <div>
 
         <nav className="flex flex-col gap-3 mt-16">
