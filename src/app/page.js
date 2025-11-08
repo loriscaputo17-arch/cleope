@@ -428,7 +428,7 @@ export default function Home() {
               </p>
 
               <h2 className="text-4xl font-extrabold mb-6 tracking-tight leading-tight">
-                Hamilton Orologi x Call of Duty: Black Ops 6
+                Hamilton Orologi x Call of Duty: Black Ops 7
               </h2>
 
               <p className="text-neutral-300 leading-relaxed mb-8 text-[15px] max-w-lg">
