@@ -56,10 +56,10 @@ export async function POST(req) {
     const startUtc = new Date(Date.UTC(2025, 10, 22, 22, 0, 0));
     const endUtc = new Date(Date.UTC(2025, 10, 23, 3, 0, 0));
 
-    const summary = "BREAKOUT – Secret Event";
+    const summary = "BREAKOUT 22.11 Milan";
     const description =
       "Conferma di registrazione all’evento BREAKOUT. Ti ricordiamo che il QR Code è valido per l’ingresso e il pagamento in loco. Nei prossimi giorni riceverai un’email con la possibilità di completare il pagamento online a prezzo ridotto per un tempo limitato.";
-    const location = "Milano – Location segreta (sarà comunicata via email)";
+    const location = "Milano – Location anonima.";
     const uid = `breakout-${code}@cleope.events`;
 
     const icsContent = buildICS({
