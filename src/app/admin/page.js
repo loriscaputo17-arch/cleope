@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar"
 import Dashboard from "./components/Dashboard"
 import Events from "./components/Events"
 import Lists from "./components/Lists"
+import BreakoutList from "./components/BreakoutList"
 import Settings from "./components/Settings"
 import Login from "./components/Login"
 
@@ -14,12 +15,30 @@ export default function AdminPage() {
   const [section, setSection] = useState("events")
   const [menuOpen, setMenuOpen] = useState(false)
 
-  // Mappa titoli per top bar
   const sectionTitles = {
     dashboard: "Dashboard",
     events: "Events",
     lists: "Access Lists",
     settings: "Settings",
+    formats: {
+      label: "Formats",
+      children: {
+        breakout1111: "Breakout 11.11",
+      },
+    },
+  }
+
+  const getSectionTitle = () => {
+    const direct = sectionTitles[section]
+    if (typeof direct === "string") return direct
+
+    for (const key in sectionTitles) {
+      const value = sectionTitles[key]
+      if (value?.children && value.children[section]) {
+        return `${value.label} › ${value.children[section]}`
+      }
+    }
+    return section
   }
 
   return (
@@ -28,12 +47,10 @@ export default function AdminPage() {
         <Login setAccess={setAccess} />
       ) : (
         <div className="flex h-screen bg-black text-white relative">
-          {/* SIDEBAR DESKTOP */}
           <div className="hidden md:flex w-64 fixed left-0 top-0 h-full border-r border-white/10 bg-neutral-950">
             <Sidebar section={section} setSection={setSection} setAccess={setAccess} />
           </div>
 
-          {/* SIDEBAR MOBILE */}
           <AnimatePresence>
             {menuOpen && (
               <motion.aside
@@ -46,32 +63,21 @@ export default function AdminPage() {
                 <div className="absolute top-0 left-0 w-64 h-full bg-neutral-950 border-r border-white/10 shadow-2xl">
                   <Sidebar
                     section={section}
-                    setSection={(s) => {
-                      setSection(s)
-                      setMenuOpen(false)
-                    }}
+                    setSection={setSection}
                     setAccess={setAccess}
+                    onClose={() => setMenuOpen(false)}
                   />
                 </div>
-
-                {/* Overlay close */}
-                <div
-                  className="absolute inset-0"
-                  onClick={() => setMenuOpen(false)}
-                />
               </motion.aside>
             )}
           </AnimatePresence>
 
-          {/* MAIN AREA */}
           <main className="flex-1 flex flex-col md:ml-64 overflow-hidden pt-[5rem]">
-            {/* TOP BAR */}
             <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4 flex items-center justify-between md:hidden">
               <button
                 onClick={() => setMenuOpen(true)}
                 className="p-2 rounded-md hover:bg-white/10 transition"
               >
-                {/* Hamburger Icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -85,14 +91,12 @@ export default function AdminPage() {
               </button>
 
               <h2 className="text-lg font-semibold uppercase tracking-wide">
-                {sectionTitles[section]}
+                {getSectionTitle()}
               </h2>
 
-              {/* Spacer for balance */}
               <div className="w-6" />
             </header>
 
-            {/* CONTENT AREA */}
             <div className="flex-1 overflow-y-auto p-6 md:p-10">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -106,6 +110,7 @@ export default function AdminPage() {
                   {section === "events" && <Events />}
                   {section === "lists" && <Lists />}
                   {section === "settings" && <Settings />}
+                  {section === "breakout1111" && <BreakoutList />}
                 </motion.div>
               </AnimatePresence>
             </div>
