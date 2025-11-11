@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
-const COLLECTION_NAME = "break_rsvp";
+const COLLECTION_NAME = "breakout_rsvp";
 const EVENT_DATE = new Date("2025-11-22T23:00:00");
 
 export default function BreakLanding() {
@@ -43,18 +43,45 @@ export default function BreakLanding() {
 
     setSubmitting(true);
     try {
-      await addDoc(collection(db, COLLECTION_NAME), {
+      // 1️⃣ Salva su Firestore
+      const docRef = await addDoc(collection(db, COLLECTION_NAME), {
         firstName,
         lastName,
         email,
         phone,
         createdAt: serverTimestamp(),
       });
+
+      // 2️⃣ Genera un codice univoco per l’invito (es. ID del doc)
+      const code = docRef.id;
+
+      // 3️⃣ Chiama l’API per inviare l’email di invito
+      const res = await fetch("/api/breakout_send_invite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: email,
+          name: `${firstName} ${lastName}`,
+          code,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Errore invio email:", data.error);
+        throw new Error("Invio email fallito");
+      }
+
+      // 4️⃣ Conferma completata
       setSuccess(true);
-      setFirstName(""); setLastName(""); setEmail("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+
     } catch (err) {
       console.error(err);
-      setError("Errore, riprova più tardi.");
+      setError("Errore durante la registrazione o l’invio dell’invito.");
     } finally {
       setSubmitting(false);
     }
@@ -72,30 +99,17 @@ export default function BreakLanding() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-6 text-center max-w-md">
-        {/* Title */}
         <img src="/images/breaktitle.png" alt="Title Secret Party" className="mt-10 w-80" />
-
-
         <p className="text-xs uppercase tracking-[0.3em] mt-2 mb-6">22.11.25 – Milano</p>
 
         {/* Countdown */}
         <div className="flex gap-6 text-sm font-mono">
-          <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">{timeLeft.days}</span>
-            <span className="text-[10px] uppercase">days</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">{timeLeft.hours}</span>
-            <span className="text-[10px] uppercase">hrs</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">{timeLeft.minutes}</span>
-            <span className="text-[10px] uppercase">min</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">{timeLeft.seconds}</span>
-            <span className="text-[10px] uppercase">sec</span>
-          </div>
+          {["days", "hours", "minutes", "seconds"].map((unit, i) => (
+            <div key={i} className="flex flex-col items-center">
+              <span className="text-3xl font-bold">{timeLeft[unit]}</span>
+              <span className="text-[10px] uppercase">{unit}</span>
+            </div>
+          ))}
         </div>
 
         {/* Description */}
@@ -105,7 +119,7 @@ export default function BreakLanding() {
           RSVP now, limited access.
         </p>
 
-        {/* Error message */}
+        {/* Error */}
         {!!error && (
           <p className="mt-4 text-xs bg-white/10 border border-white/20 px-4 py-2 rounded-md text-red-300">
             {error}
@@ -142,7 +156,7 @@ export default function BreakLanding() {
             <input
               type="text"
               placeholder="Phone"
-              value={email}
+              value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="w-full px-4 py-3 uppercase tracking-wide placeholder-neutral-500 bg-white focus:outline-none focus:ring-2 focus:ring-black"
             />
@@ -155,11 +169,16 @@ export default function BreakLanding() {
             </button>
           </form>
         ) : (
-          <div className="mt-10 bg-white/10 border border-white/20 px-6 py-8 text-center">
-            <p className="text-sm uppercase font-bold tracking-wide">RSVP Confirmed ✅</p>
-            <p className="text-xs text-neutral-200 mt-3 leading-relaxed">
-              You’ll receive event details via email.<br />
-              Welcome to <strong>BREAK</strong>.
+          <div className="mt-10 bg-black/30 border border-white/30 backdrop-blur-sm px-10 py-10 text-center text-white">
+            <p className="text-xl uppercase font-extrabold tracking-widest text-white/90">
+              You’re in.
+            </p>
+            <p className="text-md text-neutral-300 mt-4 leading-relaxed">
+              Your spot at <strong>BREAKOUT</strong> is locked. <br />
+              Watch your email inbox — details drop soon.  
+            </p>
+            <p className="text-sm text-white mt-6 italic">
+              This isn’t just an event. It’s an escape.
             </p>
           </div>
         )}
