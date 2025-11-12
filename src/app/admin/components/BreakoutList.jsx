@@ -77,7 +77,7 @@ export default function BreakoutRsvp() {
       <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-2">
         Breakout 11.11 – RSVPs
       </h1>
-      <p className="mb-8 text-lg text-neutral-400">
+      <p className="mb-8 text-lg text-white">
         <strong className="text-white">Totale RSVP:</strong> {attendees.length}
       </p>
 
