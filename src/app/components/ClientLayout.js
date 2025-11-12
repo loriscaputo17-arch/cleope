@@ -16,6 +16,7 @@ export default function ClientLayout({ children }) {
     "/srevents/admin",
     "/themerge/confirmation",
     "/loriscaputo",
+    "/breakoutlist",
   ];
 
   const hideLayout =

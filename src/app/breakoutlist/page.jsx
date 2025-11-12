@@ -37,9 +37,6 @@ export default function BreakoutPage() {
           Login
         </button>
 
-        <p className="text-neutral-500 text-xs mt-6 tracking-wide">
-          © {new Date().getFullYear()} CLEOPE Admin System
-        </p>
       </div>
     )
   }

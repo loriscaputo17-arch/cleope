@@ -12,15 +12,29 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Redirect se il dominio è srevents.vercel.app
       {
         source: "/",
         has: [
           {
             type: "host",
-            value: "srevents.vercel.app", // se arriva da questo dominio
+            value: "srevents.vercel.app",
           },
         ],
         destination: "/srevents/winter",
+        permanent: true,
+      },
+
+      // Redirect solo dalla root di breakoutpeople.com
+      {
+        source: "/",
+        has: [
+          {
+            type: "host",
+            value: "breakoutpeople.com",
+          },
+        ],
+        destination: "/formats/breakout",
         permanent: true,
       },
     ];
