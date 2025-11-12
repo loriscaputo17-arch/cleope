@@ -44,7 +44,6 @@ export default function BreakoutPage() {
     )
   }
 
-  // Mostra il contenuto dopo login
   return (
     <main className="p-8 mt-16 mx-4 md:mx-20 text-white">
       <BreakoutList />
