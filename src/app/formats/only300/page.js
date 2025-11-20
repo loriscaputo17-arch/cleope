@@ -113,7 +113,8 @@ export default function BreakLanding() {
         <p className="mt-8 text-sm tracking-wide text-neutral-300 leading-relaxed">
           予測不可能。<br />
           This is <span className="text-red-500 font-bold">ONLY 300.</span><br />
-          Access is limited — RSVP now.
+          Private Party — RSVP now. <br />
+          Request your tablet at +39 351 389 5086.
         </p>
 
         {!!error && (
