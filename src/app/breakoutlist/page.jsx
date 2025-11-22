@@ -1,24 +1,37 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import BreakoutList from "../admin/components/BreakoutList"
 
 export default function BreakoutPage() {
   const [accessGranted, setAccessGranted] = useState(false)
   const [password, setPassword] = useState("")
 
+  // ⬅️ Check localStorage on page load
+  useEffect(() => {
+    const savedAccess = localStorage.getItem("breakout_access")
+    if (savedAccess === "true") {
+      setAccessGranted(true)
+    }
+  }, [])
+
   const handleLogin = () => {
     if (password === "123") {
       setAccessGranted(true)
+      localStorage.setItem("breakout_access", "true") // ⬅️ persist login
     } else {
       alert("Wrong password!")
     }
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("breakout_access")
+    setAccessGranted(false)
+  }
+
   if (!accessGranted) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#dd0005] text-white text-center px-4 relative overflow-hidden">
-        {/* background word */}
         <h1 className="absolute text-[20vw] md:text-[12vw] font-black opacity-10 tracking-tight select-none">
           BREAKOUT
         </h1>
@@ -59,6 +72,15 @@ export default function BreakoutPage() {
 
   return (
     <main className="min-h-screen bg-[#dd0005] text-white px-6 md:px-20 py-16 relative overflow-hidden">
+
+      {/* logout button */}
+      <button
+        onClick={handleLogout}
+        className="absolute top-6 right-6 bg-black/50 hover:bg-black px-4 py-2 rounded-xl text-xs uppercase tracking-wide"
+      >
+        Logout
+      </button>
+
       {/* background word */}
       <h1 className="absolute inset-0 flex items-center justify-center text-[20vw] md:text-[10vw] font-black opacity-10 tracking-tight select-none pointer-events-none">
         BREAKOUT
@@ -81,7 +103,6 @@ export default function BreakoutPage() {
         <BreakoutList />
       </div>
 
-      {/* Footer tagline */}
       <p className="relative z-10 mt-16 text-center text-[10px] text-white/70 uppercase tracking-[0.25em]">
         Breakout Admin — Restricted Area
       </p>
