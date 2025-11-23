@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import QRCode from "qrcode";
 
-// Helper ICS (Google / Apple friendly formatting)
 function buildICS({ uid, start, end, summary, description, location, url }) {
   const fmt = (d) =>
     d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "") + "Z";

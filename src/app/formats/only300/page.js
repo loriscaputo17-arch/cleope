@@ -125,7 +125,7 @@ export default function BreakLanding() {
             onClick={() => { setActiveTab("access"); setSuccess(false); }}
             className={`${activeTab === "access" ? "text-red-500 cursor-pointer border-b-2 border-red-500" : "opacity-50"}`}
           >
-            ACCESSO
+            ACCESSO LISTA
           </button>
 
           <button
