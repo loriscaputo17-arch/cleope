@@ -31,7 +31,7 @@ export default function BreakoutRsvp() {
         ...d.data(),
       }))
 
-      // 📌 ORDER FROM MOST RECENT → OLDEST
+      // Order newest → oldest
       list.sort((a, b) => {
         const dateA = a.createdAt?.seconds || 0
         const dateB = b.createdAt?.seconds || 0
@@ -88,6 +88,37 @@ export default function BreakoutRsvp() {
     }
   }
 
+  // Export as CSV for Brevo
+  const downloadCSV = () => {
+    if (attendees.length === 0) return alert("Nessun dato da esportare.")
+
+    const headers = ["Nome", "Cognome", "Email", "Check-in", "Registrato il"]
+
+    const rows = attendees.map(a => [
+      a.firstName || "",
+      a.lastName || "",
+      a.email || "",
+      a.checkedIn ? "YES" : "NO",
+      a.createdAt instanceof Timestamp
+        ? new Date(a.createdAt.toDate()).toLocaleString("it-IT")
+        : "",
+    ])
+
+    const csvContent = [
+      headers.join(";"),
+      ...rows.map(r => r.join(";")),
+    ].join("\n")
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+
+    const link = document.createElement("a")
+    link.href = url
+    link.download = `breakout-checkin-${new Date().toISOString().slice(0, 10)}.csv`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <main className="text-white pb-20">
       <h1 className="text-4xl md:text-5xl font-extrabold mb-2">Breakout 11.11 – Check-in</h1>
@@ -97,6 +128,14 @@ export default function BreakoutRsvp() {
         <strong>{attendees.filter((a) => a.checkedIn).length}</strong> /{" "}
         {attendees.length}
       </p>
+
+      {/* 📁 EXPORT CSV BUTTON */}
+      <button
+        onClick={downloadCSV}
+        className="mb-6 bg-blue-500 px-5 py-3 rounded-xl font-semibold hover:bg-blue-400 transition"
+      >
+        ⬇️ Scarica CSV per Brevo
+      </button>
 
       {/* 🔍 SEARCH BAR */}
       <input
@@ -119,7 +158,7 @@ export default function BreakoutRsvp() {
         <p className="text-neutral-600 italic text-lg">Nessun risultato trovato.</p>
       ) : (
         <>
-          {/* 🖥 DESKTOP TABLE */}
+          {/* 🖥 TABLE */}
           <div className="hidden md:block bg-neutral-950 border border-white/10 rounded-2xl overflow-hidden">
             <table className="w-full text-base">
               <thead className="bg-neutral-900 border-b border-white/10 text-neutral-400 uppercase text-sm">
@@ -260,4 +299,3 @@ export default function BreakoutRsvp() {
     </main>
   )
 }
-

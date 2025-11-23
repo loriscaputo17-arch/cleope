@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import QRCode from "qrcode";
 
-// Helper ICS (CRLF obbligatori)
+// Helper ICS (Google / Apple friendly formatting)
 function buildICS({ uid, start, end, summary, description, location, url }) {
   const fmt = (d) =>
     d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "") + "Z";
@@ -33,12 +33,12 @@ export async function POST(req) {
   try {
     const { to, name, code } = await req.json();
     if (!to || !name || !code) {
-      return NextResponse.json({ error: "Campi mancanti" }, { status: 400 });
+      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
     const baseUrl = "https://cleopeofficial.com";
 
-    // QR personalizzato
+    // QR Code payload
     const qrData = `${baseUrl}/only300/checkin?code=${encodeURIComponent(
       code
     )}&email=${encodeURIComponent(to)}`;
@@ -50,17 +50,17 @@ export async function POST(req) {
       errorCorrectionLevel: "M",
     });
 
-    // 📍 Evento: 29 novembre 2025 — 22:30 → 00:00
-    const startUtc = new Date(Date.UTC(2025, 10, 29, 21, 30, 0)); // 22:30 italiane
-    const endUtc = new Date(Date.UTC(2025, 10, 30, 0, 0, 0)); // mezzanotte giorno dopo
+    // Event time (UTC aligned)
+    const startUtc = new Date(Date.UTC(2025, 10, 29, 21, 30, 0));
+    const endUtc = new Date(Date.UTC(2025, 10, 30, 0, 0, 0));
 
     const summary = "ONLY300";
     const description =
-      "Accesso confermato. Questo QR Code è richiesto per l’ingresso. A breve riceverai informazioni aggiuntive.";
-    const location = "Milano — Location privata.";
+      "Access verified. This QR code is required for entry. Further instructions will follow.";
+    const location = "Private Location — Milano";
     const uid = `only300-${code}@cleope.events`;
 
-    // ICS attachment
+    // ICS attachment content
     const icsContent = buildICS({
       uid,
       start: startUtc,
@@ -68,10 +68,10 @@ export async function POST(req) {
       summary,
       description,
       location,
-      url: baseUrl + "/only300",
+      url: `${baseUrl}/only300`,
     });
 
-    // Google Calendar URL
+    // Google Calendar link
     const gcalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
       summary
     )}&dates=${encodeURIComponent(
@@ -80,7 +80,7 @@ export async function POST(req) {
       location
     )}&details=${encodeURIComponent(description)}`;
 
-    // Mail server
+    // SMTP
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -91,43 +91,37 @@ export async function POST(req) {
       },
     });
 
-    // Email HTML
+    // Email Body (HTML)
     const html = `
-  <div style="font-family:Helvetica,Arial,sans-serif;background:#000;color:#fff;padding:40px;text-align:center;border:1px solid #222;">
+  <div style="font-family:Helvetica,Arial,sans-serif;background:#000;color:#fff;padding:40px;text-align:center;border:1px solid #221;">
     
-    <h1 style="font-size:32px;letter-spacing:6px;color:#ff0000;font-weight:bold;margin-bottom:5px;">
+    <h1 style="font-size:34px;letter-spacing:8px;color:#ff0000;font-weight:bold;margin-bottom:4px;">
       ONLY300
     </h1>
 
-    <p style="color:#aaa;font-size:14px;margin-bottom:30px;">
-      29.11.2025 · 22:30
+    <p style="color:#888;font-size:14px;margin-bottom:30px;">
+      November 29th, 2025 · Milano
     </p>
 
     <p style="font-size:16px;margin-bottom:30px;line-height:1.6;">
-      Ciao <strong>${name}</strong>,<br/>
-      il tuo accesso è stato <strong>aggiunto</strong>.<br/>
-      Mostra questo QR Code all’ingresso.
-    </p>
-
-    <img src="cid:qrcode" style="width:200px;filter:drop-shadow(0 0 12px red);" />
-
-    <p style="font-size:18px;margin-top:14px;font-weight:bold;color:#ff0000;">
-      CODE: ${code}
+      Hello <strong>${name}</strong>,<br/>
+      your request has been <strong>received</strong>.<br/>
+      Our team will reach out shortly for final confirmation.<br/>
     </p>
 
     <div style="margin-top:35px;">
-      <a href="${gcalLink}" style="background:#ff0000;padding:12px 25px;color:#fff;text-decoration:none;font-weight:bold;letter-spacing:2px;">
-        Aggiungi al calendario
+      <a href="${gcalLink}" style="background:#ff0000;padding:14px 28px;color:#fff;text-decoration:none;font-weight:bold;letter-spacing:2px;">
+        ADD TO CALENDAR
       </a>
-      <p style="font-size:11px;color:#777;margin-top:8px;">
-        Per Apple/Outlook usa il file .ICS allegato.
+      <p style="font-size:11px;color:#777;margin-top:10px;">
+        Apple / Outlook users: use the attached calendar file (.ICS)
       </p>
     </div>
 
     <hr style="border:0;border-top:1px solid #222;margin:40px auto;width:70%;" />
 
-    <p style="font-size:13px;color:#666;letter-spacing:2px;text-transform:uppercase;">
-      Non condividere questo codice.
+    <p style="font-size:12px;color:#555;letter-spacing:2px;text-transform:uppercase;">
+      Do not share this code.
     </p>
   </div>
 `;
@@ -135,14 +129,9 @@ export async function POST(req) {
     await transporter.sendMail({
       from: "ONLY300 <only300@cleope.events>",
       to,
-      subject: "ACCESSO RICEVUTO — ONLY300",
+      subject: "REQUEST SUBMITTED — ONLY300",
       html,
       attachments: [
-        {
-          filename: "qrcode.png",
-          content: qrImageBuffer,
-          cid: "qrcode",
-        },
         {
           filename: "only300.ics",
           content: icsContent,
@@ -155,7 +144,7 @@ export async function POST(req) {
   } catch (err) {
     console.error("SEND_INVITE ERROR:", err);
     return NextResponse.json(
-      { error: "Errore durante l'invio" },
+      { error: "Email delivery failed" },
       { status: 500 }
     );
   }
