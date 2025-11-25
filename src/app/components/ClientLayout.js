@@ -17,6 +17,7 @@ export default function ClientLayout({ children }) {
     "/themerge/confirmation",
     "/loriscaputo",
     "/breakoutlist",
+    "/only300list",
   ];
 
   const hideLayout =
