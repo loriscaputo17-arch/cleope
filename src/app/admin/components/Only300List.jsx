@@ -279,7 +279,7 @@ export default function Only300List() {
                   >
                     Elimina
                   </button>
-                </div>
+                </div> 
               </motion.div>
             ))}
           </div>
