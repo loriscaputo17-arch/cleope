@@ -63,13 +63,13 @@ export default function BreakLanding() {
           createdAt: serverTimestamp(),
         });
 
-        await fetch("/api/only300_send_invite", {
+        await fetch("/api/only300_confirm", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             to: email,
             name: `${firstName} ${lastName}`,
-            code: docRef.id,
+            //code: docRef.id,
           }),
         });
 
