@@ -9,7 +9,7 @@ const COLLECTION_TABLE = "only300_tables";
 const EVENT_DATE = new Date("2025-11-29T22:30:00");
 
 export default function BreakLanding() {
-  const [activeTab, setActiveTab] = useState("access");
+  const [activeTab, setActiveTab] = useState("table");
 
   // Shared
   const [submitting, setSubmitting] = useState(false);
