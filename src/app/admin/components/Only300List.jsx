@@ -16,10 +16,10 @@ export default function Only300List() {
   const [attendees, setAttendees] = useState([])
   const [filtered, setFiltered] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState("")
+  const [sendingEmail, setSendingEmail] = useState(false)
   const [search, setSearch] = useState("")
 
-  // Fetch attendees from Firestore
+  // Fetch attendees
   const fetchAttendees = async () => {
     try {
       setLoading(true)
@@ -27,22 +27,15 @@ export default function Only300List() {
 
       const list = snapshot.docs.map((d) => ({
         id: d.id,
+        ...d.data(),
         status: d.data().status || "pending",
         checkedIn: d.data().checkedIn || false,
-        ...d.data(),
       }))
 
-      list.sort((a, b) => {
-        const dateA = a.createdAt?.seconds || 0
-        const dateB = b.createdAt?.seconds || 0
-        return dateB - dateA
-      })
+      list.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
 
       setAttendees(list)
       setFiltered(list)
-    } catch (err) {
-      console.error(err)
-      setError("Errore durante il caricamento.")
     } finally {
       setLoading(false)
     }
@@ -52,67 +45,71 @@ export default function Only300List() {
     fetchAttendees()
   }, [])
 
-  // Live search filter
+  // Search filter
   useEffect(() => {
-    const q = search.toLowerCase()
-    setFiltered(
-      attendees.filter((a) =>
-        `${a.firstName} ${a.lastName}`.toLowerCase().includes(q)
-      )
-    )
+    const q = search.trim().toLowerCase()
+    setFiltered(attendees.filter(a => `${a.firstName} ${a.lastName}`.toLowerCase().includes(q)))
   }, [search, attendees])
 
-  // Update status (approve/reject)
-  const updateStatus = async (id, newStatus) => {
+  // Update + Send Email
+  const updateStatus = async (id, newStatus, attendee) => {
     try {
+      setSendingEmail(true)
+
       await updateDoc(doc(db, "only300_rsvp", id), { status: newStatus })
 
-      setAttendees((prev) =>
-        prev.map((a) => (a.id === id ? { ...a, status: newStatus } : a))
+      // Send approval email only if approved
+      if (newStatus === "approved") {
+        await fetch("/api/only300_confirm", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            to: attendee.email,
+            name: `${attendee.firstName} ${attendee.lastName}`,
+          }),
+        })
+      }
+
+      setAttendees(prev =>
+        prev.map(a => (a.id === id ? { ...a, status: newStatus } : a))
       )
+
+      alert("Email inviata e stato aggiornato ✔️")
     } catch {
-      alert("Errore nel cambio stato.")
+      alert("Errore: impossibile aggiornare o inviare email ❌")
+    } finally {
+      setSendingEmail(false)
     }
   }
 
-  // Delete guest
+  // Delete entry
   const handleDelete = async (id) => {
     if (!confirm("Vuoi eliminare questo contatto?")) return
-    try {
-      await deleteDoc(doc(db, "only300_rsvp", id))
-      setAttendees((prev) => prev.filter((a) => a.id !== id))
-    } catch {
-      alert("Errore eliminazione.")
-    }
+
+    await deleteDoc(doc(db, "only300_rsvp", id))
+    setAttendees(prev => prev.filter(a => a.id !== id))
   }
 
-  // Export as CSV
+  // CSV export
   const downloadCSV = () => {
-    if (attendees.length === 0) return alert("Nessun dato da esportare.")
+    if (!attendees.length) return alert("Nessun dato da esportare.")
 
     const headers = ["Nome", "Cognome", "Email", "Status", "Registrato il"]
-
     const rows = attendees.map(a => [
       a.firstName || "",
       a.lastName || "",
       a.email || "",
       a.status || "",
-      a.createdAt instanceof Timestamp
-        ? new Date(a.createdAt.toDate()).toLocaleString("it-IT")
-        : "",
+      a.createdAt instanceof Timestamp ? new Date(a.createdAt.toDate()).toLocaleString("it-IT") : "",
     ])
 
-    const csvContent = [
-      headers.join(";"),
-      ...rows.map(r => r.join(";")),
-    ].join("\n")
-
+    const csvContent = [headers.join(";"), ...rows.map(r => r.join(";"))].join("\n")
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
     const url = URL.createObjectURL(blob)
-
+    
     const link = document.createElement("a")
     link.href = url
-    link.download = `breakout-rsvp-${new Date().toISOString().slice(0, 10)}.csv`
+    link.download = `only300-rsvp-${new Date().toISOString().slice(0, 10)}.csv`
     link.click()
     URL.revokeObjectURL(url)
   }
@@ -125,7 +122,6 @@ export default function Only300List() {
         Richieste totali: <strong>{attendees.length}</strong>
       </p>
 
-      {/* Export CSV */}
       <button
         onClick={downloadCSV}
         className="mb-6 mr-4 bg-blue-500 px-5 py-3 rounded-xl font-semibold hover:bg-blue-400 transition"
@@ -133,13 +129,12 @@ export default function Only300List() {
         Scarica CSV
       </button>
 
-      {/* Search */}
       <input
         type="text"
         placeholder="🔍 Cerca nome o cognome..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="mb-8 bg-neutral-800 px-4 py-3 rounded-xl w-full md:w-1/2 outline-none border border-white/10 focus:border-purple-400 transition"
+        className="mb-8 bg-neutral-800 px-4 py-3 rounded-xl w-full md:w-1/2 border border-white/10 focus:border-purple-400 outline-none"
       />
 
       {loading ? (
@@ -148,7 +143,7 @@ export default function Only300List() {
         <p className="text-neutral-600 italic text-lg">Nessun risultato trovato.</p>
       ) : (
         <>
-          {/* DESKTOP TABLE */}
+          {/* Desktop Table */}
           <div className="hidden md:block bg-neutral-950 border border-white/10 rounded-2xl overflow-hidden">
             <table className="w-full text-base">
               <thead className="bg-neutral-900 border-b border-white/10 text-neutral-400 uppercase text-sm">
@@ -169,12 +164,15 @@ export default function Only300List() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className={`border-b border-white/10 transition 
-                        ${a.status === "approved" ? "bg-green-900/20" :
-                          a.status === "pending" ? "bg-yellow-900/20" :
-                          "bg-red-900/20"}`}
+                      className={`border-b border-white/10 ${
+                        a.status === "approved"
+                          ? "bg-green-900/20"
+                          : a.status === "pending"
+                          ? "bg-yellow-900/20"
+                          : "bg-red-900/20"
+                      }`}
                     >
-                      <td className="px-6 py-4 text-lg font-medium">
+                      <td className="px-6 py-4 font-medium text-lg">
                         {a.firstName} {a.lastName}
                       </td>
 
@@ -192,26 +190,19 @@ export default function Only300List() {
                           : "—"}
                       </td>
 
-                      <td className="px-6 py-4 text-right space-x-2">
+                      <td className="px-6 py-4 text-right">
                         {a.status !== "approved" && (
                           <button
-                            onClick={() => updateStatus(a.id, "approved")}
-                            className="bg-green-500 text-black px-4 py-2 rounded-lg font-semibold hover:bg-green-400 transition"
+                            disabled={sendingEmail}
+                            onClick={() => updateStatus(a.id, "approved", a)}
+                            className="bg-green-500 px-4 py-2 rounded-lg font-semibold hover:bg-green-400 transition mr-2"
                           >
-                            Approva
+                            {sendingEmail ? "Invio..." : "Approva"}
                           </button>
                         )}
-
-                        <button
-                          onClick={() => alert("TODO: implementa editing")}
-                          className="bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-400 transition"
-                        >
-                          Modifica
-                        </button>
-
                         <button
                           onClick={() => handleDelete(a.id)}
-                          className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-500 transition"
+                          className="bg-red-600 px-4 py-2 rounded-lg font-bold hover:bg-red-500 transition"
                         >
                           Elimina
                         </button>
@@ -221,67 +212,6 @@ export default function Only300List() {
                 </AnimatePresence>
               </tbody>
             </table>
-          </div>
-
-          {/* MOBILE VIEW */}
-          <div className="md:hidden space-y-5 mt-6">
-            {filtered.map((a) => (
-              <motion.div
-                key={a.id}
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className={`border p-5 rounded-xl shadow-lg transition ${
-                  a.status === "approved"
-                    ? "border-green-500/50 bg-green-900/10"
-                    : "border-yellow-500/50 bg-yellow-900/10"
-                }`}
-              >
-                <h3 className="text-xl font-semibold mb-1">
-                  {a.firstName} {a.lastName}
-                </h3>
-
-                <p className="text-sm mb-2">
-                  {a.status === "approved" ? (
-                    <span className="text-green-400 font-semibold">APPROVATO</span>
-                  ) : (
-                    <span className="text-yellow-400 font-semibold">PENDING</span>
-                  )}
-                </p>
-
-                <p className="text-xs text-neutral-500 mb-4">
-                  {a.createdAt instanceof Timestamp
-                    ? new Date(a.createdAt.toDate()).toLocaleString("it-IT")
-                    : ""}
-                </p>
-
-                <div className="flex flex-col gap-3">
-                  {a.status !== "approved" && (
-                    <button
-                      onClick={() => updateStatus(a.id, "approved")}
-                      className="bg-green-500 text-black px-4 py-2 rounded-lg font-bold hover:bg-green-400 transition"
-                    >
-                      Approva
-                    </button>
-                  )}
-
-                  <button
-                    onClick={() => alert("TODO: implementa editing")}
-                    className="bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-400 transition"
-                  >
-                    Modifica
-                  </button>
-
-                  <button
-                    onClick={() => handleDelete(a.id)}
-                    className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-500 transition"
-                  >
-                    Elimina
-                  </button>
-                </div> 
-              </motion.div>
-            ))}
           </div>
         </>
       )}
