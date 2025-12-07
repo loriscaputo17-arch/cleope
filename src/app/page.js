@@ -410,62 +410,50 @@ export default function Home() {
       <section className="w-full py-32 px-6 bg-black text-white overflow-hidden">
         <div className="max-w-6xl mx-auto flex flex-col gap-24">
 
-          <div className="relative group rounded-[24px] overflow-hidden border border-white/10 flex flex-col md:flex-row h-auto">
-            {/* IMG SX */}
-            <div className="relative w-full md:w-1/2 h-[40vh] md:h-full">
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2F11.11.png?alt=media&token=3e1e869b-70a4-4733-83c3-313c2af0f867"
-                alt="Breakout 22.11"
-                
-                className="object-cover object-center"
-              />
-            </div>
-
-            {/* TESTO DX */}
-            <div className="relative flex flex-col justify-center items-start w-full md:w-1/2 p-8 md:p-14 text-left z-10 bg-gradient-to-b from-black via-neutral-950 to-black">
-              <p className="uppercase mb-4 text-[11px] tracking-[0.25em] bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
-                CLEOPE SOUND
-              </p>
-
-              <h2 className="text-4xl font-extrabold mb-6 tracking-tight leading-tight">
-                BREAKOUT 22.11 Milan
-              </h2>
-
-              <p className="text-neutral-300 leading-relaxed mb-8 text-[15px] max-w-lg">
-                The city calls again. But this time <span className="text-white font-semibold">3 movements</span> are answering.
-                <br /><br />
-                
-                <br /><br />
-                <span className="text-white font-semibold">BREAKOUT</span> // Nov. 22th.<br />
-                3 movements.<br />
-                1 legendary night in the heart of Milan.
-                <br /><br />
-                4 main music players all together for one unique night.
-                <br /><br />
-                Don't lose the opportunity to live an <span className="text-white font-semibold">extraordinary djset.</span>
-                <br /><br />
-                🎫 RSVP now — limited access.
-                <br /><br />
-                Breakout is coming.<br />
-                See y'all on <span className="text-white font-medium">Nov. 22th.</span>
-                <br /><br />
-                <span className="text-neutral-400 italic">Accesso solo su prenotazione — capienza limitata.</span>
-              </p>
-
-
-              <a
-                href="https://breakoutpeople.com/formats/breakout"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-white text-black px-8 py-3 text-sm rounded-full hover:bg-neutral-200 transition"
-              >
-                RSVP Open to Get Access
-                <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="18px" height="18px" viewBox="0 0 640 640">
-                  <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-                </svg>
-              </a>
-            </div>
+          <div className="relative group rounded-[24px] overflow-hidden border border-white/10 flex flex-col md:flex-row h-auto cursor-pointer"
+            onClick={() => window.location.href = "/sound/kosmi"}>
+          
+          {/* BACKGROUND IMAGE KOSMI */}
+          <div className="relative w-full md:w-1/2 h-[40vh] md:h-full">
+            <img
+              src="/images/sound/kosmi.png"
+              alt="Kosmi Background"
+              className="object-cover object-center w-full h-full scale-105 group-hover:scale-110 transition-all duration-700 grayscale group-hover:grayscale-0"
+            />
+            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-700" />
           </div>
+
+          {/* TEXT AREA */}
+          <div className="relative flex flex-col justify-center items-start w-full md:w-1/2 p-8 md:p-14 text-left z-10 bg-gradient-to-b from-black via-neutral-950 to-black">
+
+            <p className="uppercase mb-4 text-[11px] tracking-[0.25em] bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
+              CLEOPE SOUND
+            </p>
+
+            <h2 className="text-4xl font-extrabold mb-4 tracking-tight leading-tight">
+              KOSMI — Point of Views
+            </h2>
+
+            <p className="text-neutral-300 leading-relaxed mb-8 text-[15px] max-w-lg">
+              The newest release from <span className="text-white font-semibold">KOSMI</span>.  
+              An introspective electronic journey blending cosmic ambience & modern percussive energy.  
+              Available now on SoundCloud.
+            </p>
+
+            {/* SOUNDCLOUD BUTTON */}
+            <a
+              href="/sound/kosmi"
+              className="inline-flex items-center gap-3 bg-white text-black px-8 py-3 text-sm rounded-full hover:bg-neutral-200 transition"
+            >
+              Listen on SoundCloud
+              <svg xmlns="http://www.w3.org/2000/svg" fill="black" width="18" height="18" viewBox="0 0 640 640">
+                <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+              </svg>
+            </a>
+
+          </div>
+        </div>
+
 
           <div className="grid md:grid-cols-2 gap-10">
             
