@@ -7,7 +7,7 @@ export default function ArtistTabsSection() {
   const [activeTab, setActiveTab] = useState('upcoming')
 
   return (
-    <section className="max-w-5xl mx-auto mb-40">
+    <section className="max-w-7xl mx-auto mb-40">
       <div className="flex justify-center gap-6 md:gap-12 mb-12 border-b border-white/5">
         {[
           { id: 'upcoming', label: 'Upcoming', icon: Music },
@@ -19,7 +19,7 @@ export default function ArtistTabsSection() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 pb-4 uppercase tracking-[0.2em] text-[10px] transition-all cursor-pointer ${
-              activeTab === tab.id ? "text-red-600 border-b-2 border-red-600" : "text-white/40 hover:text-white"
+              activeTab === tab.id ? "text-red-600 border-b-2 border-red-600" : "text-white hover:text-white"
             }`}
           >
             {tab.label}
@@ -37,13 +37,13 @@ export default function ArtistTabsSection() {
             ].map((show, i) => (
               <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
                 <div className="flex items-center gap-6">
-                  <span className="text-red-600 font-bold tabular-nums w-12">{show.date}</span>
+                  <span className="text-red-600 text-md font-bold tabular-nums w-35">{show.date}</span>
                   <div>
                     <h5 className="text-sm font-bold uppercase tracking-tight">{show.club}</h5>
                     <p className="text-[10px] text-white/40 uppercase">{show.city}</p>
                   </div>
                 </div>
-                <span className="text-[10px] text-white/20 uppercase tracking-widest hidden md:block">{show.event}</span>
+                <span className="text-[12px] text-white/50 uppercase tracking-widest hidden md:block">{show.event}</span>
               </div>
             ))}
           </div>
@@ -68,7 +68,7 @@ export default function ArtistTabsSection() {
         {/* MIX & RADIO */}
         {activeTab === 'mix' && (
           <div className="space-y-6">
-             <section className="max-w-5xl mx-auto mb-32">
+             <section className="max-w-7xl mx-auto mb-32">
                 <div className="bg-[#080808] backdrop-blur-3xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
                   <div className="flex items-center gap-3 mb-6">
                       <PlayCircle className="text-red-600" size={18} />
@@ -99,13 +99,13 @@ export default function ArtistTabsSection() {
             ].map((show, i) => (
               <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
                 <div className="flex items-center gap-6">
-                  <span className="text-red-600 font-bold tabular-nums w-12">{show.date}</span>
+                  <span className="text-red-600 text-md font-bold tabular-nums w-35">{show.date}</span>
                   <div>
                     <h5 className="text-sm font-bold uppercase tracking-tight">{show.club}</h5>
                     <p className="text-[10px] text-white/40 uppercase">{show.city}</p>
                   </div>
                 </div>
-                <span className="text-[10px] text-white/20 uppercase tracking-widest hidden md:block">{show.event}</span>
+                <span className="text-[12px] text-white/50 uppercase tracking-widest hidden md:block">{show.event}</span>
               </div>
             ))}
           </div>

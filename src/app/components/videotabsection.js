@@ -9,24 +9,21 @@ export default function VideoTabsSection() {
   return (
     <section className="max-w-7xl mx-auto mb-40">
       {/* SWITCHER TABS */}
-      <div className="flex justify-center gap-8 mb-16 cursor-pointer">
+      <div className="flex justify-center gap-6 md:gap-12 mb-12 border-b border-white/5">
         <button
           onClick={() => setActiveTab('live')}
-          className={`uppercase tracking-[0.4em] text-[10px] md:text-xs pb-2 transition-all duration-300 border-b-2 cursor-pointer ${
-            activeTab === 'live' 
-            ? "text-white border-red-600 opacity-100" 
-            : "text-white/30 border-transparent opacity-50 hover:opacity-80"
-          }`}
+          className={`flex items-center gap-2 pb-4 uppercase tracking-[0.2em] text-[10px] transition-all cursor-pointer ${
+              activeTab === 'live' ? "text-red-600 border-b-2 border-red-600" : "text-white hover:text-white"
+            }`}
+          
         >
           Experiences
         </button>
         <button
           onClick={() => setActiveTab('djsets')}
-          className={`uppercase tracking-[0.4em] text-[10px] md:text-xs pb-2 transition-all duration-300 border-b-2 ${
-            activeTab === 'djsets' 
-            ? "text-white border-red-600 opacity-100" 
-            : "text-white/30 border-transparent opacity-50 hover:opacity-80"
-          }`}
+          className={`flex items-center gap-2 pb-4 uppercase tracking-[0.2em] text-[10px] transition-all cursor-pointer ${
+              activeTab === 'djsets' ? "text-red-600 border-b-2 border-red-600" : "text-white hover:text-white"
+            }`}
         >
           DJ Sets
         </button>
