@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { db } from "@/lib/firebase";
+import { db } from "../lib/firebase"
 import { doc, getDoc, collection, addDoc } from "firebase/firestore";
 
 export default function TicketsPage() {

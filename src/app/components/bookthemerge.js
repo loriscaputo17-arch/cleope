@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";  // 👈 import
-import { db } from "@/lib/firebase";
+import { db } from "../lib/firebase"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const COLLECTION_NAME = "11oct_merge";

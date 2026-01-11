@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import { db } from "@/lib/firebase"
+import { db } from "../lib/firebase"
 import { collection, addDoc, getDocs, doc, setDoc } from "firebase/firestore"
 import Image from "next/image"
 import { motion } from "framer-motion"

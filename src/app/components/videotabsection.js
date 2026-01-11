@@ -12,7 +12,7 @@ export default function VideoTabsSection() {
       <div className="flex justify-center gap-8 mb-16 cursor-pointer">
         <button
           onClick={() => setActiveTab('live')}
-          className={`uppercase tracking-[0.4em] text-[10px] md:text-xs pb-2 transition-all duration-300 border-b-2 ${
+          className={`uppercase tracking-[0.4em] text-[10px] md:text-xs pb-2 transition-all duration-300 border-b-2 cursor-pointer ${
             activeTab === 'live' 
             ? "text-white border-red-600 opacity-100" 
             : "text-white/30 border-transparent opacity-50 hover:opacity-80"

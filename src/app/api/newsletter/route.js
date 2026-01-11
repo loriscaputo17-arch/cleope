@@ -1,6 +1,6 @@
 // src/app/api/newsletter/route.ts
 import { NextResponse } from "next/server";
-import { db } from "@/lib/firebase";
+import { db } from "../lib/firebase"
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export async function POST(request) {
