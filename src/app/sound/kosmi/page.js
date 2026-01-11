@@ -47,7 +47,7 @@ export default function CleopeSoundKosmiPage() {
 
           <div className="flex gap-8 justify-center items-center mt-12 bg-white/5 backdrop-blur-xl py-4 px-10 rounded-full border border-white/10">
             <a href="https://www.instagram.com/kosmi_____/" target="_blank" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Instagram size={20} /></a>
-            <a href="#" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Music2 size={20} /></a>
+            <a href="https://www.tiktok.com/@itskosmi?is_from_webapp=1&sender_device=pc" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Music2 size={20} /></a>
             <a href="#" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Youtube size={20} /></a>
           </div>
         </div>
