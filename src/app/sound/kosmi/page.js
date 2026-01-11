@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect } from "react"
-import { Instagram, Music2, Youtube, PlayCircle, Tiktok } from "lucide-react"
+import { Instagram, Music2, Youtube, PlayCircle, Calendar, Music, Radio } from "lucide-react"
+import VideoTabsSection from "../../components/videotabsection"
+import ArtistTabsSection from "../../components/artisttabsection"
 
 export default function CleopeSoundKosmiPage() {
 
@@ -17,75 +19,66 @@ export default function CleopeSoundKosmiPage() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-black text-white relative overflow-hidden pb-20">
+    <main className="min-h-screen bg-black text-white relative overflow-hidden pb-20 font-sans">
 
-      {/* 1. HERO SECTION: PARALLAX-LIKE BACKGROUND & LOGO PNG */}
+      {/* 1. HERO SECTION: BACKGROUND & LOGO */}
       <section className="relative h-screen flex flex-col items-center justify-center text-center px-6">
-        
-        {/* Background Artist Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-50"
+          className="absolute inset-0 bg-cover bg-center opacity-40 scale-105"
           style={{ 
             backgroundImage: "url('/images/sound/kosmi.png')",
-            filter: "contrast(1.1) brightness(0.8)" 
+            filter: "contrast(1.2) brightness(0.7)" 
           }}
         />
-        
-        {/* Overlay sfumato per profondità */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
-
-        {/* Content Overlay */}
+        
         <div className="relative z-10 w-full max-w-4xl flex flex-col items-center">
-          <h2 className="uppercase tracking-[0.6em] text-white/40 text-[10px] md:text-xs mb-8 animate-pulse">
-            Cleope Sound Presents
+          <h2 className="uppercase tracking-[0.6em] text-white/40 text-[10px] md:text-xs mb-8">
+            Cleope Sound Artist
           </h2>
           
-          {/* LOGO PNG - IL NICKNAME SOPRA IL BACKGROUND */}
-          <div className="relative group transition-transform duration-700 hover:scale-105">
+          <div className="relative group transition-transform duration-1000">
             <img 
               src="/images/sound/kosmisign.png" 
               alt="Kosmi Signature" 
-              className="w-[300px] md:w-[500px] lg:w-6800px] h-auto drop-shadow-[0_0_35px_rgba(255,255,255,0.1)]"
+              className="w-[280px] md:w-[500px] lg:w-[700px] h-auto drop-shadow-[0_0_50px_rgba(255,255,255,0.15)]"
             />
           </div>
 
-          {/* SOCIAL LINKS - Minimal & Chic */}
-          <div className="flex gap-8 justify-center items-center mt-12 bg-black/20 backdrop-blur-md py-4 px-8 rounded-full border border-white/5">
-            <a href="https://www.instagram.com/kosmi_____/" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Instagram size={22} /></a>
-            <a href="https://open.spotify.com/artist/0EloPWY9rjZgAjnLweYLwy?si=YxLX7QnOSG-obXEwrkGVmw" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Music2 size={22} /></a>
-            <a href="https://www.tiktok.com/it-IT/" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Youtube size={22} /></a>
+          <div className="flex gap-8 justify-center items-center mt-12 bg-white/5 backdrop-blur-xl py-4 px-10 rounded-full border border-white/10">
+            <a href="https://www.instagram.com/kosmi_____/" target="_blank" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Instagram size={20} /></a>
+            <a href="#" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Music2 size={20} /></a>
+            <a href="#" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Youtube size={20} /></a>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-            <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-20 animate-bounce">
+            <div className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent"></div>
         </div>
       </section>
 
-      {/* CONTENUTO PRINCIPALE */}
+      {/* CONTENUTO INIZIO */}
       <div className="relative z-10 px-6 md:px-20">
         
-        {/* 2. PLAYER SECTION (MIX TAPE) */}
-        <section className="max-w-5xl mx-auto -mt-16 mb-32">
-          <div className="bg-[#0a0a0a] backdrop-blur-3xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        {/* 2. PLAYER SECTION (FLOAT) */}
+        <section className="max-w-5xl mx-auto -mt-20 mb-32">
+          <div className="bg-[#080808] backdrop-blur-3xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
              <div className="flex items-center gap-3 mb-6">
-                <PlayCircle className="text-red-600" size={20} />
-                <h4 className="uppercase tracking-[0.3em] text-[10px] text-white/60 font-semibold">Latest Mixtape</h4>
+                <PlayCircle className="text-red-600" size={18} />
+                <h4 className="uppercase tracking-[0.3em] text-[10px] text-white/60 font-semibold">Featured Mixtape</h4>
              </div>
              <iframe
               width="100%"
               height="166"
               scrolling="no"
               frameBorder="no"
-              allow="autoplay"
               src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/kosmi/pointofviews&color=%23dd0005&inverse=true&auto_play=false&show_user=true"
               className="rounded-xl filter grayscale contrast-125 hover:grayscale-0 transition-all duration-700"
             />
           </div>
         </section>
 
+        {/* 3. BIO SECTION */}
         <section className="max-w-4xl mx-auto mb-40">
           <div className="grid md:grid-cols-[1fr_2fr] gap-16">
             {/* Colonna Sinistra: Titolo e Numero */}
@@ -166,64 +159,16 @@ export default function CleopeSoundKosmiPage() {
           </div>
         </section>
 
-        {/* 4. VIDEO SECTION - Vertical Reel Style (Max 300px) */}
-        <section className="max-w-7xl mx-auto mb-40 px-4">
-          <h4 className="uppercase tracking-[0.4em] text-[10px] text-white/30 mb-12 text-center">
-            Visual Experiences
-          </h4>
-          
-          {/* Griglia centrata: i video si dispongono in riga su desktop e colonna su mobile */}
-          <div className="flex flex-wrap justify-center gap-8">
-            
-            {/* Video Card 1 */}
-            <div className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 shadow-2xl w-full max-w-[300px]">
-              <div className="aspect-[9/16] overflow-hidden bg-black">
-                <video 
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster="/images/sound/video-placeholder-1.jpg"
-                >
-                  <source src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/sound%2Fkosmi1.mp4?alt=media&token=28990f16-2616-4005-80e8-d169b9cb70b6" type="video/mp4" />
-                  Il tuo browser non supporta il tag video.
-                </video>
-              </div>
-              
-              {/* Label Info Sotto */}
-              <div className="p-5 bg-[#0a0a0a]/90 backdrop-blur-md border-t border-white/5 text-center">
-                <p className="text-[9px] uppercase tracking-[0.3em] text-red-600 font-bold mb-1 italic">Live</p>
-                <h5 className="text-[11px] uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
-                  Live @HouseParty
-                </h5>
-              </div>
-            </div>
+        {/* 4. SCHEDULE & UPCOMING RELEASES (TABS) */}
+        {/* <ArtistTabsSection /> */}
 
-            {/* Video Card 2 - Copia questa struttura per altri video */}
-            <div className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 shadow-2xl w-full max-w-[300px]">
-              <div className="aspect-[9/16] overflow-hidden bg-black">
-                <video 
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                >
-                  <source src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/sound%2Fkosmi2.mp4?alt=media&token=c17c9fcf-59ca-4b82-957a-6f4faef1fb32" type="video/mp4" />
-                </video>
-              </div>
-              <div className="p-5 bg-[#0a0a0a]/90 backdrop-blur-md border-t border-white/5 text-center">
-                <p className="text-[9px] uppercase tracking-[0.3em] text-red-600 font-bold mb-1 italic">Live</p>
-                <h5 className="text-[11px] uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
-                  Live @HouseParty
-                </h5>
-              </div>
-            </div>
+        {/* 5. VIDEO SECTION (TABS) */}
+        <div className="mb-40">
+           <VideoTabsSection />
+        </div>
 
-          </div>
-        </section>
-
-        {/* 5. GALLERY SECTION - High End Grid */}
-        <section className="max-w-7xl mx-auto mb-40">
+        {/* 6. GALLERY */}
+       <section className="max-w-7xl mx-auto mb-40">
           <h4 className="uppercase tracking-[0.4em] text-[10px] text-white/30 mb-12 text-center">In Action</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="space-y-4">
@@ -245,66 +190,11 @@ export default function CleopeSoundKosmiPage() {
           </div>
         </section>
 
-         <section className="max-w-7xl mx-auto mb-40 px-4">
-          <h4 className="uppercase tracking-[0.4em] text-[10px] text-white/30 mb-12 text-center">
-            DJ Sets
-          </h4>
-          
-          {/* Griglia centrata: i video si dispongono in riga su desktop e colonna su mobile */}
-          <div className="flex flex-wrap justify-center gap-8">
-            
-            {/* Video Card 1 */}
-            <div className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 shadow-2xl w-full max-w-[300px]">
-              <div className="aspect-[9/16] overflow-hidden bg-black">
-                <video 
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster="/images/sound/video-placeholder-1.jpg"
-                >
-                  <source src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Fdjset%2F9153472407083279152.MP4?alt=media&token=2a4fb883-784a-430a-8be6-0dfcc0755f70" type="video/mp4" />
-                  Il tuo browser non supporta il tag video.
-                </video>
-              </div>
-              
-              {/* Label Info Sotto */}
-              <div className="p-5 bg-[#0a0a0a]/90 backdrop-blur-md border-t border-white/5 text-center">
-                <p className="text-[9px] uppercase tracking-[0.3em] text-red-600 font-bold mb-1 italic">DJ Set</p>
-                <h5 className="text-[11px] uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
-                  VOLT Milano
-                </h5>
-              </div>
-            </div>
-
-            {/* Video Card 2 - Copia questa struttura per altri video */}
-            <div className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 shadow-2xl w-full max-w-[300px]">
-              <div className="aspect-[9/16] overflow-hidden bg-black">
-                <video 
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                >
-                  <source src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Fdjset%2F564440575416043201.MP4?alt=media&token=343e969f-97a7-4b37-9530-b23b912e376a" type="video/mp4" />
-                </video>
-              </div>
-              <div className="p-5 bg-[#0a0a0a]/90 backdrop-blur-md border-t border-white/5 text-center">
-                <p className="text-[9px] uppercase tracking-[0.3em] text-red-600 font-bold mb-1 italic">DJ Set</p>
-                <h5 className="text-[11px] uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
-                  VOLT Milano
-                </h5>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* 6. FOOTER */}
-        <footer className="py-20 text-center border-t border-white/5">
-          <img src="/images/sound/kosmisign.png" alt="Kosmi" className="w-32 mx-auto opacity-20 mb-8" />
+        {/* 7. FOOTER */}
+        <footer className="py-24 text-center border-t border-white/5">
+          <img src="/images/sound/kosmisign.png" alt="Kosmi" className="w-24 mx-auto opacity-10 mb-8" />
           <p className="text-[10px] text-white/20 uppercase tracking-[0.8em]">
-            Cleope Sound Artist
+            Cleope Sound Artist — 2026
           </p>
         </footer>
       </div>
