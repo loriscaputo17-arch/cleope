@@ -24,7 +24,7 @@ export default function CleopeSoundKosmiPage() {
       {/* 1. HERO SECTION: BACKGROUND & LOGO */}
       <section className="relative h-screen flex flex-col items-center justify-center text-center px-6">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-40 scale-105"
+          className="absolute inset-0 bg-cover bg-center opacity-40 scale-105 h-[96vh]"
           style={{ 
             backgroundImage: "url('/images/sound/kosmi.png')",
             filter: "contrast(1.2) brightness(0.7)" 
@@ -59,27 +59,9 @@ export default function CleopeSoundKosmiPage() {
 
       {/* CONTENUTO INIZIO */}
       <div className="relative z-10 px-6 md:px-20">
-        
-        {/* 2. PLAYER SECTION (FLOAT) */}
-        <section className="max-w-5xl mx-auto -mt-20 mb-32">
-          <div className="bg-[#080808] backdrop-blur-3xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
-             <div className="flex items-center gap-3 mb-6">
-                <PlayCircle className="text-red-600" size={18} />
-                <h4 className="uppercase tracking-[0.3em] text-[10px] text-white/60 font-semibold">Featured Mixtape</h4>
-             </div>
-             <iframe
-              width="100%"
-              height="166"
-              scrolling="no"
-              frameBorder="no"
-              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/kosmi/pointofviews&color=%23dd0005&inverse=true&auto_play=false&show_user=true"
-              className="rounded-xl filter grayscale contrast-125 hover:grayscale-0 transition-all duration-700"
-            />
-          </div>
-        </section>
 
         {/* 3. BIO SECTION */}
-        <section className="max-w-4xl mx-auto mb-40">
+        <section className="max-w-4xl mx-auto mb-20">
           <div className="grid md:grid-cols-[1fr_2fr] gap-16">
             {/* Colonna Sinistra: Titolo e Numero */}
             <div className="space-y-4">
@@ -160,10 +142,10 @@ export default function CleopeSoundKosmiPage() {
         </section>
 
         {/* 4. SCHEDULE & UPCOMING RELEASES (TABS) */}
-        {/* <ArtistTabsSection /> */}
+        <ArtistTabsSection />
 
         {/* 5. VIDEO SECTION (TABS) */}
-        <div className="mb-40">
+        <div className="mb-10">
            <VideoTabsSection />
         </div>
 

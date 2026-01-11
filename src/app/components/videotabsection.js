@@ -7,7 +7,7 @@ export default function VideoTabsSection() {
   const [activeTab, setActiveTab] = useState('live')
 
   return (
-    <section className="max-w-7xl mx-auto mb-40 px-4">
+    <section className="max-w-7xl mx-auto mb-40">
       {/* SWITCHER TABS */}
       <div className="flex justify-center gap-8 mb-16 cursor-pointer">
         <button
@@ -18,7 +18,7 @@ export default function VideoTabsSection() {
             : "text-white/30 border-transparent opacity-50 hover:opacity-80"
           }`}
         >
-          Visual Experiences
+          Experiences
         </button>
         <button
           onClick={() => setActiveTab('djsets')}

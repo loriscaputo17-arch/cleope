@@ -1,17 +1,19 @@
 'use client'
 import { useState } from "react"
 import { Calendar, Music, Radio } from "lucide-react"
+import { PlayCircle} from "lucide-react"
 
 export default function ArtistTabsSection() {
-  const [activeTab, setActiveTab] = useState('dates')
+  const [activeTab, setActiveTab] = useState('upcoming')
 
   return (
-    <section className="max-w-5xl mx-auto mb-40 px-4">
+    <section className="max-w-5xl mx-auto mb-40">
       <div className="flex justify-center gap-6 md:gap-12 mb-12 border-b border-white/5">
         {[
-          { id: 'dates', label: 'Tour Dates', icon: Calendar },
           { id: 'upcoming', label: 'Upcoming', icon: Music },
-          { id: 'mix', label: 'Mix & Radio', icon: Radio },
+          { id: 'mix', label: 'Music', icon: Radio },
+          { id: 'dates', label: 'Dates', icon: Calendar },
+          { id: 'old_dates', label: 'Last Dates', icon: Radio },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -20,7 +22,6 @@ export default function ArtistTabsSection() {
               activeTab === tab.id ? "text-red-600 border-b-2 border-red-600" : "text-white/40 hover:text-white"
             }`}
           >
-            <tab.icon size={14} />
             {tab.label}
           </button>
         ))}
@@ -31,9 +32,8 @@ export default function ArtistTabsSection() {
         {activeTab === 'dates' && (
           <div className="space-y-4">
             {[
-              { date: "16 GEN", club: "VOLT", city: "Milano", event: "Mosaiko Night" },
-              { date: "23 GEN", club: "Rocket Club", city: "Milano", event: "Akeem" },
-              { date: "07 FEB", club: "Blue Marlin", city: "Ibiza", event: "Special Guest" },
+              { date: "28 FEB", club: "THE MERGE II", city: "Milano", event: "CLEOPE" },
+              { date: "28 MAR", club: "THE MERGE III", city: "Milano", event: "CLEOPE" },
             ].map((show, i) => (
               <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
                 <div className="flex items-center gap-6">
@@ -54,8 +54,8 @@ export default function ArtistTabsSection() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="p-6 bg-gradient-to-br from-red-900/20 to-black rounded-2xl border border-red-900/30">
               <span className="text-[10px] text-red-500 font-bold uppercase">Febbraio 2026</span>
-              <h5 className="text-xl font-bold mt-2">Tribal Spirit (EP)</h5>
-              <p className="text-sm text-white/50 mt-1">Union Records</p>
+              <h5 className="text-xl font-bold mt-2">Caruso Remix</h5>
+              <p className="text-sm text-white/50 mt-1">White Label</p>
             </div>
             <div className="p-6 bg-white/5 rounded-2xl border border-white/5 opacity-50">
               <span className="text-[10px] uppercase italic">In Produzione</span>
@@ -68,14 +68,46 @@ export default function ArtistTabsSection() {
         {/* MIX & RADIO */}
         {activeTab === 'mix' && (
           <div className="space-y-6">
-             <div className="group border-b border-white/5 pb-4">
-                <p className="text-[10px] text-white/30 uppercase">Rinse FM Guest Mix</p>
-                <h5 className="text-sm font-medium group-hover:text-red-600 transition-colors">Afro House Journey Vol. 4</h5>
-             </div>
-             <div className="group border-b border-white/5 pb-4">
-                <p className="text-[10px] text-white/30 uppercase">Radio Ibiza Global</p>
-                <h5 className="text-sm font-medium group-hover:text-red-600 transition-colors">Sunset Session 2025</h5>
-             </div>
+             <section className="max-w-5xl mx-auto mb-32">
+                <div className="bg-[#080808] backdrop-blur-3xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl">
+                  <div className="flex items-center gap-3 mb-6">
+                      <PlayCircle className="text-red-600" size={18} />
+                      <h4 className="uppercase tracking-[0.3em] text-[10px] text-white/60 font-semibold">Featured Mixtape</h4>
+                  </div>
+                  <iframe
+                    width="100%"
+                    height="166"
+                    scrolling="no"
+                    frameBorder="no"
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/kosmi/pointofviews&color=%23dd0005&inverse=true&auto_play=false&show_user=true"
+                    className="rounded-xl filter grayscale contrast-125 hover:grayscale-0 transition-all duration-700"
+                  />
+                </div>
+              </section>
+
+          </div>
+        )}
+
+        {activeTab === 'old_dates' && (
+          <div className="space-y-4">
+            {[
+              { date: "15 DIC 2024", club: "VOLT", city: "Milano", event: "CLEOPE" },
+              { date: "4 MAG 2025", club: "TANTRA", city: "IBIZA", event: "CLEOPE" },
+              { date: "31 MAG 2025", club: "FORO ITALICO", city: "ROMA", event: "CLEOPE" },
+              { date: "14 AGO 2025", club: "VESPER BEACH CLUB", city: "Porto Cervo", event: "CLEOPE" },
+              { date: "11 OTT 2025", club: "SUPERCLUB", city: "Milano", event: "THE MERGE I" },
+            ].map((show, i) => (
+              <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
+                <div className="flex items-center gap-6">
+                  <span className="text-red-600 font-bold tabular-nums w-12">{show.date}</span>
+                  <div>
+                    <h5 className="text-sm font-bold uppercase tracking-tight">{show.club}</h5>
+                    <p className="text-[10px] text-white/40 uppercase">{show.city}</p>
+                  </div>
+                </div>
+                <span className="text-[10px] text-white/20 uppercase tracking-widest hidden md:block">{show.event}</span>
+              </div>
+            ))}
           </div>
         )}
       </div>
