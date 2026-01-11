@@ -97,11 +97,11 @@ export default function CleopeSoundKosmiPage() {
                 <p className="text-white/80 text-lg md:text-xl leading-relaxed font-light italic border-l-2 border-white/10 pl-6">
                   "Kosmi è stato per 12 anni dj resident del party Akeem di Zamunda al Rocket Club di Milano. 
                   Fondatore di JUMBLE e creatore della crew AfroHouse <span className="text-white font-medium italic">Mosaiko</span>, 
-                  dal 2024 è promoter del Giovedì al VOLT Milano."
+                  dal 2024 è promoter del Giovedì al VOLT Milano con il format CLEOPE."
                 </p>
                 <p className="text-white/60 text-base leading-relaxed">
-                  Manager di artisti come Highsnob e Fresh Mula, dal 2019 ricopre il ruolo di 
-                  <span className="text-white"> Talent Scout per ULTRA MUSIC PUBLISHING</span> sotto la direzione di Patrick Moxey.
+                  Manager di artisti come Highsnob e Fresh Mula, ha ricoperto il ruolo di 
+                  <span className="text-white"> Talent Scout per ULTRA MUSIC PUBLISHING</span> per 4 anni.
                 </p>
               </div>
 
