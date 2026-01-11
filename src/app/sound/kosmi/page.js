@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from "react"
-import { Instagram, Music2, Youtube, PlayCircle } from "lucide-react"
+import { Instagram, Music2, Youtube, PlayCircle, Tiktok } from "lucide-react"
 
 export default function CleopeSoundKosmiPage() {
 
@@ -52,9 +52,9 @@ export default function CleopeSoundKosmiPage() {
 
           {/* SOCIAL LINKS - Minimal & Chic */}
           <div className="flex gap-8 justify-center items-center mt-12 bg-black/20 backdrop-blur-md py-4 px-8 rounded-full border border-white/5">
-            <a href="#" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Instagram size={22} /></a>
-            <a href="#" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Music2 size={22} /></a>
-            <a href="#" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Youtube size={22} /></a>
+            <a href="https://www.instagram.com/kosmi_____/" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Instagram size={22} /></a>
+            <a href="https://open.spotify.com/artist/0EloPWY9rjZgAjnLweYLwy?si=YxLX7QnOSG-obXEwrkGVmw" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Music2 size={22} /></a>
+            <a href="https://www.tiktok.com/it-IT/" className="text-white/60 hover:text-white transition-all transform hover:scale-110"><Youtube size={22} /></a>
           </div>
         </div>
 
@@ -228,7 +228,7 @@ export default function CleopeSoundKosmiPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="space-y-4">
                 <img src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Ffoto%2FCREDITS%20%20%23milan%20%23centralstation-6265.jpg?alt=media&token=acdac707-b621-4b10-8ec9-b9b3bb8cb5ec" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
-                <img src="http://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Ffoto%2FCREDITS%20%20%23milan%20%23centralstation-6265.jpg?alt=media&token=acdac707-b621-4b10-8ec9-b9b3bb8cb5ec" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
+                <img src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Ffoto%2FScreenshot%202026-01-11%20at%2014.52.04.png?alt=media&token=150cf1ac-b045-4943-85fd-6b1f00eaec5b" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
             </div>
             <div className="pt-8 space-y-4">
                 <img src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Ffoto%2FCREDITS%20%20%23milan%20%23centralstation-6507.jpg?alt=media&token=ec7499ed-f2c9-444b-b542-e1284f6f060d" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
@@ -239,9 +239,64 @@ export default function CleopeSoundKosmiPage() {
                 <img src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Ffoto%2FCREDITS%20%23milan%20%23centralstation-6825.jpg?alt=media&token=a080794f-9257-4860-9867-35b977f2fe6c" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
             </div>
             <div className="pt-8 space-y-4">
-                <img src="/images/sound/set3.jpg" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
-                <img src="/images/sound/kosmi.png" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
+                <img src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Ffoto%2FScreenshot%202026-01-11%20at%2014.52.15.png?alt=media&token=d1453fe9-947a-4b6d-985a-805c96081698" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
+                <img src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Ffoto%2FScreenshot%202026-01-11%20at%2014.52.36.png?alt=media&token=213de720-879b-44f6-b51e-22f1d055ddbc" className="w-full rounded-lg grayscale hover:grayscale-0 transition-all duration-500" alt="kosmi" />
             </div>
+          </div>
+        </section>
+
+         <section className="max-w-7xl mx-auto mb-40 px-4">
+          <h4 className="uppercase tracking-[0.4em] text-[10px] text-white/30 mb-12 text-center">
+            DJ Sets
+          </h4>
+          
+          {/* Griglia centrata: i video si dispongono in riga su desktop e colonna su mobile */}
+          <div className="flex flex-wrap justify-center gap-8">
+            
+            {/* Video Card 1 */}
+            <div className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 shadow-2xl w-full max-w-[300px]">
+              <div className="aspect-[9/16] overflow-hidden bg-black">
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/images/sound/video-placeholder-1.jpg"
+                >
+                  <source src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Fdjset%2F9153472407083279152.MP4?alt=media&token=2a4fb883-784a-430a-8be6-0dfcc0755f70" type="video/mp4" />
+                  Il tuo browser non supporta il tag video.
+                </video>
+              </div>
+              
+              {/* Label Info Sotto */}
+              <div className="p-5 bg-[#0a0a0a]/90 backdrop-blur-md border-t border-white/5 text-center">
+                <p className="text-[9px] uppercase tracking-[0.3em] text-red-600 font-bold mb-1 italic">DJ Set</p>
+                <h5 className="text-[11px] uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
+                  VOLT Milano
+                </h5>
+              </div>
+            </div>
+
+            {/* Video Card 2 - Copia questa struttura per altri video */}
+            <div className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 shadow-2xl w-full max-w-[300px]">
+              <div className="aspect-[9/16] overflow-hidden bg-black">
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                >
+                  <source src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/kosmi%2Fdjset%2F564440575416043201.MP4?alt=media&token=343e969f-97a7-4b37-9530-b23b912e376a" type="video/mp4" />
+                </video>
+              </div>
+              <div className="p-5 bg-[#0a0a0a]/90 backdrop-blur-md border-t border-white/5 text-center">
+                <p className="text-[9px] uppercase tracking-[0.3em] text-red-600 font-bold mb-1 italic">DJ Set</p>
+                <h5 className="text-[11px] uppercase tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">
+                  VOLT Milano
+                </h5>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -249,7 +304,7 @@ export default function CleopeSoundKosmiPage() {
         <footer className="py-20 text-center border-t border-white/5">
           <img src="/images/sound/kosmisign.png" alt="Kosmi" className="w-32 mx-auto opacity-20 mb-8" />
           <p className="text-[10px] text-white/20 uppercase tracking-[0.8em]">
-            Cleope Sound — Discover the Unheard
+            Cleope Sound Artist
           </p>
         </footer>
       </div>
