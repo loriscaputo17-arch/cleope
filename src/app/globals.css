@@ -44,3 +44,51 @@ body {
   animation: snow linear infinite;
 }
 
+.innerroute-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+  padding: 14px 4px;
+  color: #ffffff;
+
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+
+  outline: none;
+  box-shadow: none;
+
+  transition: border-color 0.25s ease;
+}
+
+.innerroute-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.innerroute-input:focus {
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+  outline: none;
+  box-shadow: none;
+}
+
+/* textarea */
+.innerroute-input.textarea {
+  resize: none;
+  min-height: 90px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
