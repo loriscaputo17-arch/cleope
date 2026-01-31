@@ -91,7 +91,7 @@ export default function InnerRouteTablesList() {
             placeholder="Search name, phone or notes"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="bg-transparent border-b w-100 border-white/30 text-[14px] uppercase tracking-widest px-2 py-2 outline-none w-full md:w-64"
+            className="bg-transparent border-b w-[50vw] border-white/30 text-[14px] uppercase tracking-widest px-2 py-2 outline-none"
           />
 
           <button

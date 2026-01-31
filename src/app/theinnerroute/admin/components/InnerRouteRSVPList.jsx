@@ -109,7 +109,7 @@ export default function InnerRouteRSVPList() {
             placeholder="Search name or email"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="bg-transparent w-100 border-b border-white/30 text-[14px] uppercase tracking-widest px-2 py-2 outline-none w-full md:w-64"
+            className="bg-transparent w-[50vw] border-b border-white/30 text-[14px] uppercase tracking-widest px-2 py-2 outline-none"
           />
 
           <button
