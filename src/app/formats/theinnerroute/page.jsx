@@ -145,16 +145,16 @@ export default function InnerRoutePartOneLanding() {
         </div>
 
         {/* Navigation */}
-        <div className="flex gap-12 text-[11px] uppercase tracking-[0.25em] mb-10">
+        <div className="flex gap-12 text-[11px] uppercase tracking-[0.25em] mb-10 cursor-pointer font-bold">
           <button
             onClick={() => { setActiveTab("access"); setSuccess(false); }}
-            className={activeTab === "access" ? "text-uppercase cursor-pointer border-b border-white pb-2" : "opacity-40"}
+            className={activeTab === "access" ? "text-uppercase  cursor-pointer border-b border-white pb-2" : "opacity-40"}
           >
             RSVP
           </button>
           <button
             onClick={() => { setActiveTab("table"); setSuccess(false); }}
-            className={activeTab === "table" ? "text-uppercase cursor-pointer border-b border-white pb-2" : "opacity-40"}
+            className={activeTab === "table" ? "text-uppercase font-bold cursor-pointer border-b border-white pb-2" : "opacity-40"}
           >
             BOOK TABLE
           </button>
