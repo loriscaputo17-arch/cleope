@@ -145,13 +145,13 @@ export default function InnerRoutePartOneLanding() {
             onClick={() => { setActiveTab("access"); setSuccess(false); }}
             className={activeTab === "access" ? "text-uppercase cursor-pointer border-b border-white pb-2" : "opacity-40"}
           >
-            REQUEST INVITATION
+            RSVP
           </button>
           <button
             onClick={() => { setActiveTab("table"); setSuccess(false); }}
             className={activeTab === "table" ? "text-uppercase cursor-pointer border-b border-white pb-2" : "opacity-40"}
           >
-            PRIVATE TABLE
+            BOOK TABLE
           </button>
         </div>
 
