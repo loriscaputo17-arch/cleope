@@ -97,7 +97,7 @@ export default function TheInnerRouteLanding() {
             href="/formats/theinnerroute"
             className="mt-14 border border-white px-12 py-4 text-[11px] uppercase tracking-[0.4em] hover:bg-white hover:text-black transition"
           >
-            Enter Part I
+            RSVP NOW 07.02 - Part I
           </a>
         </div>
       </section>
