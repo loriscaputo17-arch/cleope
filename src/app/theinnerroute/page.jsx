@@ -107,15 +107,15 @@ export default function TheInnerRouteLanding() {
             <div className="grid md:grid-cols-12 gap-12 items-center">
 
                 {/* IMAGE */}
-                <div className="md:col-span-7 flex items-center gap-8">
+                <div className="md:col-span-7 md:flex items-center gap-8">
                 <img
                     src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fvesper%2F2.png?alt=media&token=b2d4e88e-200e-4456-92cc-b344e4a4f754"
-                    className="h-[40vw] object-cover grayscale brightness-90"
+                    className="md:h-[40vw] h-full object-cover grayscale brightness-90"
                     alt="The Inner Route Project"
                 />
                 <img
                     src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fvesper%2F3.png?alt=media&token=4758b9ae-8009-436a-adbb-e4fdb6ef46ff"
-                    className="h-[40vw] object-cover grayscale brightness-90"
+                    className="md:h-[40vw] h-full object-cover grayscale brightness-90"
                     alt="The Inner Route Project"
                 />
                 </div>

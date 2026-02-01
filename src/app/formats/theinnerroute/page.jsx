@@ -109,10 +109,15 @@ export default function InnerRoutePartOneLanding() {
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-md">
 
-        {/* Brand Lockup */}
+        <img
+            src="/logo/logovesper.png"
+            alt="VESPER"
+            className="w-32 mx-auto mt-10 mb-2"
+          />
+
         <img
           src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fvesper%2Fintestazione.png?alt=media&token=006a3583-41d5-44e5-a306-c716c142b9d4"
-          className="w-90 mt-10 mb-6 opacity-90"
+          className="w-90 mb-6 opacity-90"
         />
 
         <p className="text-[11px] uppercase tracking-[0.4em] text-white/70">
