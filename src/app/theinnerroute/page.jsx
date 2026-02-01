@@ -47,7 +47,13 @@ export default function TheInnerRouteLanding() {
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-3xl flex flex-col items-center">
 
-          {/* VESPER LOGO */}
+          
+          <img
+            src="/logo/logovesper.png"
+            alt="VESPER"
+            className="w-32 mx-auto mb-2 mt-[10rem]"
+          />
+
           <img
             src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fvesper%2Fintestazione.png?alt=media&token=006a3583-41d5-44e5-a306-c716c142b9d4"
             className="w-64 md:w-80 mb-10"
