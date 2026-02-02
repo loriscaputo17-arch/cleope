@@ -250,7 +250,7 @@ export default function InnerRoutePartOneLanding() {
         </p>
 
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fvesper%2Ffooter.png?alt=media&token=9de4f943-c1d0-4edf-aca3-cfc00852aec5"
+          src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fvesper%2Ffooterlogo.png?alt=media&token=70997dc8-9d7b-468e-a859-a09b24f9fcc0"
           className="w-90 mt-0 mb-6 opacity-90"
         />
       </div>
