@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { db } from "../../../lib/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useSearchParams } from "next/navigation";
 
 const COLLECTION_RSVP = "inner_route_part_one_rsvp";
 const COLLECTION_TABLE = "inner_route_part_one_tables";
@@ -24,6 +25,9 @@ export default function InnerRoutePartOneLanding() {
   const [tablePhone, setTablePhone] = useState("");
   const [guests, setGuests] = useState("");
   const [notes, setNotes] = useState("");
+
+  const searchParams = useSearchParams();
+  const qParam = searchParams.get("q"); 
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,8 +60,10 @@ export default function InnerRoutePartOneLanding() {
           lastName,
           email,
           phone,
+          q: qParam || null,
           createdAt: serverTimestamp(),
         });
+
 
         await fetch("/api/innerroute_sendrequest", {
           method: "POST",
@@ -76,6 +82,7 @@ export default function InnerRoutePartOneLanding() {
           phone: tablePhone,
           guests,
           notes,
+          q: qParam || null,
           createdAt: serverTimestamp(),
         });
 
