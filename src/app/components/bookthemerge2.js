@@ -186,7 +186,7 @@ if (loading) {
         <img
           src="/images/themerge2/header.png"
           alt="The Merge"
-          className="md:w-[25vw] w-[60vw] mb-4 opacity-90"
+          className="md:w-[25vw] w-[75vw] mb-4 opacity-90"
         />
         <p className="micro mb-4">28 · 02 · 2026</p>
 
@@ -271,7 +271,7 @@ if (loading) {
         <img
           src="/images/themerge2/footer.png"
           alt="Confidential"
-          className="w-32 mt-4 mb-10"
+          className="md:w-32 w-25 mt-4 mb-10"
         />
       </div>
     </main>
