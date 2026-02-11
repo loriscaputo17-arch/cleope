@@ -18,7 +18,7 @@ export default function InnerRouteTablesList() {
   /* ================= FETCH ================= */
   useEffect(() => {
     const q = query(
-      collection(db, "inner_route_part_one_tables"),
+      collection(db, "the_merge_2_tables"),
       orderBy("createdAt", "desc")
     )
 

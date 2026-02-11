@@ -180,13 +180,13 @@ if (loading) {
       </div>
 
       {/* MAIN */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 pt-12 max-w-xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center text-center px-6 pt-12 max-w-3xl mx-auto">
 
         {/* TOP IMAGE */}
         <img
           src="/images/themerge2/header.png"
           alt="The Merge"
-          className="w-[80vw] mb-4 opacity-90"
+          className="md:w-[25vw] w-[90vw] mb-4 opacity-90"
         />
         <p className="micro mb-4">28 · 02 · 2026</p>
 
@@ -204,7 +204,7 @@ if (loading) {
         </div>
 
         {/* MODE */}
-        <div className="flex gap-16 tabs mb-16 font-bold cursor-pointer">
+        <div className="flex gap-16 tabs mb-4 mt-2 font-bold cursor-pointer">
           <button onClick={()=>{setMode("access"); setDone(false)}} className={mode==="access"?"active":""}>
             RSVP
           </button>

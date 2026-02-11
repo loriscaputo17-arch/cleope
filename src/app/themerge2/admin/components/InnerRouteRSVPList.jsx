@@ -18,7 +18,7 @@ export default function InnerRouteRSVPList() {
   /* ================= FETCH ================= */
   useEffect(() => {
     const q = query(
-      collection(db, "inner_route_part_one_rsvp"),
+      collection(db, "the_merge_2_rsvp"),
       orderBy("createdAt", "desc")
     )
 

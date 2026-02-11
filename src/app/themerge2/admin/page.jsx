@@ -36,19 +36,10 @@ export default function InnerRouteAdminPage() {
 
         {/* Background */}
         <h1 className="absolute inset-0 flex items-center justify-center text-[22vw] md:text-[12vw] font-black opacity-[0.04] tracking-tight select-none pointer-events-none">
-          INNER ROUTE
+          THE MERGE
         </h1>
 
         <div className="relative z-10 w-full max-w-sm text-center">
-          <img
-            src="/logo/logovesper.png"
-            alt="VESPER"
-            className="w-40 mx-auto mb-10 opacity-90"
-          />
-
-          <p className="text-xs uppercase tracking-[0.35em] text-white/60 mb-6">
-            Restricted Access
-          </p>
 
           <input
             type="password"
@@ -66,7 +57,7 @@ export default function InnerRouteAdminPage() {
           </button>
 
           <p className="mt-12 text-[10px] uppercase tracking-[0.3em] text-white/40">
-            Admin Area · The Inner Route
+            Admin Area · The Merge
           </p>
         </div>
       </div>
@@ -92,16 +83,8 @@ export default function InnerRouteAdminPage() {
 
       {/* Header */}
       <div className="relative z-10 text-center mb-14">
-        <img
-          src="/logo/logovesper.png"
-          alt="VESPER"
-          className="w-32 mx-auto mb-6"
-        />
         <p className="text-xs uppercase tracking-[0.35em] text-white/60">
-          The Inner Route · Part I
-        </p>
-        <p className="text-xs uppercase tracking-[0.35em] text-white/40 mt-1">
-          Milan · February 7th, 2026
+          The Merge 2
         </p>
       </div>
 
