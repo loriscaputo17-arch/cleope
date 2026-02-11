@@ -92,3 +92,168 @@ body {
   animation: marquee 20s linear infinite;
 }
 
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, black, transparent);
+  animation: load 1.2s infinite;
+}
+
+@keyframes load {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+/* LOADING SYSTEM */
+
+.loading-text2 {
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.loading-wrapper {
+  width: 220px;
+  height: 2px;
+  background: rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  height: 100%;
+  background: black;
+  transition: width 0.12s linear;
+}
+
+.loading-percent {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+}
+
+
+@keyframes pulse {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* TYPO */
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+.micro {
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.tabs {
+  font-size: 12px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+}
+
+.ghost-title {
+  font-size: 18vw;
+  font-weight: 900;
+  opacity: 0.04;
+  letter-spacing: -0.05em;
+}
+
+/* GLASS */
+.glass-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 32px;
+  backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.glass-input {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.25);
+  padding: 14px;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: black;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: black;
+}
+
+.submit {
+  margin-top: 20px;
+  border: 1px solid black;
+  padding: 14px;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+.submit:hover {
+  background: black;
+  color: white;
+}
+
+.error {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: #a00;
+}
+
+/* SIDES */
+.side-label {
+  font-size: 11px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.side-meta, .side-countdown, .side-hash {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.footer {
+  margin-top: 96px;
+  font-size: 9px;
+  letter-spacing: 0.45em;
+  opacity: 0.3;
+}
+
+.active {
+  opacity: 1;
+  position: relative;
+}
+
+.active::after {
+  content: "";
+  display: block;
+  margin: 6px auto 0;
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+}
+
+.glass-input::placeholder {
+  color: rgba(0,0,0,0.45);
+}
+
+textarea.glass-input {
+  resize: none;
+  min-height: 90px;
+}

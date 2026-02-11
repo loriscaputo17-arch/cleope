@@ -410,12 +410,11 @@ export default function Home() {
       <section className="w-full py-32 px-6 bg-black text-white overflow-hidden">
         <div className="max-w-6xl mx-auto flex flex-col gap-24">
 
-          <div
+          {/*<div
             className="relative group rounded-[28px] overflow-hidden border border-white/10 flex flex-col md:flex-row h-auto cursor-pointer"
             onClick={() => window.location.href = "/theinnerroute"}
           >
 
-            {/* BACKGROUND IMAGE – THE INNER ROUTE */}
             <div className="relative w-full md:w-1/2 h-[45vh] md:h-full">
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fvesper%2F1.png?alt=media&token=9ccc12cb-0746-428f-90e7-81eda002e8c8"
@@ -424,7 +423,6 @@ export default function Home() {
               />
             </div>
 
-            {/* TEXT AREA */}
             <div className="relative flex flex-col justify-center items-start w-full md:w-1/2 p-10 md:p-16 text-left z-10 bg-gradient-to-b from-black via-neutral-950 to-black">
 
               <p className="uppercase mb-6 text-[11px] tracking-[0.3em] bg-white/10 backdrop-blur-sm rounded-full px-5 py-2 inline-block">
@@ -445,7 +443,6 @@ export default function Home() {
                 laying the groundwork for a new Mediterranean rhythm.
               </p>
 
-              {/* CTA */}
               <a
                 href="/theinnerroute"
                 className="inline-flex items-center gap-3 bg-white text-black px-9 py-3 text-sm rounded-full hover:bg-neutral-200 transition"
@@ -457,7 +454,7 @@ export default function Home() {
               </a>
 
             </div>
-          </div>
+          </div>*/}
 
           <div className="grid md:grid-cols-2 gap-10">
             

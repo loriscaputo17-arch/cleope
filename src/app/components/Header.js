@@ -45,19 +45,19 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/10">
 <a
-        href="/formats/theinnerroute/"
+        href="/formats/themerge2/"
         className="cursor-pointer"
         >
       <div className="w-full bg-neutral-200 text-neutral-800 overflow-hidden border-b border-black/10">
         <div className="whitespace-nowrap flex items-center h-9 animate-marquee">
           <span className="mx-8 text-[10px] uppercase tracking-[0.35em]">
-            The Inner Route · Part I — Saturday February 7th 2026 · Milan · RSVP Now
+            <strong>THE MERGE 2</strong> · Saturday February 28th · Milan · RSVP Now
           </span>
           <span className="mx-8 text-[10px] uppercase tracking-[0.35em]">
-            The Inner Route · Part I — Saturday February 7th 2026 · Milan · RSVP Now
+            <strong>THE MERGE 2</strong> · Saturday February 28th · Milan · RSVP Now
           </span>
           <span className="mx-8 text-[10px] uppercase tracking-[0.35em]">
-            The Inner Route · Part I — Saturday February 7th 2026 · Milan · RSVP Now
+            <strong>THE MERGE 2</strong> · Saturday February 28th · Milan · RSVP Now
           </span>
         </div>
       </div>

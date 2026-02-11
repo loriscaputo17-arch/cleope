@@ -246,13 +246,11 @@ export default function TheInnerRouteLanding() {
         </p>
       </footer>
 
-      {/* ================= FIXED RSVP BAR ================= */}
     <div className="fixed bottom-0 left-0 w-full bg-white text-black z-50 overflow-hidden border-t border-black/10">
     <a
-        href="/formats/theinnerroute/"
+        href="/formats/themerge2/"
         className="whitespace-nowrap flex items-center h-12 animate-marquee cursor-pointer"
         >
-
                 <span className="mx-8 text-xs uppercase tracking-[0.3em]">
                 <span className="font-bold">The Inner Route  Part I</span> — Saturday February 7th 2026 · Milan · RSVP Now
                 </span>
@@ -264,7 +262,6 @@ export default function TheInnerRouteLanding() {
                 </span>
             </a>
     </div>
-
 
     </main>
   );
