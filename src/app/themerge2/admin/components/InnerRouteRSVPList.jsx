@@ -128,6 +128,7 @@ export default function InnerRouteRSVPList() {
             <tr className="text-left text-white/50 border-b border-white/10">
               <th className="py-2">Name</th>
               <th className="py-2">Email</th>
+              <th className="py-2">PR</th>
               <th className="py-2">Phone</th>
               <th className="py-2">Date</th>
               <th className="py-2">Status</th>
@@ -141,11 +142,14 @@ export default function InnerRouteRSVPList() {
                 key={item.id}
                 className={`border-b border-white/5 ${item.checkedIn ? "opacity-50" : ""}`}
               >
-                <td className="py-2">{item.firstName} {item.lastName}</td>
+                <td className="py-2">{item.fullName}</td>
                 <td className="py-2">
                   <a href={`mailto:${item.email}`} className="underline underline-offset-2">
                     {item.email}
                   </a>
+                </td>
+                <td className="py-2">
+                    {item.q}
                 </td>
                 <td className="py-2">
                 {item.phone ? (

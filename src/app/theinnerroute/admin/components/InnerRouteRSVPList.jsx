@@ -93,6 +93,20 @@ export default function InnerRouteRSVPList() {
     return `https://wa.me/${clean}`
     }
 
+    const filtered2 = useMemo(() => {
+  const s = search.toLowerCase()
+
+  return items
+    .filter(i => i.checkedIn === true) // 👈 SOLO checked-in
+    .filter(i => i.q === "tembo") // 👈 SOLO checked-in
+    .filter(i =>
+      `${i.firstName} ${i.lastName} ${i.email}`
+        .toLowerCase()
+        .includes(s)
+    )
+}, [items, search])
+
+
 
   /* ================= UI ================= */
   return (
@@ -101,7 +115,7 @@ export default function InnerRouteRSVPList() {
       {/* HEADER */}
       <div className="flex flex-col gap-4 mb-6 md:flex-row md:items-center md:justify-between">
         <h3 className="text-xs uppercase tracking-[0.3em] text-white/60">
-          RSVP Requests ({filtered.length})
+          RSVP Requests ({filtered.length}) {filtered2.length}
         </h3>
 
         <div className="flex flex-col md:flex-row gap-4">
@@ -129,7 +143,7 @@ export default function InnerRouteRSVPList() {
               <th className="py-2">Name</th>
               <th className="py-2">Email</th>
               <th className="py-2">Phone</th>
-              <th className="py-2">Date</th>
+              <th className="py-2">q</th>
               <th className="py-2">Status</th>
               <th className="py-2 text-right">Actions</th>
             </tr>
@@ -160,7 +174,7 @@ export default function InnerRouteRSVPList() {
                 ) : "-"}
                 </td>
                 <td className="py-2 text-xs text-white/40">
-                  {item.createdAt?.toDate().toLocaleString("it-IT")}
+                  {item.q}
                 </td>
                 <td className="py-2 text-xs uppercase tracking-wider">
                   {item.checkedIn ? "Checked-in" : item.approved ? "Approved" : "Pending"}
