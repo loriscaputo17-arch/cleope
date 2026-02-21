@@ -271,7 +271,7 @@ if (loading) {
         <img
           src="/images/themerge2/footer.png"
           alt="Confidential"
-          className="md:w-32 w-25 mt-4 mb-10"
+          className="md:w-56 w-42 mt-4 mb-10"
         />
       </div>
     </main>
