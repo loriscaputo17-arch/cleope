@@ -82,7 +82,7 @@ export default function InnerRouteRSVPList() {
   }
 
   const toggleCheckin = async (item) => {
-    await updateDoc(doc(db, "inner_route_part_one_rsvp", item.id), {
+    await updateDoc(doc(db, "the_merge_2_rsvp", item.id), {
       checkedIn: !item.checkedIn
     })
   }
