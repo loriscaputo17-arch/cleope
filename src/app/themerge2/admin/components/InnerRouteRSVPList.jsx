@@ -33,45 +33,67 @@ export default function InnerRouteRSVPList() {
   const filtered = useMemo(() => {
     const s = search.toLowerCase()
     return items.filter(i =>
-      `${i.firstName} ${i.lastName} ${i.email}`
+      `${i.fullName} ${i.email}`
         .toLowerCase()
         .includes(s)
     )
   }, [items, search])
 
   /* ================= CSV ================= */
-  const exportCSV = () => {
-    const headers = ["First Name", "Last Name", "Email", "Phone", "Approved", "Checked In", "Date"]
-    const rows = filtered.map(i => [
-      i.firstName,
-      i.lastName,
-      i.email,
-      i.phone || "",
-      i.approved ? "YES" : "NO",
-      i.checkedIn ? "YES" : "NO",
-      i.createdAt?.toDate().toISOString() || ""
-    ])
-
-    const csv = [headers, ...rows]
-      .map(r => r.map(v => `"${v}"`).join(","))
-      .join("\n")
-
-    const blob = new Blob([csv], { type: "text/csv" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = "inner-route-rsvp.csv"
-    a.click()
-    URL.revokeObjectURL(url)
+const exportCSV = (rows, filename) => {
+  if (!rows?.length) {
+    alert("Nothing to export")
+    return
   }
+
+  const headers = [
+    "Fullname",
+    "Email",
+    "Phone",
+    "PR",
+    "Guests",
+    "Status",
+    "Note",
+    "Created At",
+  ]
+
+  const csvRows = [headers.join(";")]
+
+  rows.forEach(r => {
+    const created =
+      r.createdAt?.seconds
+        ? new Date(r.createdAt.seconds * 1000).toLocaleString("it-IT")
+        : ""
+
+    csvRows.push([
+      r.fullName || "",
+      r.email || "",
+      r.phone || "",
+      r.q || "",
+      r.guests ?? 1,
+      r.status || "pending",
+      r.note || "",
+      created,
+    ].join(";"))
+  })
+
+  const blob = new Blob([csvRows.join("\n")], {
+    type: "text/csv;charset=utf-8;",
+  })
+
+  const link = document.createElement("a")
+  link.href = URL.createObjectURL(blob)
+  link.download = `${filename}-${Date.now()}.csv`
+  link.click()
+}
 
   /* ================= ACTIONS ================= */
   const approve = async (item) => {
-    await updateDoc(doc(db, "inner_route_part_one_rsvp", item.id), {
+    await updateDoc(doc(db, "the_merge_2_rsvp", item.id), {
       approved: true
     })
 
-    await fetch("/api/innerroute_confirm", {
+    await fetch("/api/themerge2_confirm", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -113,7 +135,7 @@ export default function InnerRouteRSVPList() {
           />
 
           <button
-            onClick={exportCSV}
+            onClick={() => exportCSV(filtered, "the-merge-2-rsvp")}
             className="border border-white/30 px-4 py-2 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition"
           >
             Export CSV
@@ -203,7 +225,7 @@ export default function InnerRouteRSVPList() {
             className={`border border-white/15 p-4 ${item.checkedIn ? "opacity-50" : ""}`}
           >
             <p className="text-sm mb-1">
-              {item.firstName} {item.lastName}
+              {item.fullName}
             </p>
 
             <a

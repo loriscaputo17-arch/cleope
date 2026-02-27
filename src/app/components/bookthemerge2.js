@@ -1,19 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { db } from "../../lib/firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSearchParams } from "next/navigation";
+import { supabase } from "../../lib/supabase";
 
-const RSVP_COLLECTION  = "the_merge_2_rsvp";
-const TABLE_COLLECTION = "the_merge_2_tables";
+const EVENT_ID = "the_merge_2"; // 🔥 importante per filtrare dopo
 const EVENT_DATE = new Date("2026-02-28T23:45:00");
 
 export default function TheMergeII() {
   const searchParams = useSearchParams();
   const q = searchParams.get("q");
-  const [progress, setProgress] = useState(0);
 
+  const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState("access");
   const [done, setDone] = useState(false);
@@ -31,55 +29,50 @@ export default function TheMergeII() {
     notes:""
   });
 
+  /* ================= COUNTDOWN ================= */
   useEffect(() => {
-      const interval = setInterval(() => {
-        const diff = EVENT_DATE - new Date();
-        if (diff <= 0) return setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  
-        setTimeLeft({
-          days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((diff / (1000 * 60)) % 60),
-          seconds: Math.floor((diff / 1000) % 60),
-        });
-      }, 1000);
-  
-      return () => clearInterval(interval);
-  }, []);
-
-/* LOADING SCREEN WITH PERCENTAGE */
-useEffect(() => {
-  let value = 0;
-
-  const interval = setInterval(() => {
-    value += Math.floor(Math.random() * 6) + 3; // step irregolare
-    if (value >= 100) {
-      value = 100;
-      clearInterval(interval);
-      setTimeout(() => setLoading(false), 300);
-    }
-    setProgress(value);
-  }, 120);
-
-  return () => clearInterval(interval);
-}, []);
-
-
-  /* COUNTDOWN */
-  useEffect(() => {
-    const i = setInterval(() => {
-      const diff = EVENT_DATE - new Date();
+    const interval = setInterval(() => {
+      const diff = EVENT_DATE.getTime() - Date.now();
       if (diff <= 0) return;
+
       setTime({
         d: Math.floor(diff / 86400000),
         h: Math.floor(diff / 3600000) % 24,
         m: Math.floor(diff / 60000) % 60,
         s: Math.floor(diff / 1000) % 60,
       });
+
+      setTimeLeft({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor(diff / 3600000) % 24,
+        minutes: Math.floor(diff / 60000) % 60,
+        seconds: Math.floor(diff / 1000) % 60,
+      });
     }, 1000);
-    return () => clearInterval(i);
+
+    return () => clearInterval(interval);
   }, []);
 
+  /* ================= LOADING ================= */
+  useEffect(() => {
+    let value = 0;
+
+    const interval = setInterval(() => {
+      value += Math.floor(Math.random() * 6) + 3;
+      if (value >= 100) {
+        value = 100;
+        clearInterval(interval);
+        setTimeout(() => setLoading(false), 300);
+      }
+      setProgress(value);
+    }, 120);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  /* =====================================================
+     🔥 SUBMIT → SUPABASE (RSVP + TABLES)
+     ===================================================== */
   async function submit(e) {
     e.preventDefault();
     setError("");
@@ -91,15 +84,39 @@ useEffect(() => {
         return;
       }
 
-      await addDoc(
-        collection(db, mode === "access" ? RSVP_COLLECTION : TABLE_COLLECTION),
-        {
-          ...data,
-          q: q || null,
-          createdAt: serverTimestamp(),
-        }
-      );
+      // ================= RSVP =================
+      if (mode === "access") {
+        const { error } = await supabase
+          .from("Lists")
+          .insert({
+            event_id: "7LECmaSD3fTRxrOU7acZ",
+            full_name: data.fullName,
+            email: data.email,
+            phone_number: data.phone || null,
+            pr: q || null,
+            approved: false,
+          });
 
+        if (error) throw error;
+      }
+
+      if (mode === "table") {
+        const { error } = await supabase
+          .from("TableRequests")
+          .insert({
+            event_id: "7LECmaSD3fTRxrOU7acZ",
+            full_name: data.fullName,
+            email: data.email,
+            phone_number: data.phone || null,
+            guests: Number(data.guests) || null,
+            note: data.notes || null,
+            pr: q || null,
+          });
+
+        if (error) throw error;
+      }
+
+      // 🔥 email trigger (lasciato uguale)
       await fetch("/api/themerge2_sendrequest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -110,39 +127,38 @@ useEffect(() => {
       });
 
       setDone(true);
-    } catch {
+    } catch (err) {
+      console.error(err);
       setError("TRANSMISSION FAILED");
     } finally {
       setSending(false);
     }
   }
 
-if (loading) {
-  return (
-    <main className="min-h-screen bg-[#ededed] flex flex-col items-center justify-center text-black">
+  /* ================= UI (IDENTICA ALLA TUA) ================= */
 
-      <p className="loading-text2 mb-6">
-        INITIALIZING PRIVATE INTERFACE
-      </p>
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-[#ededed] flex flex-col items-center justify-center text-black">
+        <p className="loading-text2 mb-6">
+          INITIALIZING PRIVATE INTERFACE
+        </p>
 
-      <div className="loading-wrapper mb-4">
-        <div
-          className="loading-bar-inner"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+        <div className="loading-wrapper mb-4">
+          <div
+            className="loading-bar-inner"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
 
-      <p className="loading-percent">
-        {progress}%
-      </p>
+        <p className="loading-percent">{progress}%</p>
 
-      <p className="loading-text2 mt-6 opacity-50">
-        ONE MERGE · ONE NIGHT
-      </p>
-    </main>
-  );
-}
-
+        <p className="loading-text2 mt-6 opacity-50">
+          ONE MERGE · ONE NIGHT
+        </p>
+      </main>
+    );
+  }
 
   return (
     <main className="relative min-h-screen bg-[#ededed] text-black overflow-hidden">
