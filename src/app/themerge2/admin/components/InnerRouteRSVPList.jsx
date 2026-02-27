@@ -67,16 +67,16 @@ export default function InnerRouteRSVPList() {
 
   /* ================= ACTIONS ================= */
   const approve = async (item) => {
-    await updateDoc(doc(db, "inner_route_part_one_rsvp", item.id), {
+    await updateDoc(doc(db, "the_merge_2_rsvp", item.id), {
       approved: true
     })
 
-    await fetch("/api/innerroute_confirm", {
+    await fetch("/api/themerge2_confirm", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         to: item.email,
-        name: `${item.firstName} ${item.lastName}`
+        name: `${item.fullName}`
       })
     })
   }
