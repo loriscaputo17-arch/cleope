@@ -203,7 +203,7 @@ export default function InnerRouteRSVPList() {
             className={`border border-white/15 p-4 ${item.checkedIn ? "opacity-50" : ""}`}
           >
             <p className="text-sm mb-1">
-              {item.firstName} {item.lastName}
+              {item.fullName}
             </p>
 
             <a

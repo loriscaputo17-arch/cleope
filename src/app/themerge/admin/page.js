@@ -253,6 +253,51 @@ export default function BookPage() {
     </div>
   );
 
+  // 🔹 Export CSV combinato
+  function exportAllToCSV() {
+    try {
+      // unisci entrambe le fonti
+      const combined = [
+        ...records,
+        ...sheetRecords,
+      ];
+
+      // rimuovi duplicati per email
+      const uniqueMap = new Map();
+      combined.forEach((r) => {
+        if (r.email && !uniqueMap.has(r.email)) {
+          uniqueMap.set(r.email, r);
+        }
+      });
+
+      const unique = Array.from(uniqueMap.values());
+
+      // prepara dati CSV
+      const csvData = unique.map((r) => ({
+        Nome: r.firstName || "",
+        Cognome: r.lastName || "",
+        Email: r.email || "",
+        Telefono: r.phone || "",
+      }));
+
+      const csv = Papa.unparse(csvData);
+
+      // download file
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "contatti_merge.csv";
+      link.click();
+
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Errore export CSV:", err);
+      alert("❌ Errore durante l'export");
+    }
+  }
+
   return (
     <main className="min-h-screen w-full bg-black text-white px-4 py-10">
       <div className="max-w-6xl mx-auto mt-16">
@@ -267,6 +312,23 @@ export default function BookPage() {
             onChange={(e) => setSearch(e.target.value)}
             className="flex-1 px-4 py-3 rounded-xl bg-black/40 border border-white/15 focus:outline-none focus:border-white/40 placeholder-white/60 text-sm"
           />
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <input
+            type="text"
+            placeholder="Cerca per nome, email, telefono, codice..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="flex-1 px-4 py-3 rounded-xl bg-black/40 border border-white/15 focus:outline-none focus:border-white/40 placeholder-white/60 text-sm"
+          />
+
+          <button
+            onClick={exportAllToCSV}
+            className="px-4 py-3 rounded-xl bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
+          >
+            ⬇️ Scarica CSV
+          </button>
         </div>
 
         {/* 🔹 Tabella Firestore */}
