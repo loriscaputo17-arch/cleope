@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import BreakoutList from "../admin/components/BreakoutList"
+import BreakoutList from "../admin2/components/BreakoutList"
 
 export default function BreakoutPage() {
   const [accessGranted, setAccessGranted] = useState(false)

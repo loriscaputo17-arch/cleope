@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import Only300List from "../admin/components/Only300List"
+import Only300List from "../admin2/components/Only300List"
 
 export default function BreakoutPage() {
   const [accessGranted, setAccessGranted] = useState(false)
