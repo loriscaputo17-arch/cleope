@@ -76,7 +76,7 @@ export default function ZamnaLanding() {
           <div className={`top-header ${loaded ? "in" : ""}`}>
             <span className="collab-text">ZAMNA IN THE CLUB</span>
             <span className="collab-x">×</span>
-            <span className="collab-text">CLEOPE</span>
+            <span className="collab-text">CLEOPE SOUND</span>
           </div>
 
           {/* ── Gold separator ── */}
