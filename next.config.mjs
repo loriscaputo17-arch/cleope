@@ -6,6 +6,8 @@ const nextConfig = {
       "www.google.com",
       "images.xceed.me",
       "www.ticketnation.it",
+      "www.vesperbeachclub.com",
+      "www.houseofronin.it",
     ],
   },
   reactStrictMode: true,

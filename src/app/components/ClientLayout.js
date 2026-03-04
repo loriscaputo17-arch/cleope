@@ -18,6 +18,7 @@ export default function ClientLayout({ children }) {
     "/loriscaputo",
     "/breakoutlist",
     "/only300list",
+    "/admin",
   ];
 
   const hideLayout =
