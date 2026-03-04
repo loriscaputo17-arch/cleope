@@ -3,9 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "../../lib/supabase"
 
 export const Footer = () => {
   const [time, setTime] = useState("");
+  const [email, setEmail] = useState("")
+  const [loadingNewsletter, setLoadingNewsletter] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   useEffect(() => {
     const update = () => setTime(new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" }));
@@ -13,6 +17,28 @@ export const Footer = () => {
     const i = setInterval(update, 60000);
     return () => clearInterval(i);
   }, []);
+
+  async function subscribeNewsletter() {
+      if (!email) return
+  
+      try {
+        setLoadingNewsletter(true)
+  
+        const { error } = await supabase
+          .from('Newsletter')
+          .insert([{ email }])
+  
+        if (error) throw error
+  
+        setSuccess(true)
+        setEmail("")
+      } catch (err) {
+        console.error("Newsletter error:", err)
+        alert("Something went wrong")
+      } finally {
+        setLoadingNewsletter(false)
+      }
+    }
 
   return (
     <>
@@ -173,7 +199,7 @@ export const Footer = () => {
             gap: 'clamp(32px, 5vw, 64px)',
             borderBottom: '1px solid rgba(240,239,235,0.07)',
           }}
-        >
+        > 
           {/* About */}
           <div>
             <span className="ftr-label">About</span>
@@ -226,13 +252,30 @@ export const Footer = () => {
             <p style={{ fontSize: 13, fontWeight: 300, color: 'rgba(240,239,235,0.38)', marginBottom: 16, lineHeight: 1.6 }}>
               Early access and private drops.
             </p>
-            <form
-              onSubmit={e => { e.preventDefault(); alert("Thanks for subscribing!") }}
+            <div
               style={{ display: 'flex' }}
             >
-              <input type="email" placeholder="your@email.com" required className="ftr-input" />
-              <button type="submit" className="ftr-btn">→</button>
-            </form>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                className="nl-in"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <button
+                className="btn-solid"
+                onClick={subscribeNewsletter}
+                disabled={loadingNewsletter}
+              >
+                {loadingNewsletter ? "..." : "Subscribe"}
+              </button>
+            </div>
+            {success && (
+              <p style={{ marginTop: 16, fontSize: 12, color: "rgba(240,239,235,0.6)" }}>
+                Thanks for subscribing.
+              </p>
+            )}
           </div>
         </div>
 

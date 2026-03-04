@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { db } from "../../lib/firebase"
+import { supabase } from "../../lib/supabase"
 import { collection, getDocs } from 'firebase/firestore'
 import { motion } from 'framer-motion'
 
@@ -141,6 +142,9 @@ const GlobalStyles = () => (
 export default function Home() {
   const [events, setEvents] = useState([])
   const [loadingEvents, setLoadingEvents] = useState(true)
+  const [email, setEmail] = useState("")
+  const [loadingNewsletter, setLoadingNewsletter] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   useEffect(() => {
     async function fetchEvents() {
@@ -170,6 +174,28 @@ export default function Home() {
     }
     fetchEvents()
   }, [])
+
+  async function subscribeNewsletter() {
+    if (!email) return
+
+    try {
+      setLoadingNewsletter(true)
+
+      const { error } = await supabase
+        .from('Newsletter')
+        .insert([{ email }])
+
+      if (error) throw error
+
+      setSuccess(true)
+      setEmail("")
+    } catch (err) {
+      console.error("Newsletter error:", err)
+      alert("Something went wrong")
+    } finally {
+      setLoadingNewsletter(false)
+    }
+  }
 
   const pad = 'clamp(20px, 5vw, 72px)'
   const sec = 'clamp(64px, 9vw, 128px)'
@@ -401,9 +427,28 @@ export default function Home() {
               Early access, private drops and curated experiences. No spam.
             </p>
             <div style={{ display: 'flex' }}>
-              <input type="email" placeholder="your@email.com" className="nl-in" />
-              <button className="btn-solid">Subscribe</button>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                className="nl-in"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <button
+                className="btn-solid"
+                onClick={subscribeNewsletter}
+                disabled={loadingNewsletter}
+              >
+                {loadingNewsletter ? "..." : "Subscribe"}
+              </button>
             </div>
+
+            {success && (
+              <p style={{ marginTop: 16, fontSize: 12, color: "rgba(240,239,235,0.6)" }}>
+                Thanks for subscribing.
+              </p>
+            )}
           </div>
         </section>
 
