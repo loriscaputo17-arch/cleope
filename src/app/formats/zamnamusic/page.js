@@ -11,7 +11,7 @@ const MAPS_LINK     = "https://www.google.com/maps/search/?api=1&query=Piazza+Li
 export default function ZamnaLanding() {
   const canvasRef = useRef(null);
   const [loaded, setLoaded]   = useState(false);
-  const [imgSrc, setImgSrc]   = useState("https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/locandine%2Fzamnaxcleope.PNG?alt=media&token=6206935c-dab0-491f-ba76-a70350b7e66a");
+  const [imgSrc, setImgSrc]   = useState("https://rzplxudcblduqqcwfdyw.supabase.co/storage/v1/object/public/materials/zamna.PNG");
 
   useEffect(() => { const t = setTimeout(() => setLoaded(true), 80); return () => clearTimeout(t); }, []);
 
