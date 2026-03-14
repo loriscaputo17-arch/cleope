@@ -208,10 +208,10 @@ export default function Home() {
         {/* ── HERO ── */}
         <section style={{ position: 'relative', height: '100svh', width: '100%', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0 }}>
-            <Image
-              src="https://firebasestorage.googleapis.com/v0/b/cleope-80cdc.firebasestorage.app/o/IMG_0500.JPG?alt=media&token=77c85fc7-766b-43fe-be1e-cfb36bf82dea"
-              alt="CLEOPE" fill priority
-              style={{ objectFit: 'cover', opacity: 0.45 }}
+            <img
+              src="image.webp"
+              alt="CLEOPE"
+              style={{ objectFit: 'cover', opacity: 0.45, height: '100%' }}
             />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, transparent 30%, #080808 100%)' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,8,8,0.1) 0%, rgba(8,8,8,0.65) 75%, #080808 100%)' }} />
