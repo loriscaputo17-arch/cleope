@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import QRCode from "qrcode";
 
-// Helper per ICS (CRLF obbligatori)
 function buildICS({ uid, start, end, summary, description, location, url }) {
   const fmt = (d) =>
     d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "") + "Z";
@@ -36,13 +35,9 @@ export async function POST(req) {
       return NextResponse.json({ error: "Campi mancanti" }, { status: 400 });
     }
 
-    // Dominio pubblico del progetto
     const baseUrl = "https://breakoutpeople.com";
 
-    // Link QR per check-in e pagamento all’ingresso
-    const qrData = `${baseUrl}/breakout/checkin?code=${encodeURIComponent(
-      code
-    )}&email=${encodeURIComponent(to)}`;
+    const qrData = `${baseUrl}/breakout/checkin?code=${encodeURIComponent(code)}&email=${encodeURIComponent(to)}`;
 
     const qrImageBuffer = await QRCode.toBuffer(qrData, {
       type: "png",
@@ -51,32 +46,18 @@ export async function POST(req) {
       errorCorrectionLevel: "M",
     });
 
-    // Evento: 22 novembre 2025 (Milano)
-    // Orari indicativi (23:00 – 04:00, UTC → 22:00Z – 03:00Z)
-    const startUtc = new Date(Date.UTC(2025, 10, 22, 22, 0, 0));
-    const endUtc = new Date(Date.UTC(2025, 10, 23, 3, 0, 0));
+    // 20 marzo 2025 · 23:30 – 04:30 (UTC → 22:30Z – 03:30Z)
+    const startUtc = new Date(Date.UTC(2025, 2, 20, 22, 30, 0));
+    const endUtc   = new Date(Date.UTC(2025, 2, 21,  3, 30, 0));
 
-    const summary = "BREAKOUT 22.11 Milan";
-    const description =
-      "Conferma di registrazione all’evento BREAKOUT. Ti ricordiamo che il QR Code è valido per l’ingresso e il pagamento in loco. Nei prossimi giorni riceverai un’email con la possibilità di completare il pagamento online a prezzo ridotto per un tempo limitato.";
-    const location = "Milano – Location anonima.";
-    const uid = `breakout-${code}@cleope.events`;
+    const summary     = "BREAKOUT 20.03 Milan";
+    const description = "Conferma di registrazione all'evento BREAKOUT. Il QR Code è valido per l'ingresso. Porta il codice con te la sera dell'evento.";
+    const location    = "Spazio Diaz, Milano";
+    const uid         = `breakout-${code}@cleope.events`;
 
-    const icsContent = buildICS({
-      uid,
-      start: startUtc,
-      end: endUtc,
-      summary,
-      description,
-      location,
-      url: baseUrl + "/breakout",
-    });
+    const icsContent = buildICS({ uid, start: startUtc, end: endUtc, summary, description, location, url: baseUrl + "/breakout" });
 
-    const gcalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-      summary
-    )}&dates=20251122T220000Z/20251123T030000Z&location=${encodeURIComponent(
-      location
-    )}&details=${encodeURIComponent(description)}`;
+    const gcalLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(summary)}&dates=20250320T223000Z/20250321T033000Z&location=${encodeURIComponent(location)}&details=${encodeURIComponent(description)}`;
 
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -93,12 +74,12 @@ export async function POST(req) {
         <h1 style="text-transform:uppercase; letter-spacing:3px; font-size:24px; margin-bottom:10px;">
           BREAKOUT – INVITO UFFICIALE
         </h1>
-        <p style="color:#bbb;">22 Novembre 2025 · Milano</p>
+        <p style="color:#bbb;">20 Marzo 2025 · Spazio Diaz, Milano</p>
 
         <p style="margin:30px 0; font-size:16px;">
           Ciao <strong>${name}</strong>,<br/>
-          la tua registrazione è stata <strong>confermata</strong><br/>
-          Qui sotto trovi il tuo <strong>QR Code personale</strong> per l’ingresso.
+          la tua registrazione è stata <strong>confermata</strong>.<br/>
+          Qui sotto trovi il tuo <strong>QR Code personale</strong> per l'ingresso.
         </p>
 
         <div style="margin:20px 0;">
@@ -109,14 +90,13 @@ export async function POST(req) {
         <div style="background:#1a1a1a; border:1px solid #333; padding:20px; text-align:left; max-width:440px; margin:20px auto; border-radius:8px;">
           <h3 style="margin:0 0 10px 0; color:#fff;">Dettagli Evento</h3>
           <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:1.7; color:#ccc;">
-            <li><strong>Evento:</strong> BREAKOUT – Secret Event</li>
-            <li><strong>Data:</strong> Sabato 22 Novembre 2025</li>
-            <li><strong>Orario:</strong> 23:00 – 04:00</li>
-            <li><strong>Luogo:</strong> Milano (indirizzo verrà comunicato)</li>
+            <li><strong>Evento:</strong> BREAKOUT </li>
+            <li><strong>Data:</strong> Giovedì 20 Marzo 2025</li>
+            <li><strong>Orario:</strong> 23:30 – 04:30</li>
+            <li><strong>Luogo:</strong> Spazio Diaz, Milano</li>
           </ul>
           <p style="margin-top:12px; color:#dd0005;">
-            Il QR Code è valido per il pagamento all’ingresso.<br/>
-            Nei prossimi giorni riceverai una mail con la possibilità di completare il pagamento online a prezzo ridotto per un periodo limitato.
+            Presenta il QR Code all'ingresso per accedere all'evento.
           </p>
         </div>
 
@@ -126,7 +106,7 @@ export async function POST(req) {
              Aggiungi al tuo calendario
           </a>
           <p style="font-size:12px; color:#888; margin-top:10px;">
-            Per Apple/Outlook puoi usare l’allegato <strong>breakout.ics</strong>.
+            Per Apple/Outlook puoi usare l'allegato <strong>breakout.ics</strong>.
           </p>
         </div>
 
@@ -139,9 +119,9 @@ export async function POST(req) {
     `;
 
     await transporter.sendMail({
-      from: 'BREAKOUT <breakout.people@gmail.com>',
+      from: "BREAKOUT <breakout.people@gmail.com>",
       to,
-      subject: "Il tuo invito ufficiale – BREAKOUT",
+      subject: "Il tuo invito ufficiale – BREAKOUT 20.03",
       html,
       attachments: [
         {
@@ -161,9 +141,6 @@ export async function POST(req) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("SEND_INVITE ERROR:", err);
-    return NextResponse.json(
-      { error: "Invio dell’invito non riuscito" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Invio dell'invito non riuscito" }, { status: 500 });
   }
 }

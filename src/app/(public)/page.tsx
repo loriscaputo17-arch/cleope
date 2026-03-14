@@ -340,7 +340,7 @@ export default function Home() {
                   return (
                     <Link
                       key={event.id}
-                      href={`/events/${event.slug || event.id}`}
+                      href={`#`}
                       style={{ gridColumn: 'span 1', gridRow: big ? 'span 2' : 'span 1', display: 'block' }}
                     >
                       <motion.div

@@ -164,14 +164,14 @@ export const Header = () => {
       <header className="hdr fixed top-0 left-0 w-full z-50">
 
         {/* ── TICKER ── */}
-        <a href="/formats/themerge2/">
+        <a href="https://breakoutpeople.com">
           <div className="ticker-wrap">
             <div className="ticker-track">
               {Array(8).fill(null).map((_, i) => (
                 <span key={i} className="ticker-item">
-                  <strong>The Merge 2</strong>
+                  <strong>Breakout 2</strong>
                   <span className="ticker-sep">·</span>
-                  Sabato 28 Febbraio
+                  Sabato 20 Marzo
                   <span className="ticker-sep">·</span>
                   Milano
                   <span className="ticker-sep">·</span>
